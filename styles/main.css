@@ -19,8 +19,14 @@ header {
 }
 
 .header-top {
-    border-bottom: 1px solid var(--grey);
     width: 100%;
+    border-bottom: 1px solid var(--grey);
+}
+
+.header-bottom {
+    width: 100%;
+    border-bottom: 1px solid var(--grey);
+    background-color: var(--light-grey);
 }
 
 .container {
@@ -43,8 +49,8 @@ nav {
 }
 
 .cart {
-    width: 2.3rem;
-    height: 2.3rem;
+    width: 2.2rem;
+    height: 2.2rem;
 }
 
 .search-container {
@@ -67,6 +73,18 @@ input {
 }
 
 input:focus {
-    border: 1px solid red;
-    box-shadow: none;
+    border: 1px solid var(--blue);
+}
+
+.category-container {
+    width: 80%;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-container li {
+    font-size: 1.1rem;
+    font-weight: 700;
 }
