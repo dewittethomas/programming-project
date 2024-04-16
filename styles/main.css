@@ -57,7 +57,7 @@ input {
     padding: 1rem 1rem 1rem 3rem;
     width: 70%;
     height: 45px;
-    border: none;
+    border: 1px solid var(--grey);
     border-radius: 9px;
     box-shadow: 1px 1px 10px var(--grey);
     background-image: url("/images/search.svg");
