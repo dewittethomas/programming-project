@@ -88,3 +88,69 @@ input:focus {
     font-size: 1.1rem;
     font-weight: 700;
 }
+.container {
+    margin: auto;
+    padding: 0 2.2rem;
+    display: flex;
+    align-items: flex-start; /* Align items vertically at the start */
+    justify-content: space-between; /* Distribute space between items */
+}
+
+.item {
+    width: 30%; /* Adjust width as needed */
+    margin-right: 2rem; /* Add spacing between items */
+}
+
+.item img {
+    max-width: 100%; /* Ensure image does not exceed container width */
+}
+
+.NaamProductFoto {
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.Beschrijving {
+    width: 60%; /* Adjust width as needed */
+}
+
+/* CSS for rounded corners and styling of dates */
+.calendar {
+    width: 30%; /* Adjust width as needed */
+    border-collapse: collapse;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+.calendar th, .calendar td {
+    border: 0.1rem solid black;
+    padding: 0.5rem; /* Increase padding for better clickable area */
+    text-align: center;
+    width: calc(100% / 7);
+    cursor: pointer; /* Change cursor to pointer for clickable dates */
+}
+
+.calendar .selected {
+    background-color: var(--blue); /* Change to the desired color for selected dates */
+    color: blue; /* Change to the desired text color for selected dates */
+}
+
+.calendar .fade {
+    color: #aaa; /* Change to the desired color for faded dates */
+    pointer-events: none; /* Disable pointer events for faded dates */
+}
+
+
+.header {
+    background-color: #ccc;
+}
+
+.empty {
+    background-color: #f2f2f2;
+}
+.capitalize{
+    text-transform: uppercase;
+    font-weight: bold;
+
+
+}
