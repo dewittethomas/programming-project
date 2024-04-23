@@ -88,3 +88,36 @@ input:focus {
     font-size: 1.1rem;
     font-weight: 700;
 }
+
+Footer{
+    background-color: rgb(121, 121, 121);
+    margin-top: auto;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+}
+
+.links {
+    display: flex;
+    flex-direction: column; 
+}
+
+.links a{
+    color: black;
+}
+
+.symbolen {
+    display: flex;
+    align-items: center;
+  }
+
+.symbolen a {
+    margin-right: 20px;
+    max-width: 30px;
+    height: 30px;
+    display: flex;
+}
+
