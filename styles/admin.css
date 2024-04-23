@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+            margin: 0; /* Voorkomt de standaardmarges van de body */
+            padding: 0; /* Voorkomt de standaardvullingen van de body */
+}
+
+nav {
+    background-color: lightgrey; /* Instellen van de achtergrondkleur */
+}
+
+.header {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header img {
+    height: 50px; /* Pas dit aan aan de grootte van je logo */
+}
+.winkelwagen{width: 25px;
+                    height: 25px;}
+.search-bar {
+    border: none;
+    padding: 8px;
+    flex: 1; /* Laat de zoekbalk flexibel groeien */
+}
+
+.cart-icon {
+    width: 30px; /* Pas dit aan aan de grootte van je icoon */
+    height: 30px;
+    display: inline-block;
+}
+
+.main-content {
+    background-color: white;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.confirmation-message {
+    font-weight: bold;
+}
+
+
+
+
+
+footer {
+    background-color: #dddddd; /* grijs */
+    width: 100%; /* neemt volledige breedte in */
+    padding: 20px; /* optioneel: voeg wat ruimte toe aan de binnenkant van de footer */
+    position: fixed; /* blijft onderaan de pagina, zelfs als er niet genoeg inhoud is */
+    bottom: 0; /* plaatst de footer aan de onderkant */
+    left: 0; /* uitlijning op de linkerkant */
+}
