@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Uitleendienst MediaLab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikelpagina</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -39,33 +35,61 @@
         </div>
     </header>
 
-    <main>
-        <article>
+    <div class="product-container">
+        <?php
+        include 'db_connection.php';
 
-        </article>
+        // Query om producten op te halen
+        $sql = "SELECT id, naam, afbeeldingID FROM PRODUCTEN";
+        $result = $conn->query($sql);
 
-        <article>
+        // Array om bij te houden welke namen al zijn weergegeven
+        $weergegevenNamen = array();
 
-        </article>
+        // Producten weergeven met afbeeldingen
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                // Controleer of de naam al is weergegeven
+                if (!in_array($row["naam"], $weergegevenNamen)) {
+                    echo '<div class="product">';
+                    echo '<a href="artikel.php?id=' . $row["id"] . '">';
+                    // Productnaam weergeven
+                    echo "<h2>" . $row["naam"] . "</h2>";
+                    // Productafbeelding weergeven indien beschikbaar
+                    if (!empty($row["afbeeldingID"])) {
+                        echo '<img src="data:images/jpeg;base64,' . base64_encode($row["afbeeldingID"]) . '" /><br>';
+                    } else {
+                        echo "Geen afbeelding beschikbaar<br>";
+                    }
+                    echo '</a>';
+                    echo '</div>';
 
-        <article>
+                    // Naam toevoegen aan array van weergegeven namen
+                    $weergegevenNamen[] = $row["naam"];
+                }
+            }
+        } else {
+            echo "Geen producten gevonden.";
+        }
 
-        </article>
-    </main>
+        // Sluit de databaseverbinding
+        $conn->close();
+        ?>
+    </div>
 
     <footer class="Footer">
         <div class="links">
             <a href="Voorwaarde.html">Voorwaarde</a>
             <a href="contact.html">Contact</a>
             <a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a>
-        </div>
-        <div class="symbolen">
+          </div>
+          <div class="symbolen">
             <a href="https://www.facebook.com/erasmushogeschool"><img src="images/facebook.png"></a> 
             <a href="https://twitter.com/ehbrussel"><img src="images/twitter.png"></a>
             <a href="https://www.instagram.com/erasmushogeschool/"><img src="images/instagram.png"></a>
             <a href="https://www.youtube.com/user/ehbrussel"><img src="images/youtube.png"></a>
             <a href="https://www.flickr.com/photos/erasmushogeschool"><img src="images/flickr.png"  ></a> 
-        </div>
+          </div>
     </footer>
 </body>
 </html>
