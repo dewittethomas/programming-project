@@ -89,15 +89,16 @@ input:focus {
     font-weight: 700;
 }
 
-Footer{
+.Footer{
     background-color: rgb(121, 121, 121);
-    margin-top: auto;
+    margin-top: 55px;
     padding: 20px;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     width: 100%;
     justify-content: space-between;
     display: flex;
+    bottom: 0;
 }
 
 .links {
@@ -123,14 +124,25 @@ Footer{
 
 .titel{
     font-weight: 700;
+<<<<<<< Updated upstream
     text-decoration: underline;
 }
 
 .voorwaarde{
     padding: 30px;
+=======
+    text-decoration: underline;    
+}
+
+.voorwaarde{
+    padding: 20px;
+>>>>>>> Stashed changes
 }
 
 .voorwaarde a{
     color: red;
 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
