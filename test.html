@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 100%; /* Adjust width as needed */
+            border-collapse: collapse;
+            border-radius: 10px; /* Add rounded corners */
+            color: blue;
+            border: 1px solid black;
+        }
+        th {
+            width: 100px;
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid black;
+        }
+        td {
+            width: 100px;
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid black;
+            cursor: pointer; /* Change cursor to pointer to indicate clickable area */
+        }
+        .calendar td > * {
+            width: 100%; /* Make child elements fill the entire width */
+            height: 100%; /* Make child elements fill the entire height */
+            box-sizing: border-box; /* Include padding and border in the width calculation */
+        }
+        input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none; /* Prevent interaction with hidden checkboxes */
+        }
+        .selected {
+            background-color: black;
+            color: white; /* Change text color to white for better contrast */
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>maandag</th>
+            <th>dinsdag</th>
+            <th>woensdag</th>
+            <th>donderdag</th>
+            <th>vrijdag</th>
+            <th>zaterdag</th>
+            <th>zondag</th>
+        </tr>
+        <tr>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day1">1</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day2">2</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day3">3</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day4">4</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day5">5</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day6">6</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day7">7</td>
+        </tr>
+        <tr>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day8">8</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day9">9</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day10">10</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day11">11</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day12">12</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day13">13</td>
+            <td onclick="toggleSelection(this)"><input type="checkbox" name="day14">14</td>
+        </tr>
+    </table>
+
+    <script>
+        function toggleSelection(cell) {
+            cell.classList.toggle('selected');
+        }
+    </script>
+</body>
+</html>

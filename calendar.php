@@ -1,11 +1,4 @@
 <?php
-// Enable error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Your PHP code goes here
-?>
-<?php
 // Function to generate a calendar for a specific month and year
 function generateCalendar($month, $year) {
     // Get the first day of the month
@@ -18,7 +11,7 @@ function generateCalendar($month, $year) {
     echo '<table class="calendar">';
     echo '<caption>' . date('F Y', $firstDayOfMonth) . '</caption>';
     echo '<tr>';
-    echo '<th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>';
+    echo '<th>ma</th><th>di</th><th>wo</th><th>do</th><th>vr</th><th>za</th><th>zo</th>';
     echo '</tr>';
 
     // Start the first row
