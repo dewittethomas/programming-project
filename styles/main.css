@@ -40,6 +40,7 @@ header {
     padding: 0 1rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
@@ -74,11 +75,17 @@ nav {
     display: flex;
     justify-content: center;
     flex-grow: 1;
+    visibility: visible;
 }
 
-input {
+.header-bottom .search-container {
+    display: none;
+}
+
+input[type="text"] {
     width: 70%;
     height: 45px;
+    margin: 1rem 0;
     padding: 1rem 1rem 1rem 3rem;
     border: 1px solid var(--grey);
     border-radius: 9px;
@@ -89,7 +96,7 @@ input {
     background-size: 1rem 1rem;
 }
 
-input:focus {
+input[type="text"]:focus {
     border: 1px solid var(--blue);
 }
 
@@ -105,10 +112,6 @@ input:focus {
     padding: 1rem 0;
     font-weight: 600;
     position: relative;
-}
-
-.category-container li:hover {
-    cursor: default;
 }
 
 .category-container li:before  {
@@ -182,18 +185,21 @@ footer {
     align-items: center;
 }
 
-.information p {
-    padding: 0 0.8rem;
+.pages {
+    display: flex;
 }
 
 .pages a {
-    padding: 0 1.5rem;
     color: var(--green);
 }
 
 .pages a:hover {
     color: var(--dark-green);
     text-decoration: underline;
+}
+
+.pages li {
+    padding: 0 0.8rem;
 }
 
 .socials {
@@ -214,4 +220,39 @@ footer {
 .footer-icon img {
     width: 1.3rem;
     height: 1.3rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .header-top .search-container {
+        display: none;
+    }
+
+    .category-container {
+        display: none;
+    }
+
+    .header-bottom .search-container {
+        display: inline-flex;
+    }
+
+    .search-container input {
+        width: 100%;
+    }
+
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .socials {
+        margin: 1rem 0 0 0;
+    }
+}
+
+/* TODO: 
+- Put icons under logo if mobile device 
+- Add category button for mobile and tablet
+*/
+
+@media screen and (max-width: 480px) {
+
 }
