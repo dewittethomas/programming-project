@@ -10,11 +10,11 @@
 
 body {
     min-height: 100vh;
+    color: var(--black);
+    background-color: var(--white);
+    font-family: Poppins, sans-serif;
     display: flex;
     flex-direction: column;
-    font-family: Poppins, sans-serif;
-    background-color: var(--white);
-    color: var(--black);
 }
 
 header {
@@ -24,6 +24,7 @@ header {
 .header-top {
     width: 100%;
     border-bottom: 1px solid var(--grey);
+    background-color: var(--white);
 }
 
 .header-bottom {
@@ -33,12 +34,12 @@ header {
 }
 
 .container {
+    width: 100%;
     max-width: 1250px;
-    margin: auto;
-    padding: 0 1.5rem;
+    margin: 0 auto;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .logo {
@@ -53,7 +54,6 @@ nav {
 }
 
 .nav-icon {
-    margin: 0 0.1rem;
     padding: 0.6rem;
     display: flex;
     align-items: center;
@@ -102,10 +102,9 @@ input:focus {
 }
 
 .category-container li {
-    padding: 16px 0;
-    position: relative;
+    padding: 1rem 0;
     font-weight: 600;
-    user-select: none;
+    position: relative;
 }
 
 .category-container li:hover {
@@ -115,16 +114,52 @@ input:focus {
 .category-container li:before  {
     width: 100%;
     height: 4px;
+    background-color: var(--red);
     content: '';
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0px;
-    background-color: var(--red);
+    bottom: 0;
     transform: scaleX(0); 
 }
 
 .category-container li:hover::before {
+    transform: scaleX(1); 
+}
+
+.dropdown-content {
+    width: 100%;
+    background-color: var(--light-grey);
+    border: 1px solid var(--grey);
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+}
+
+.dropdown-container:hover .dropdown-content {
+    visibility: visible;
+}
+
+.dropdown-row {
+    width: 80%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-row .category {
+    color: var(--red);
+    font-weight: 700;
+}
+
+.dropdown-row a:hover, .dropdown-row p:hover {
+    text-decoration: underline;
+}
+
+.dropdown-container:hover .dropdown-item::before {
     transform: scaleX(1); 
 }
 
@@ -135,9 +170,10 @@ footer {
 }
 
 .footer-container {
-    max-width: 1250px;
-    margin: 1rem auto;
+    width: 100%;
+    padding: 1rem 0;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -156,7 +192,7 @@ footer {
 }
 
 .pages a:hover {
-    color: #159A91;
+    color: var(--dark-green);
     text-decoration: underline;
 }
 
