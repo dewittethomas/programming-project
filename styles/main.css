@@ -300,6 +300,10 @@ footer {
     border-color: var(--white);
 }
 
+.artikel-foto{
+    width: calc(25%);
+}
+
 @media screen and (max-width: 1024px) {
     .header-top .search-container {
         display: none;

@@ -65,7 +65,8 @@
         include 'db_connection.php';
 
         // Query om producten op te halen
-        $sql = "SELECT id, naam, afbeeldingID FROM PRODUCTEN";
+        $sql = "SELECT id, naam, Afbeelding
+        FROM PRODUCTEN";
         $result = $conn->query($sql);
 
         // Array om bij te houden welke namen al zijn weergegeven
@@ -74,17 +75,20 @@
         // Producten weergeven met afbeeldingen
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                // Controleer of de naam al is weergegeven
+                // Controleren op duplicaties
                 if (!in_array($row["naam"], $weergegevenNamen)) {
                     echo '<div class="product">';
+                    // Link naar artikelpagina
                     echo '<a href="artikel.php?id=' . $row["id"] . '">';
                     // Productnaam weergeven
                     echo "<h2>" . $row["naam"] . "</h2>";
                     // Productafbeelding weergeven indien beschikbaar
-                    if (!empty($row["afbeeldingID"])) {
-                        echo '<img src="data:images/jpeg;base64,' . base64_encode($row["afbeeldingID"]) . '" /><br>';
-                    } else {
-                        echo "Geen afbeelding beschikbaar<br>";
+                    $imagePath = 'images/website/' . $row["Afbeelding"]; // Pad naar de afbeelding
+                    if (file_exists($imagePath)) {
+                        echo '<img src="' . $imagePath . '" alt="" class= "artikel-foto"/><br>';
+                    } 
+                    else {
+                        echo "No image available<br>";
                     }
                     echo '</a>';
                     echo '</div>';
@@ -97,7 +101,6 @@
             echo "Geen producten gevonden.";
         }
 
-        // Sluit de databaseverbinding
         $conn->close();
         ?>
     </div>
