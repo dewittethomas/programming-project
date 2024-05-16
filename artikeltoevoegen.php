@@ -17,50 +17,82 @@
                 <a class="logo" href="/" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-                <form class="search-container" action="/">
-                    <input class="search-glass" type="text" placeholder="Search...">
-                </form>
                 <nav>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/shopping-cart.svg" loading="lazy">
-                    </a>
                     <a class="nav-icon" href="">
                         <img src="/images/website/profile-picture.svg" loading="lazy">
                     </a>
                 </nav>
             </div>
         </div>
-        <div class="header-bottom">
-            <div class="container">
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
-                </form>
-                <ul class="category-container">
-                    <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="">Video</a></li>
-
-                        <div class="dropdown-content">
-                            <div class="container">
-                                <div class="dropdown-row">
-                                    <a class="category" href="#">Camera's</a>
-                                    <a href="#">Dieptecamera</a>
-                                    <a href="#">Overige</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <li>Audio</li>
-                    <li>Belichting</li>
-                    <li>Tools</li>
-                    <li>Varia</li>
-                    <li>XR</li>
-                </ul>
-            </div>
-        </div>
+        
     </header>
 
     <main>
+        <div id="artikelToevoegen">
+        <?php
+// Database configuratie
+$servername = "dt5.ehb.be";
+$username = "2324PROGPRGR07";
+$password = "mTClwp3M"; 
+$dbname = "2324PROGPRGR07";
+
+// Maak een verbinding met de database
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Controleer de verbinding
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Controleer of het formulier is ingediend
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Ontvang de gegevens van het formulier
+    $naam = $_POST['naam'];
+    $merk = $_POST['merk'];
+    $categorie = $_POST['categorie'];
+    $beschrijving = $_POST['beschrijving'];
+
+    // Voorbereiden en binden
+    $stmt = $conn->prepare("INSERT INTO PRODUCTEN (naam, merk, categorie, beschrijving) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $naam, $merk, $categorie, $beschrijving);
+
+    // Voer de query uit
+    if ($stmt->execute()) {
+        echo "Nieuw artikel succesvol toegevoegd.";
+    } else {
+        echo "Fout bij het toevoegen van het artikel: " . $stmt->error;
+    }
+
+    // Sluit de statement en de verbinding
+    $stmt->close();
+    $conn->close();
+}
+?>
+
+
+        <h2>Artikel Toevoegen</h2>
+        <!--action="add_article.php" method="post" enctype="multipart/form-data"-->
+        <form >
+            <label for="naam">Naam:</label>
+            <input type="text" id="naam" name="naam" required><br><br>
+        
+            <label for="merk">Merk:</label>
+            <input type="text" id="merk" name="merk"><br><br>
+        
+            <label for="categorie">Categorie:</label>
+            <input type="text" id="categorie" name="categorie" required><br><br>
+        
+            <label for="beschrijving">Beschrijving:</label>
+            <textarea id="beschrijving" name="beschrijving" required></textarea><br><br>
+        
+            <label for="foto">Foto:</label>
+            <input type="file" id="foto" name="foto"><br><br>
+        
+            <input type="submit" value="Artikel Toevoegen">
+        </form>
+        </div>
+
+
     </main>
 
     <footer>
