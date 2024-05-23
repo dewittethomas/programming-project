@@ -292,8 +292,9 @@ footer {
     background-color: var(--grey);
 }
 
-.toevoegen-student button{
+.toevoegen-button{
     margin-left: 1%;
+    margin-right: 1%;
     background-color: var(--red);
     color: var(--white);
     padding: 15px 50px;

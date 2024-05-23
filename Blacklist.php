@@ -32,15 +32,59 @@
         </div>
     </header>
 
+    <?php
+        include 'db_connection.php';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
+            foreach ($_POST['blackliststatus'] as $id) {
+                $sql = "UPDATE PERSONEN SET blackliststatus = 1 WHERE voornaam = $id";
+                $conn->query($sql);
+            }
+            header("Location: studenten_overzicht.php");
+        }
+        
+        $sql = "SELECT voornaam, achternaam, email, blackliststatus FROM PERSONEN";
+        $result = $conn->query($sql);
+
+    ?>
+
+    <table border="1">
+        <tr>
+            <th>Voornaam</th>
+            <th>Achternaam</th>
+            <th>Email</th>
+            <th>Blacklist</th>
+        </tr>
+        <?php
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["voornaam"] . "</td>";
+                    echo "<td>" . $row["achternaam"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
+                    echo "<td><input type='checkbox' name='blacklist[]' value='" . $row["voornaam"] . "'" . ($row["blackliststatus"] ? " checked" : "") . "></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";
+            }
+        ?>
+    </table>
+
     <div class="container-blacklist">
         <p>Voornaam student</p>
         <p>Achternaam student</p>
         <p>Mail student</p>
         <p>Reden</p>
     </div>
-    <div class="toevoegen-student">
-        <button>Student Toevoegen</button>
-    </div>
+
+    <button class="toevoegen-button" type="button" onclick="addStudent()">Voeg student toe</button>
+
+    <?php
+        function addStudent() {
+            // Code to add a student goes here
+        }
+    ?>
 
     <footer>
         <div class="container">
