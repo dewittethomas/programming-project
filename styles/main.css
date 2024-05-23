@@ -299,7 +299,7 @@ footer {
     }
 }
 
-#artikelToevoegen {
+#artikelToevoegen{
     width: 100%;
     max-width: 600px;
     margin: 2rem auto;
@@ -358,7 +358,7 @@ footer {
 }
 
 #artikelToevoegen input[type="submit"]:hover {
-    background-color: var(--dark-blue);
+    background-color: var(--dark-red);
 }
 
 /* Media queries voor responsief ontwerp */
