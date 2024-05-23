@@ -40,7 +40,7 @@
                 $sql = "UPDATE PERSONEN SET blackliststatus = 1 WHERE voornaam = $id";
                 $conn->query($sql);
             }
-            header("Location: studenten_overzicht.php");
+            header("Location: Blacklist.php");
         }
         
         $sql = "SELECT voornaam, achternaam, email, blackliststatus, reden FROM PERSONEN";
@@ -48,35 +48,36 @@
 
     ?>
 
-    <div class="container-blacklist">
-        <p>Voornaam student</p>
-        <p>Achternaam student</p>
-        <p>Mail student</p>
-        <p>Reden</p>
-    </div>
-
-    <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "<div class='container-studenten'>";
-                    echo "<p>" . $row["voornaam"] . "</p>";
-                    echo "<p>" . $row["achternaam"] . "</p>";
-                    echo "<p>" . $row["email"] . "</p>";
-                    echo "<form method='post' action='blacklist.php'>
-                                        <input type='hidden' name='id' value='" . $row["voornaam"] . "'>
-                                        <textarea name='reason'>" . $row["reden"] . "</textarea>
-                                        <input type='submit' value='Opslaan'>
-                                    </form>";
-                echo "</div>";
-            }
-        } else {
-            echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";
-        }
-    ?>
-
-    <a href="BlacklistToevoegen.php">
-        <button class="toevoegen-button" type="button">Voeg student toe</button>
-    </a>
+    <h1>Studenten Overzicht</h1>
+    <form method="post" action="Blacklist.php">
+        <table border="1">
+            <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Email</th>
+                <th>Blacklist</th>
+            </tr>
+            <?php
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<div class='studentenLijst'>";
+                            echo "<tr>";
+                            echo "<td>" . $row["voornaam"] . "</td>";
+                            echo "<td>" . $row["achternaam"] . "</td>";
+                            echo "<td>" . $row["email"] . "</td>";
+                            echo "<td><input type='checkbox' name='blackliststatus[]' value='" . $row["voornaam"] . "'" . ($row["blackliststatus"] ? " checked" : "") . "></td>";
+                            echo "</tr>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>Geen personen op de blacklist</td></tr>";
+                }
+            ?> 
+        </table>
+        <a href="Blacklist.php">
+            <button class="toevoegen-button" type="button">Bijwerken</button>
+        </a>
+    </form>
 
     <footer>
         <div class="container">
