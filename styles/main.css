@@ -344,7 +344,7 @@ footer {
     resize: vertical;
 }
 
-#artikelToevoegen input[type="submit"] {
+#artikelToevoegen, #scansysteem input[type="submit"] {
     align-self: center;
     padding: 0.8rem 2rem;
     border: none;
@@ -357,9 +357,31 @@ footer {
     box-shadow: 1px 1px 5px var(--grey);
 }
 
-#artikelToevoegen input[type="submit"]:hover {
+#artikelToevoegen,#scansysteem input[type="submit"]:hover {
     background-color: var(--dark-red);
 }
+#scansysteem {
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+}
+#uitlenenForm, #terugnemenForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px var(--grey);
+    background-color: var(--white);
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+
+}
+
+
 
 /* Media queries voor responsief ontwerp */
 @media screen and (max-width: 480px) {
