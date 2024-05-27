@@ -35,15 +35,16 @@
     <?php
         include 'db_connection.php';
 
+        $sql = "SELECT user_id, name, surname, email, blackliststatus, reason FROM USERS";
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
-            foreach ($_POST['blackliststatus'] as $id) {
-                $sql = "UPDATE PERSONEN SET blackliststatus = 1 WHERE voornaam = $id";
+            foreach ($_POST['blackliststatus'] as $user_id) {
+                $sql = "UPDATE USERS SET blackliststatus = 1 WHERE user_id = $user_id";
                 $conn->query($sql);
             }
             header("Location: studenten_overzicht.php");
         }
         
-        $sql = "SELECT voornaam, achternaam, email, blackliststatus, reden FROM PERSONEN";
         $result = $conn->query($sql);
 
     ?>
@@ -58,16 +59,18 @@
     <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "<div class='container-studenten'>";
-                    echo "<p>" . $row["voornaam"] . "</p>";
-                    echo "<p>" . $row["achternaam"] . "</p>";
+                if ($row["blackliststatus"] == 1) {
+                    echo "<div class='container-studenten'>";
+                    echo "<p>" . $row["name"] . "</p>";
+                    echo "<p>" . $row["surname"] . "</p>";
                     echo "<p>" . $row["email"] . "</p>";
                     echo "<form method='post' action='blacklist.php'>
-                                        <input type='hidden' name='id' value='" . $row["voornaam"] . "'>
-                                        <textarea name='reason'>" . $row["reden"] . "</textarea>
+                                        <input type='hidden' name='id' value='" . $row["name"] . "'>
+                                        <textarea name='reason'>" . $row["reason"] . "</textarea>
                                         <input type='submit' value='Opslaan'>
                                     </form>";
-                echo "</div>";
+                    echo "</div>";
+                }
             }
         } else {
             echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";

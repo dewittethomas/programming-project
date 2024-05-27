@@ -65,8 +65,8 @@
         include 'db_connection.php';
 
         // Query om producten op te halen
-        $sql = "SELECT id, naam, Afbeelding
-        FROM PRODUCTEN";
+        $sql = "SELECT id, name, image
+        FROM PRODUCTS";
         $result = $conn->query($sql);
 
         // Array om bij te houden welke namen al zijn weergegeven
@@ -76,14 +76,14 @@
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 // Controleren op duplicaties
-                if (!in_array($row["naam"], $weergegevenNamen)) {
+                if (!in_array($row["name"], $weergegevenNamen)) {
                     echo '<div class="product">';
                     // Link naar artikelpagina
                     echo '<a href="artikel.php?id=' . $row["id"] . '">';
                     // Productnaam weergeven
-                    echo "<h2>" . $row["naam"] . "</h2>";
+                    echo "<h2>" . $row["name"] . "</h2>";
                     // Productafbeelding weergeven indien beschikbaar
-                    $imagePath = 'images/website/' . $row["Afbeelding"]; // Pad naar de afbeelding
+                    $imagePath = 'images/website/' . $row["image"]; // Pad naar de afbeelding
                     if (file_exists($imagePath)) {
                         echo '<img src="' . $imagePath . '" alt="" class= "artikel-foto"/><br>';
                     } 
@@ -94,7 +94,7 @@
                     echo '</div>';
 
                     // Naam toevoegen aan array van weergegeven namen
-                    $weergegevenNamen[] = $row["naam"];
+                    $weergegevenNamen[] = $row["name"];
                 }
             }
         } else {
