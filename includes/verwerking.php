@@ -22,7 +22,7 @@ if(isset($_POST['artikelnummerUitlenen'])) {
     echo $artikelnummer;
 
     // Update de beschikbaarheidsstatus naar 0 voor het ingevoerde artikelnummer
-    $sql = "UPDATE PRODUCTEN SET beschikbaarheid = 0 WHERE id = '$artikelnummer'";
+    $sql = "UPDATE PRODUCTS SET status = 0 WHERE id = '$artikelnummer'";
 
     if ($conn->query($sql) === TRUE) {
         echo "Artikel met nummer " . $artikelnummer . " is uitgeleend.";
@@ -36,7 +36,7 @@ if(isset($_POST['artikelnummerTerugnemen'])) {
     $artikelnummer = $_POST['artikelnummerTerugnemen'];
 
     // Update de beschikbaarheidsstatus naar 1 voor het ingevoerde artikelnummer
-    $sql = "UPDATE PRODUCTEN SET beschikbaarheid = 1 WHERE id = '$artikelnummer'";
+    $sql = "UPDATE PRODUCTS SET status = 1 WHERE id = '$artikelnummer'";
 
     if ($conn->query($sql) === TRUE) {
         echo "Artikel met nummer " . $artikelnummer . " is teruggebracht.";
