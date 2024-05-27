@@ -217,6 +217,10 @@ input {
     cursor: pointer;
 }
 
+.product-container {
+    color: black !important;
+}
+
 footer {
     color: var(--white);
     background-color: var(--light-black);

@@ -1,3 +1,7 @@
+<?php
+    require "includes/connect.php";
+    require "includes/products.php";
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -18,8 +22,21 @@
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
                 <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
+                    <input class="search-glass" type="text" placeholder="Search...">
                 </form>
+                <nav>
+                    <a class="nav-icon" href="">
+                        <img src="/images/website/shopping-cart.svg" loading="lazy">
+                    </a>
+                    <a class="nav-icon" href="">
+                        <img src="/images/website/profile-picture.svg" loading="lazy">
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <div class="header-middle">
+            <div class="container">
+                
                 <nav>
                     <a class="nav-icon" href="">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
@@ -60,59 +77,25 @@
         </div>
     </header>
 
-    <div class="product-container">
-        <?php
-        include 'db_connection.php';
+    <main>
+        <div class="product-container">
+            <?php
 
-        // Query om producten op te halen
-        $sql = "SELECT id, naam, Afbeelding
-        FROM PRODUCTEN";
-        $result = $conn->query($sql);
+                echo $result
 
-        // Array om bij te houden welke namen al zijn weergegeven
-        $weergegevenNamen = array();
-
-        // Producten weergeven met afbeeldingen
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                // Controleren op duplicaties
-                if (!in_array($row["naam"], $weergegevenNamen)) {
-                    echo '<div class="product">';
-                    // Link naar artikelpagina
-                    echo '<a href="artikel.php?id=' . $row["id"] . '">';
-                    // Productnaam weergeven
-                    echo "<h2>" . $row["naam"] . "</h2>";
-                    // Productafbeelding weergeven indien beschikbaar
-                    $imagePath = 'images/website/' . $row["Afbeelding"]; // Pad naar de afbeelding
-                    if (file_exists($imagePath)) {
-                        echo '<img src="' . $imagePath . '" alt="" class= "artikel-foto"/><br>';
-                    } 
-                    else {
-                        echo "No image available<br>";
-                    }
-                    echo '</a>';
-                    echo '</div>';
-
-                    // Naam toevoegen aan array van weergegeven namen
-                    $weergegevenNamen[] = $row["naam"];
-                }
-            }
-        } else {
-            echo "Geen producten gevonden.";
-        }
-
-        $conn->close();
-        ?>
-    </div>
+            ?>
+        </div>
+    </main>
+    
 
     <footer>
         <div class="container">
             <div class="footer-container">
-                <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
+                <p>&copy; Erasmushogeschool Brussel 2024</p>
                 
                 <ul class="pages">
-                    <li><a href="Voorwaarde.html">Voorwaarden</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="">Voorwaarden</a></li>
+                    <li><a href="">Contact</a></li>
                 </ul>
 
                 <div class="socials">
