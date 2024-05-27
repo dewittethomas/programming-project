@@ -382,7 +382,7 @@ footer {
     }
 }
 
-#artikelToevoegen{
+.artikelToevoegen{
     width: 100%;
     max-width: 600px;
     margin: 2rem auto;
@@ -393,27 +393,27 @@ footer {
     background-color: var(--white);
 }
 
-#artikelToevoegen h2 {
+.artikelToevoegen h2 {
     text-align: center;
     color: var(--black);
     margin-bottom: 1rem;
 }
 
-#artikelToevoegen form {
+.artikelToevoegen form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-#artikelToevoegen label {
+.artikelToevoegen label {
     margin-bottom: 0.5rem;
     font-weight: 600;
     color: var(--black);
 }
 
-#artikelToevoegen input[type="text"],
-#artikelToevoegen textarea,
-#artikelToevoegen input[type="file"] {
+.artikelToevoegen input[type="text"],
+.artikelToevoegen textarea,
+.artikelToevoegen input[type="file"] {
     width: 100%;
     margin-bottom: 1rem;
     padding: 0.5rem;
@@ -422,12 +422,12 @@ footer {
     box-shadow: 1px 1px 5px var(--grey);
 }
 
-#artikelToevoegen textarea {
+.artikelToevoegen textarea {
     height: 100px;
     resize: vertical;
 }
 
-#artikelToevoegen, #scansysteem input[type="submit"] {
+.artikelToevoegen input[type="submit"], #scansysteem input[type="submit"] {
     align-self: center;
     padding: 0.8rem 2rem;
     border: none;
@@ -440,7 +440,7 @@ footer {
     box-shadow: 1px 1px 5px var(--grey);
 }
 
-#artikelToevoegen,#scansysteem input[type="submit"]:hover {
+.artikelToevoegen input[type="submit"]:hover,#scansysteem input[type="submit"]:hover {
     background-color: var(--dark-red);
 }
 #scansysteem {
