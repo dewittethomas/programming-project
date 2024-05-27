@@ -443,6 +443,24 @@ footer {
 .artikelToevoegen input[type="submit"]:hover,#scansysteem input[type="submit"]:hover {
     background-color: var(--dark-red);
 }
+.artikelToevoegen select,
+.artikelToevoegen option {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px var(--grey);
+    background-color: var(--white);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--black);
+}
+
+.artikelToevoegen select:focus {
+    border: 1px solid var(--blue);
+    outline: none;
+}
 #scansysteem {
     display: flex;
     justify-content: center;
