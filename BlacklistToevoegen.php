@@ -17,51 +17,76 @@
                 <a class="logo" href="/" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
+                <form class="search-container" action="/">
+                    <input type="text" placeholder="Search...">
+                </form>
                 <nav>
+                    <a class="nav-icon" href="">
+                        <img src="/images/website/shopping-cart.svg" loading="lazy">
+                    </a>
                     <a class="nav-icon" href="">
                         <img src="/images/website/profile-picture.svg" loading="lazy">
                     </a>
                 </nav>
             </div>
         </div>
-        
     </header>
 
-    <main>
-        <div id="artikelToevoegen">
-        
-        <h2>Artikel Toevoegen</h2>
-        <form action="/includes/add-article.php" method="post" enctype="multipart/form-data">
-            <label for="naam">Naam:</label>
-            <input type="text" id="naam" name="naam" required><br><br>
-        
-            <label for="merk">Merk:</label>
-            <input type="text" id="merk" name="merk"><br><br>
-        
-            <label for="categorie">Categorie:</label>
-            <input type="text" id="categorie" name="categorie" required><br><br>
-        
-            <label for="beschrijving">Beschrijving:</label>
-            <textarea id="beschrijving" name="beschrijving" required></textarea><br><br>
-        
-            <label for="foto">Foto:</label>
-            <input type="file" id="foto" name="foto"><br><br>
-        
-            <input type="submit"  value="Artikel Toevoegen">
-        </form>
-        </div>
+    <?php
+        include 'db_connection.php';
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
+            foreach ($_POST['blackliststatus'] as $id) {
+                $sql = "UPDATE PERSONEN SET blackliststatus = 1 WHERE voornaam = $id";
+                $conn->query($sql);
+            }
+            header("Location: Blacklist.php");
+        }
+        
+        $sql = "SELECT voornaam, achternaam, email, blackliststatus, reden FROM PERSONEN";
+        $result = $conn->query($sql);
 
-    </main>
+    ?>
+
+    <h1>Studenten Overzicht</h1>
+    <form method="post" action="Blacklist.php">
+        <table border="1">
+            <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Email</th>
+                <th>Blacklist</th>
+            </tr>
+            <?php
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<div class='studentenLijst'>";
+                            echo "<tr>";
+                            echo "<td>" . $row["voornaam"] . "</td>";
+                            echo "<td>" . $row["achternaam"] . "</td>";
+                            echo "<td>" . $row["email"] . "</td>";
+                            echo "<td><input type='checkbox' name='blackliststatus[]' value='" . $row["voornaam"] . "'" . ($row["blackliststatus"] ? " checked" : "") . "></td>";
+                            echo "</tr>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>Geen personen op de blacklist</td></tr>";
+                }
+            ?> 
+        </table>
+        <a href="Blacklist.php">
+            <button class="toevoegen-button" type="button">Bijwerken</button>
+        </a>
+    </form>
 
     <footer>
         <div class="container">
             <div class="footer-container">
-                <p>&copy; Erasmushogeschool Brussel 2024</p>
+                <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
                 
                 <ul class="pages">
-                    <li><a href="">Voorwaarden</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="Voorwaarde.html">Voorwaarden</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
                 <div class="socials">

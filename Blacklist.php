@@ -43,33 +43,10 @@
             header("Location: studenten_overzicht.php");
         }
         
-        $sql = "SELECT voornaam, achternaam, email, blackliststatus FROM PERSONEN";
+        $sql = "SELECT voornaam, achternaam, email, blackliststatus, reden FROM PERSONEN";
         $result = $conn->query($sql);
 
     ?>
-
-    <table border="1">
-        <tr>
-            <th>Voornaam</th>
-            <th>Achternaam</th>
-            <th>Email</th>
-            <th>Blacklist</th>
-        </tr>
-        <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row["voornaam"] . "</td>";
-                    echo "<td>" . $row["achternaam"] . "</td>";
-                    echo "<td>" . $row["email"] . "</td>";
-                    echo "<td><input type='checkbox' name='blacklist[]' value='" . $row["voornaam"] . "'" . ($row["blackliststatus"] ? " checked" : "") . "></td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";
-            }
-        ?>
-    </table>
 
     <div class="container-blacklist">
         <p>Voornaam student</p>
@@ -78,13 +55,28 @@
         <p>Reden</p>
     </div>
 
-    <button class="toevoegen-button" type="button" onclick="addStudent()">Voeg student toe</button>
-
     <?php
-        function addStudent() {
-            // Code to add a student goes here
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<div class='container-studenten'>";
+                    echo "<p>" . $row["voornaam"] . "</p>";
+                    echo "<p>" . $row["achternaam"] . "</p>";
+                    echo "<p>" . $row["email"] . "</p>";
+                    echo "<form method='post' action='blacklist.php'>
+                                        <input type='hidden' name='id' value='" . $row["voornaam"] . "'>
+                                        <textarea name='reason'>" . $row["reden"] . "</textarea>
+                                        <input type='submit' value='Opslaan'>
+                                    </form>";
+                echo "</div>";
+            }
+        } else {
+            echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";
         }
     ?>
+
+    <a href="BlacklistToevoegen.php">
+        <button class="toevoegen-button" type="button">Voeg student toe</button>
+    </a>
 
     <footer>
         <div class="container">
