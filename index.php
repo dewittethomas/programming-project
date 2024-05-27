@@ -1,25 +1,32 @@
+<?php
+
+?>
+
+
+
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Uitleendienst MediaLab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <header>
+<header>
         <div class="header-top">
             <div class="container">
                 <a class="logo" href="/" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
-                </form>
+                <form action="search.php" method="GET">
+                <input type="text" name="query"  placeholder="Search...">
+            </form>
                 <nav>
                     <a class="nav-icon" href="">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
@@ -36,37 +43,33 @@
                     <input type="text" placeholder="Search...">
                 </form>
                 <ul class="category-container">
-                    <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="">Video</a></li>
-
-                        <div class="dropdown-content">
-                            <div class="container">
-                                <div class="dropdown-row">
-                                    <a class="category" href="#">Camera's</a>
-                                    <a href="#">Dieptecamera</a>
-                                    <a href="#">Overige</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <li>Audio</li>
-                    <li>Belichting</li>
-                    <li>Tools</li>
-                    <li>Varia</li>
-                    <li>XR</li>
-                </ul>
+        <div class="dropdown-container">
+            <li class="dropdown-item"><a href="gezochte_producten.php?category=Video">Video</a></li>
+            <div class="dropdown-content">
+                <div class="container">
+                    <div class="dropdown-row">
+                        <a class="category" href="gezochte_producten.php?category=Camera's">Camera's</a>
+                        <a href="gezochte_producten.php?category=Dieptecamera">Dieptecamera</a>
+                        <a href="gezochte_producten.php?category=Overige">Overige</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <li><a href="gezochte_producten.php?category=Audio">Audio</a></li>
+        <li><a href="gezochte_producten.php?category=Belichting">Belichting</a></li>
+        <li><a href="gezochte_producten.php?category=Tools">Tools</a></li>
+        <li><a href="gezochte_producten.php?category=Varia">Varia</a></li>
+        <li><a href="gezochte_producten.php?category=XR">XR</a></li>
+    </ul>
             </div>
         </div>
     </header>
-
     <div class="product-container">
         <?php
         include 'db_connection.php';
 
         // Query om producten op te halen
-        $sql = "SELECT id, naam, Afbeelding
-        FROM PRODUCTEN";
+        $sql = "SELECT id, naam, afbeelding FROM PRODUCTEN";
         $result = $conn->query($sql);
 
         // Array om bij te houden welke namen al zijn weergegeven
@@ -75,24 +78,21 @@
         // Producten weergeven met afbeeldingen
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                // Controleren op duplicaties
+                // Controleer of de naam al is weergegeven
                 if (!in_array($row["naam"], $weergegevenNamen)) {
                     echo '<div class="product">';
-                    // Link naar artikelpagina
                     echo '<a href="artikel.php?id=' . $row["id"] . '">';
                     // Productnaam weergeven
                     echo "<h2>" . $row["naam"] . "</h2>";
                     // Productafbeelding weergeven indien beschikbaar
-                    $imagePath = 'images/website/' . $row["Afbeelding"]; // Pad naar de afbeelding
-                    if (file_exists($imagePath)) {
-                        echo '<img src="' . $imagePath . '" alt="" class= "artikel-foto"/><br>';
-                    } 
-                    else {
-                        echo "No image available<br>";
+                    if (!empty($row["afbeeldingID"])) {
+                        echo '<img src="data:images/jpeg;base64,' . base64_encode($row["afbeeldingID"]) . '" /><br>';
+                    } else {
+                        echo "Geen afbeelding beschikbaar<br>";
                     }
                     echo '</a>';
                     echo '</div>';
-
+                    
                     // Naam toevoegen aan array van weergegeven namen
                     $weergegevenNamen[] = $row["naam"];
                 }
@@ -101,11 +101,11 @@
             echo "Geen producten gevonden.";
         }
 
+        // Sluit de databaseverbinding
         $conn->close();
         ?>
     </div>
-
-    <footer>
+ <footer>
         <div class="container">
             <div class="footer-container">
                 <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>

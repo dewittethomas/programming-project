@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .row {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+.spatie {
+    padding: 20px; /* Adjust padding as needed */
+    display: flex; /* Change display to flex */
+}
+
+.item {
+    width: 10%; /* Adjust width as needed */
+    margin-right: 2rem; /* Add spacing between items */
+}
+
+.item img {
+    max-width: 100%; /* Ensure image does not exceed container width */
+}
+
+.details {
+    margin-left: 20px; /* Add spacing between image and details */
+}
+
+</style>
+<body>
+    <main>
+        <h1>Reservatie</h1>
+        <div class="row">
+            <div class="spatie">
+                <img class="item" src="38088.avif" alt="">
+                <div class="details">   
+                    <h2>Product:</h2>
+                    <p>naam</p>
+                    <h2>Geselecteerde data:</h2>
+                    <p>Begindatum: </p>
+                    <p>Einddatum: </p>
+                    <form action="" method="post">
+                        <button type="submit" name="confirm_reservation">Bevestig Reservering</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

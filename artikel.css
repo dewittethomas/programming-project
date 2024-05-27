@@ -1,0 +1,181 @@
+ /* Main styling */
+ @import url("colors.css");
+ @import url("reset.css");
+
+ body {
+     font-family: Poppins, sans-serif;
+     background-color: var(--white);
+     color: var(--black);
+ }
+
+ header {
+     width: 100%;
+ }
+
+ .header-top {
+     width: 100%;
+     border-bottom: 1px solid var(--grey);
+ }
+
+ .header-bottom {
+     width: 100%;
+     border-bottom: 1px solid var(--grey);
+     background-color: var(--light-grey);
+ }
+
+ .container {
+     margin: auto;
+     padding: 0 2.2rem;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+
+ .logo {
+     margin: 0.8rem 0;
+     display: flex;
+     align-items: center;
+ }
+
+ nav {
+     display: flex;
+     align-items: center;
+ }
+
+ .cart {
+     width: 2.2rem;
+     height: 2.2rem;
+ }
+
+ .search-container {
+     display: flex;
+     justify-content: center;
+     flex-grow: 1;
+ }
+
+ input {
+     padding: 1rem 1rem 1rem 3rem;
+     width: 70%;
+     height: 45px;
+     border: 1px solid var(--grey);
+     border-radius: 9px;
+     box-shadow: 1px 1px 10px var(--grey);
+     background-image: url("/images/search.svg");
+     background-repeat: no-repeat;
+     background-position: 1rem;
+     background-size: 1rem 1rem;
+ }
+
+ input:focus {
+     border: 1px solid var(--blue);
+ }
+
+ .category-container {
+     width: 80%;
+     margin: 1rem auto;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+
+ .category-container li {
+     font-size: 1.1rem;
+     font-weight: 700;
+ }
+
+ .item {
+     width: 30%;
+     margin-right: 2rem;
+ }
+
+ .item img {
+     max-width: 100%;
+ }
+
+ .NaamProductFoto {
+     font-size: large;
+     font-weight: bold;
+     text-transform: uppercase;
+ }
+
+ .Beschrijving {
+     width: 60%;
+ }
+
+ .calendar caption {
+     font-size: 1.5em;
+     font-weight: bold;
+     margin-bottom: 10px;
+ }
+
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     border-radius: 10px;
+     color: blue;
+     border: 1px solid black;
+ }
+
+ th {
+     width: 100px;
+     background-color: #f2f2f2;
+     padding: 10px;
+     text-align: center;
+     border: 1px solid black;
+ }
+
+ td {
+     width: 100px;
+     background-color: #f2f2f2;
+     padding: 10px;
+     text-align: center;
+     border: 1px solid black;
+ }
+
+ .calendar td > * {
+     width: 100%;
+     height: 100%;
+     box-sizing: border-box;
+ }
+
+ .empty {
+     background-color: black;
+ }
+
+ .selected {
+     background-color: black;
+     color: white;
+ }
+
+ .calendar .fade {
+     color: #aaa;
+     pointer-events: none;
+ }
+
+ .header {
+     background-color: #ccc;
+ }
+
+ .empty {
+     background-color: #f2f2f2;
+ }
+
+ .capitalize {
+     text-transform: uppercase;
+     font-weight: bold;
+ }
+
+ .red {
+     background-color: red;
+     color: white;
+ }
+
+ .gray {
+     background-color: gray;
+     color: white;
+ }
+
+ .blue {
+     background-color: blue;
+     color: white;
+ }

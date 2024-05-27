@@ -9,20 +9,213 @@
 /* General */
 
 body {
-    color: var(--black);
-    background-color: var(--white);
-    height: 100vh;
     font-family: Poppins, sans-serif;
-    display: flex;
-    flex-direction: column;
+    background-color: var(--white);
+    color: var(--black);
 }
 
-.background {
-    background-image: url("/images/website/banner.jpg");
-    background-size: cover;
+header {
+    width: 100%;
+}
+
+.header-top {
+    width: 100%;
+    border-bottom: 1px solid var(--grey);
+}
+
+.header-bottom {
+    width: 100%;
+    border-bottom: 1px solid var(--grey);
+    background-color: var(--light-grey);
+}
+
+.container {
+    margin: auto;
+    padding: 0 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    margin: 0.8rem 0;
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.cart {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+input {
+    padding: 1rem 1rem 1rem 3rem;
+    width: 70%;
+    height: 45px;
+    border: 1px solid var(--grey);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px var(--grey);
+    background-image: url("/images/search.svg");
     background-repeat: no-repeat;
-    background-position: center;
-    height: 100vh;
+    background-position: 1rem;
+    background-size: 1rem 1rem;
+}
+
+input:focus {
+    border: 1px solid var(--blue);
+}
+
+.category-container {
+    width: 80%;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-container li {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.container {
+    margin: auto;
+    padding: 0 2.2rem;
+    display: flex;
+    align-items: flex-start; /* Align items vertically at the start */
+    justify-content: space-between; /* Distribute space between items */
+}
+
+
+.NaamProductFoto {
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.Beschrijving {
+    width: 60%; /* Adjust width as needed */
+}
+
+/* CSS for rounded corners and styling of dates */
+.calendar {
+    width: 30%; /* Adjust width as needed */
+    border-collapse: collapse;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+.calendar th, .calendar td {
+    border: 0.1rem solid black;
+    padding: 0.5rem; /* Increase padding for better clickable area */
+    text-align: center;
+    width: calc(100% / 7);
+    cursor: pointer; /* Change cursor to pointer for clickable dates */
+}
+
+.calendar .selected {
+    background-color: var(--blue); /* Change to the desired color for selected dates */
+    color: blue; /* Change to the desired text color for selected dates */
+}
+
+.calendar .fade {
+    color: #aaa; /* Change to the desired color for faded dates */
+    pointer-events: none; /* Disable pointer events for faded dates */
+}
+
+
+.header {
+    background-color: #ccc;
+}
+
+.empty {
+    background-color: #f2f2f2;
+}
+.capitalize{
+    text-transform: uppercase;
+    font-weight: bold;
+
+
+}
+
+
+
+.item, .details {
+    margin: 10px;
+}
+.item {
+    width: 25%; 
+     position: relative;
+}
+
+.item img {
+    max-width: 100%; /* Ensure image does not exceed container width */
+}
+.row {
+    display: flex;
+    align-items: center;
+   
+}
+
+.spatie {
+    padding: 20px; 
+    display: flex;
+}
+.NaamProductFoto {
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.Beschrijving {
+    width: 60%; /* Adjust width as needed */
+}
+
+
+.header {
+    background-color: #ccc;
+}
+
+.empty {
+    background-color: #f2f2f2;
+}
+.capitalize{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Add spacing between elements and ensure they are displayed one below the other */
+.details {
+    margin-left: 20px; /* Add spacing between image and details */
+    position: relative; /* Ensure positioning context for pseudo-elements */
+}
+
+
+
+/* Main styling */
+
+/* Colors */
+@import url("colors.css");
+
+/* Reset defaults */
+@import url("reset.css");
+
+/* General */
+
+body {
+    min-height: 100vh;
+    color: var(--black);
+    background-color: var(--white);
+    font-family: Poppins, sans-serif;
     display: flex;
     flex-direction: column;
 }
@@ -32,15 +225,15 @@ header {
 }
 
 .header-top {
-    background-color: var(--white);
-    border-bottom: 1px solid var(--grey);
     width: 100%;
+    border-bottom: 1px solid var(--grey);
+    background-color: var(--white);
 }
 
 .header-bottom {
-    background-color: var(--light-grey);
-    border-bottom: 1px solid var(--grey);
     width: 100%;
+    border-bottom: 1px solid var(--grey);
+    background-color: var(--light-grey);
 }
 
 .container {
@@ -73,6 +266,7 @@ nav {
 .nav-icon:hover {
     background-color: var(--light-grey);
     border-radius: 50%;
+
 }
 
 .nav-icon img {
@@ -91,25 +285,21 @@ nav {
     display: none;
 }
 
-input {
-    box-shadow: 1px 1px 10px var(--grey);
-    border: 1px solid var(--grey);
+input[type="text"] {
+    width: 70%;
     height: 45px;
     margin: 1rem 0;
-    padding: 1rem;
-    border-radius: 9px;
-}
-
-.search-glass {
-    width: 70%;
     padding: 1rem 1rem 1rem 3rem;
+    border: 1px solid var(--grey);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px var(--grey);
     background-image: url("/images/website/search.svg");
     background-repeat: no-repeat;
     background-position: 1rem;
     background-size: 1rem 1rem;
 }
 
-.search-glass:focus {
+input[type="text"]:focus {
     border: 1px solid var(--blue);
 }
 
@@ -123,8 +313,8 @@ input {
 
 .category-container li {
     padding: 1rem 0;
-    position: relative;
     font-weight: 600;
+    position: relative;
 }
 
 .category-container li:before  {
@@ -144,9 +334,9 @@ input {
 }
 
 .dropdown-content {
+    width: 100%;
     background-color: var(--light-grey);
     border: 1px solid var(--grey);
-    width: 100%;
     display: flex;
     position: absolute;
     z-index: 1;
@@ -179,48 +369,10 @@ input {
     transform: scaleX(1); 
 }
 
-.login-container {
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    padding: 2rem;
-    margin: 0 auto;
-    border-radius: 10px;
-}
-
-.login-container h2 {
-    margin: 0 0 1rem 0;
-    text-align: center;
-}
-
-.center {
-    height: 70vh;
-}
-
-.input-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.input-container input:focus {
-    border: 1px solid var(--blue);
-}
-
-.login {
-    color: var(--white);
-    background-color: var(--green);
-    border: none;
-    padding: 0.8rem 0;
-    font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-}
-
 footer {
+    margin-top: auto;
     color: var(--white);
     background-color: var(--light-black);
-    margin-top: auto;
 }
 
 .footer-container {
@@ -260,9 +412,9 @@ footer {
 }
 
 .socials .footer-icon {
-    background-color: var(--dark-grey);
     margin: 0 0.5rem;
-    padding: 0.5rem;
+    padding: 0.6rem;
+    background-color: var(--dark-grey);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -343,17 +495,12 @@ footer {
     background-color: var(--grey);
 }
 
-.toevoegen-button{
+.toevoegen-student button{
     margin-left: 1%;
-    margin-right: 1%;
     background-color: var(--red);
     color: var(--white);
     padding: 15px 50px;
     border-color: var(--white);
-}
-
-.artikel-foto{
-    width: calc(25%);
 }
 
 @media screen and (max-width: 1024px) {
@@ -381,98 +528,6 @@ footer {
         margin: 1rem 0 0 0;
     }
 }
-
-#artikelToevoegen{
-    width: 100%;
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 1rem;
-    border: 1px solid var(--grey);
-    border-radius: 9px;
-    box-shadow: 1px 1px 10px var(--grey);
-    background-color: var(--white);
-}
-
-#artikelToevoegen h2 {
-    text-align: center;
-    color: var(--black);
-    margin-bottom: 1rem;
-}
-
-#artikelToevoegen form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-#artikelToevoegen label {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--black);
-}
-
-#artikelToevoegen input[type="text"],
-#artikelToevoegen textarea,
-#artikelToevoegen input[type="file"] {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    border: 1px solid var(--grey);
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px var(--grey);
-}
-
-#artikelToevoegen textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-#artikelToevoegen, #scansysteem input[type="submit"] {
-    align-self: center;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--red);
-    color: var(--white);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 1px 1px 5px var(--grey);
-}
-
-#artikelToevoegen,#scansysteem input[type="submit"]:hover {
-    background-color: var(--dark-red);
-}
-#scansysteem {
-    display: flex;
-    justify-content: center;
-    padding: 3rem;
-}
-#uitlenenForm, #terugnemenForm{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    border: 1px solid var(--grey);
-    border-radius: 9px;
-    box-shadow: 1px 1px 10px var(--grey);
-    background-color: var(--white);
-    width: 100%;
-    max-width: 600px;
-    margin: 2rem auto;
-
-}
-
-
-
-/* Media queries voor responsief ontwerp */
-@media screen and (max-width: 480px) {
-    #artikelToevoegen {
-        padding: 1rem 0.5rem;
-    }
-}
-
 
 /* TODO: 
 - Put icons under logo if mobile device 
