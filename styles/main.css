@@ -28,14 +28,86 @@ header {
     border-bottom: 1px solid var(--grey);
     background-color: var(--light-grey);
 }
-
-.container {
-    margin: auto;
-    padding: 0 2.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* Main styling for the reservation page */
+main {
+    padding: 20px;
 }
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.product-item {
+    display: flex;
+    width: 60%;
+    border: 1px solid var(--grey);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    max-width: 200;
+    height: auto;
+    margin-right: 20px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.capitalize {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.verwijderen-button {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.verwijderen-button:hover {
+    background-color: darkred;
+}
+
+.reserveren-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.reserveren-button {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.reserveren-button:hover {
+    background-color: darkred;
+}
+
+
 
 .logo {
     margin: 0.8rem 0;
@@ -88,14 +160,11 @@ input:focus {
     font-size: 1.1rem;
     font-weight: 700;
 }
-.container {
-    margin: auto;
-    padding: 0 2.2rem;
-    display: flex;
-    align-items: flex-start; /* Align items vertically at the start */
-    justify-content: space-between; /* Distribute space between items */
-}
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 .NaamProductFoto {
     font-size: large;
@@ -140,13 +209,13 @@ input:focus {
 .empty {
     background-color: #f2f2f2;
 }
-.capitalize{
-    text-transform: uppercase;
-    font-weight: bold;
 
 
+<<<<<<< Updated upstream
 }
 
+=======
+>>>>>>> Stashed changes
 
 
 .item, .details {
@@ -160,11 +229,15 @@ input:focus {
 .item img {
     max-width: 100%; /* Ensure image does not exceed container width */
 }
+<<<<<<< Updated upstream
 .row {
     display: flex;
     align-items: center;
    
 }
+=======
+
+>>>>>>> Stashed changes
 
 .spatie {
     padding: 20px; 
@@ -188,6 +261,7 @@ input:focus {
 .empty {
     background-color: #f2f2f2;
 }
+<<<<<<< Updated upstream
 .capitalize{
     text-transform: uppercase;
     font-weight: bold;
@@ -198,6 +272,9 @@ input:focus {
     margin-left: 20px; /* Add spacing between image and details */
     position: relative; /* Ensure positioning context for pseudo-elements */
 }
+=======
+
+>>>>>>> Stashed changes
 
 
 
@@ -237,6 +314,7 @@ header {
 }
 
 .container {
+<<<<<<< Updated upstream
     width: 100%;
     max-width: 1250px;
     margin: 0 auto;
@@ -244,6 +322,15 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+=======
+    
+   width: 60%;
+    margin: left ;
+   
+    display: flex;
+    align-items: center;
+    
+>>>>>>> Stashed changes
 }
 
 .logo {
@@ -426,7 +513,6 @@ footer {
 }
 
 .product-container {
-    color: black !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

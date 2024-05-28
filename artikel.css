@@ -23,6 +23,7 @@
      background-color: var(--light-grey);
  }
 
+<<<<<<< Updated upstream
  .container {
      margin: auto;
      padding: 0 2.2rem;
@@ -30,6 +31,8 @@
      align-items: center;
      justify-content: space-between;
  }
+=======
+>>>>>>> Stashed changes
 
  .logo {
      margin: 0.8rem 0;

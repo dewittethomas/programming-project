@@ -1,4 +1,5 @@
 <?php
+<<<<<<< Updated upstream
 
 function confirmReservation() {
 
@@ -45,5 +46,8 @@ function confirmReservation() {
         }
     }
 }
+=======
+include 'db_connection.php';
+>>>>>>> Stashed changes
 
 ?> 

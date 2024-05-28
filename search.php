@@ -8,7 +8,11 @@ if(isset($_GET['query'])) {
     $searchTerm = $_GET['query'];
     
     // SQL query to search for data
+<<<<<<< Updated upstream
     $sql = "SELECT * FROM PRODUCTEN WHERE naam LIKE '%$searchTerm%'";
+=======
+    $sql = "SELECT * FROM PRODUCTS WHERE name LIKE '%$searchTerm%'";
+>>>>>>> Stashed changes
     
     // Execute the query
     $result = $conn->query($sql);

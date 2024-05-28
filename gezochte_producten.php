@@ -39,6 +39,7 @@
         </div>
     </header>
     <main>
+<<<<<<< Updated upstream
         <?php
         session_start();
         include 'db_connection.php';
@@ -113,6 +114,138 @@
 
         $conn->close();
         ?>
+=======
+    
+    <?php
+    
+    session_start();
+    include 'db_connection.php';
+    
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    // Check if search results are available
+    if (isset($_SESSION['search_results'])) {
+        echo "<div class='product-container'>";
+        foreach ($_SESSION['search_results'] as $product) {
+            echo '<div class="product">';
+            echo "<a href='artikel.php?id=" . $product['id'] . "'>";
+            echo "<h2>" . htmlspecialchars($product["name"]) . "</h2>";
+            if (!empty($product["image"])) {
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($product["image"]) . '" /><br>';
+            } else {
+                echo "Geen afbeelding beschikbaar<br>";
+            }
+            echo '</a>';
+            echo '</div>';
+        }
+        echo "</div>";
+        unset($_SESSION['search_results']);
+    }
+    
+    // Check if there are no search results
+    if (isset($_GET['no_results']) && $_GET['no_results'] === 'true') {
+        echo "<p>No products found for your search.</p>";
+    }
+    
+    // Fetch products based on category
+    if (isset($_GET['category'])) {
+        $category = $_GET['category'];
+    
+        $sql = "SELECT P.id, P.name, P.image
+                FROM PRODUCTS P
+                JOIN SUBCATEGORY S ON P.subcategory_id = S.subcategory_id
+                WHERE S.category = ?";
+    
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("s", $category);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            if ($result === false) {
+                die("Error executing query: " . $conn->error);
+            }
+    
+            echo "<div class='product-container'>";
+            echo "<h2>Products in Category: " . htmlspecialchars($category) . "</h2>";
+            echo "<br>";
+            echo "<br>";    
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="product">';
+                    echo "<a href='artikel.php?id=" . $row['id'] . "'>";
+                    echo "<h2>" . htmlspecialchars($row['name']) . "</h2>";
+                    if (!empty($row['image'])) {
+                        echo '<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" /><br>';
+                    } else {
+                        echo "Geen afbeelding beschikbaar<br>";
+                    }
+                    echo '</a>';
+                    echo '</div>';
+                }
+            } else {
+                echo "Geen producten gevonden in deze categorie.";
+            }
+    
+            echo "</div>";
+    
+            $stmt->close();
+        } else {
+            die("Failed to prepare the SQL statement: " . $conn->error);
+        }
+    }
+    // Fetch products based on category
+    if (isset($_GET['subcategory'])) {
+        $category = $_GET['subcategory'];
+    
+        $sql = "SELECT P.id, P.name, P.image
+                FROM PRODUCTS P
+                JOIN SUBCATEGORY S ON P.subcategory_id = S.subcategory_id
+                WHERE S.subcategory = ?";
+    
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("s", $category);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            if ($result === false) {
+                die("Error executing query: " . $conn->error);
+            }
+    
+            echo "<div class='product-container'>";
+            echo "<h2>Products in Category: " . htmlspecialchars($category) . "</h2>";
+    
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="product">';
+                    echo "<a href='artikel.php?id=" . $row['id'] . "'>";
+                    echo "<h2>" . htmlspecialchars($row['name']) . "</h2>";
+                    if (!empty($row['image'])) {
+                        echo '<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" /><br>';
+                    } else {
+                        echo "Geen afbeelding beschikbaar<br>";
+                    }
+                    echo '</a>';
+                    echo '</div>';
+                }
+            } else {
+                echo "Geen producten gevonden in deze categorie.";
+            }
+    
+            echo "</div>";
+    
+            $stmt->close();
+        } else {
+            die("Failed to prepare the SQL statement: " . $conn->error);
+        }
+    }
+    
+    $conn->close();
+    ?>
+    
+
+>>>>>>> Stashed changes
     </main>
     <footer>
         <p>&copy; Erasmushogeschool Brussel 2024</p>
