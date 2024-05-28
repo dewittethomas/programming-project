@@ -15,7 +15,7 @@
 <header>
     <div class="header-top">
         <div class="container">
-            <a class="logo" href="/" title="Home">
+            <a class="logo" href="admin.html" title="Home">
                 <img src="/images/website/logo.svg" loading="lazy" alt="Home">
             </a>
             <nav>
@@ -28,10 +28,10 @@
     
 </header>
 <main>
-  <div id="scansysteem">
+  <div class="scansysteem">
 
   <!-- Formulier om artikelnummer voor uitlenen in te voeren -->
-  <form id="uitlenenForm" action="verwerking.php" method="post">
+  <form class="uitlenenForm" action="/includes/verwerking.php" method="post">
     <label for="artikelnummerUitlenen">Artikelnummer Uitlenen:</label><br>
     <input type="text" id="artikelnummerUitlenen" name="artikelnummerUitlenen" required><br><br>
     <input type="submit" value="Uitlenen">
@@ -40,7 +40,7 @@
   
 
   <!-- Formulier om artikelnummer voor terugnemen in te voeren -->
-  <form id="terugnemenForm" action="verwerking.php" method="post">
+  <form class="terugnemenForm" action="/includes/verwerking.php" method="post">
     <label for="artikelnummerTerugnemen">Artikelnummer Terugnemen:</label><br>
     <input type="text" id="artikelnummerTerugnemen" name="artikelnummerTerugnemen" required><br><br>
     <input type="submit" value="Terugnemen">
