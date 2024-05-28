@@ -18,12 +18,12 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Verkrijg de formuliervelden
-  $name = $_POST['name'];
-  $brand = $_POST['brand'];
-  $category = $_POST['category'];
-  $description = $_POST['description'];
-  $subcategory_id = $_POST['subcategory_id'];
-  
+  $name = $conn->real_escape_string($_POST['name']);
+  $brand = $conn->real_escape_string($_POST['brand']);
+  $category = $conn->real_escape_string($_POST['category']);
+  $description = $conn->real_escape_string($_POST['description']);
+
+
 
   // Verwerk de foto-upload
   $afbeelding = '';
