@@ -35,79 +35,66 @@
     <?php
         include 'db_connection.php';
 
-        $sql = "SELECT user_id, name, surname, email, blackliststatus, reason FROM USERS";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+        {
+            // Reset all blacklist statuses to 0
+            $sql_reset = "UPDATE USERS SET blackliststatus = 0";
+            $conn->query($sql_reset);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
-            foreach ($_POST['blackliststatus'] as $user_id) {
-                $sql = "UPDATE USERS SET blackliststatus = 1 WHERE name = '$user_id'";
-                $conn->query($sql);
-            }
-            header("Location: Blacklist.php");
-        }
-        
-        $result = $conn->query($sql);
-
-    ?>
-
-    <div class="container-blacklist">
-        <p>Voornaam student</p>
-        <p>Achternaam student</p>
-        <p>Mail student</p>
-        <p>Reden</p>
-    </div>
-
-    <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "<div class='container-studenten'>";
-                echo "<p>" . $row["name"] . "</p>";
-                echo "<p>" . $row["surname"] . "</p>";
-                echo "<p>" . $row["email"] . "</p>";
-                echo "<div class='BlacklistButtons'>";
-                    echo "<button class='toevoegen-button' type='button' onclick='myFunction()'>Toevoegen</button>";
-                    echo "<button class='toevoegen-button' type='button'>Verwijderen</button>";
-                echo "</div>";
-                echo "</div>";
-
-            }
-        } else {
-            echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";
-        }
-
-        function myFunction() {
-            include 'db_connection.php';
-
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
-                foreach ($_POST['blackliststatus'] as $user_id) {
-                    $sql = "UPDATE USERS SET blackliststatus = 1 WHERE user_id = '$user_id'";
-                    $conn->query($sql);
+            // Update selected users to blackliststatus = 1
+            if (isset($_POST['blackliststatus'])) 
+            {
+                foreach ($_POST['blackliststatus'] as $user_id) 
+                {
+                    $sql_update = "UPDATE USERS SET blackliststatus = 1 WHERE user_id = $user_id";
+                    $conn->query($sql_update);
                 }
-                header("Location: Blacklist.php");
             }
+
         }
+
+
+
+
+        $sql = "SELECT user_id, name, surname, email, blackliststatus, reason FROM USERS";
+        $result = $conn->query($sql);
     ?>
 
-    <?php
-        
-    ?>
-
-    <button class='toevoegen-button' type='button' onclick='myFunction()'>Toevoegen</button>
-
-
-    <a href="Blacklist.php">
-        <button class="toevoegen-button" type="button">Blacklist</button>
-    </a>
+    <h1>Studenten Overzicht</h1>
+    <form method="POST" action="Blacklist.php">
+        <table border="1">
+            <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Email</th>
+                <th>Blacklist</th>
+            </tr>
+            <?php
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["name"] . "</td>";
+                    echo "<td>" . $row["surname"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
+                    echo "<td><input type='checkbox' name='blackliststatus[]' value='" . $row["user_id"] . "'" . ($row["blackliststatus"] ? " checked" : "") . "></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='4'>Geen personen op de blacklist</td></tr>";
+            }
+            ?>
+        </table>
+        <button type="submit" class="toevoegen-button">Bijwerken</button>
+    </form>
 
     <footer>
         <div class="container">
             <div class="footer-container">
                 <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
-                
                 <ul class="pages">
                     <li><a href="Voorwaarde.html">Voorwaarden</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
-
                 <div class="socials">
                     <a class="footer-icon" href="https://www.facebook.com/erasmushogeschool" target="_blank">
                         <img src="/images/website/facebook.png" loading="lazy" alt="">

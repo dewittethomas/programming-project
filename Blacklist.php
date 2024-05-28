@@ -77,8 +77,8 @@
         }
     ?>
 
-    <a href="BlacklistToevoegen.php">
-        <button class="toevoegen-button" type="button">Voeg student toe</button>
+    <a href="update.php">
+        <button class="toevoegen-button" type="button">Studentenlijst</button>
     </a>
 
     <footer>
