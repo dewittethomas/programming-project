@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Include the database connection file
-include 'db_connection.php';
+include 'includes/connect.php';
 
 // Initialize an empty array to store selected products if not already initialized
 if (!isset($_SESSION['selected_products'])) {
