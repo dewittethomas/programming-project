@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Contactpagina Erasmushogeschool</title>
+    <title>Uitleendienst MediaLab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -30,49 +30,56 @@
                 </nav>
             </div>
         </div>
-        <div class="header-bottom">
-            <div class="container">
-                <ul class="category-container">
-                    <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="">Video</a></li>
-
-                        <div class="dropdown-content">
-                            <div class="container">
-                                <div class="dropdown-row">
-                                    <a class="category" href="#">Camera's</a>
-                                    <a href="#">Dieptecamera</a>
-                                    <a href="#">Overige</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <li>Audio</li>
-                    <li>Belichting</li>
-                    <li>Tools</li>
-                    <li>Varia</li>
-                    <li>XR</li>
-                </ul>
-            </div>
-        </div>
     </header>
 
-    <div class="contact">
-        <p class="titel-contact">Contact</p><br>
-        <p><u>Beheerder:</u></p>
-        <p><u>Email:</u> voornaam.achternaam@ehb.be</p>
-        <p><u>Nummer:</u> +32 123 45 67 89</p>
-        <p><u>Aanwezigheid:</u> ?</p>
-        <br>
-        <p class="titel-contact">ICT Dienst:</p><br>
-        <p><u>Email:</u> voornaam.achternaam@ehb.be</p>
-        <p><u>Nummer:</u> +32 123 45 67 89</p>
-        <p><u>Aanwezigheid:</u> ?</p>
+    <?php
+        include 'includes/connect.php';
+
+        $sql = "SELECT user_id, name, surname, email, blackliststatus, reason FROM USERS";
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
+            foreach ($_POST['blackliststatus'] as $user_id) {
+                $sql = "UPDATE USERS SET blackliststatus = 1 WHERE user_id = ?";
+                $conn->query($sql);
+            }
+            header("Location: studenten_overzicht.php");
+        }
+        
+        $result = $conn->query($sql);
+
+    ?>
+
+    <div class="container-blacklist">
+        <p>Voornaam student</p>
+        <p>Achternaam student</p>
+        <p>Mail student</p>
+        <p>Reden</p>
     </div>
 
-    <div>
-        <img src="images/website/ehb-foto.jpg" class="foto-contact">
-    </div>
+    <?php
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                if ($row["blackliststatus"] == 1) {
+                    echo "<div class='container-studenten'>";
+                    echo "<p>" . $row["name"] . "</p>";
+                    echo "<p>" . $row["surname"] . "</p>";
+                    echo "<p>" . $row["email"] . "</p>";
+                    echo "<form method='post' action='blacklist.php'>
+                                        <input type='hidden' name='id' value='" . $row["name"] . "'>
+                                        <textarea name='reason'>" . $row["reason"] . "</textarea>
+                                        <input type='submit' value='Opslaan'>
+                                    </form>";
+                    echo "</div>";
+                }
+            }
+        } else {
+            echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";
+        }
+    ?>
+
+    <a href="BlacklistToevoegen.php">
+        <button class="toevoegen-button" type="button">Voeg student toe</button>
+    </a>
 
     <footer>
         <div class="container">

@@ -445,6 +445,92 @@ footer {
     background-color: var(--dark-red);
 }
 
+
+.foto-contact{
+    width: 800px; /* Breedte van de afbeelding */
+    height: auto; /* Behoudt de oorspronkelijke verhoudingen van de afbeelding */
+    position: absolute; /* Absoluut positioneren */
+    top: 50%; /* Plaats de bovenkant van de afbeelding op 50% van de hoogte van de pagina */
+    right: 0; /* Plaats de afbeelding aan de rechterkant van het scherm */
+    transform: translateY(-50%);
+    padding-right: 50px; ;
+}
+
+.container-voorwaarde{
+    padding: 20px;
+}
+
+.container-voorwaarde a{
+    color: red;
+}
+
+.titel-voorwaarde{
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.container-blacklist{
+    font-weight: 700;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.container-studenten{
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    align-items: center;
+    text-align: center;
+    text-wrap: nowrap;
+
+}
+
+.container-blacklist p{
+    border: 2px solid #ccc;
+    width: 80%;
+    padding: 15px;
+    background-color: var(--grey);
+}
+
+.container-studenten p{
+    border: 2px solid #ccc;
+    width: 80%;
+    padding: 15px;
+    background-color: var(--grey);
+}
+.container-studenten form{
+    border: 2px solid #ccc;
+    display: flex;
+    background-color: var(--grey);
+    padding: 11.5px;
+    padding-right: 120px;
+    padding-left: 120px;
+}
+
+.toevoegen-button{
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 15px 50px;
+    border-color: var(--white);
+}
+
+.artikel-foto{
+    width: calc(25%);
+}
+
+.studentenBlacklist th{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
 /* Media queries voor responsief ontwerp */
 @media screen and (max-width: 480px) {
     #artikelToevoegen {
@@ -461,3 +547,185 @@ footer {
 @media screen and (max-width: 480px) {
 
 }
+
+.contact{
+    padding: 50px;
+    font-size: 24px;
+}
+
+.titel-contact{
+    font-size: 36px;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.foto-contact{
+    width: 800px; /* Breedte van de afbeelding */
+    height: auto; /* Behoudt de oorspronkelijke verhoudingen van de afbeelding */
+    position: absolute; /* Absoluut positioneren */
+    top: 50%; /* Plaats de bovenkant van de afbeelding op 50% van de hoogte van de pagina */
+    right: 0; /* Plaats de afbeelding aan de rechterkant van het scherm */
+    transform: translateY(-50%);
+    padding-right: 50px; ;
+}
+
+.container-voorwaarde{
+    padding: 20px;
+}
+
+.container-voorwaarde a{
+    color: red;
+}
+
+.titel-voorwaarde{
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.container-blacklist{
+    font-weight: 700;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.container-blacklist p{
+    border: 2px solid #ccc;
+    width: 80%;
+    padding-right: 165px;
+    padding-left: 165px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    background-color: var(--grey);
+}
+
+.toevoegen-button{
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 15px 50px;
+    border-color: var(--white);
+}
+
+.artikel-foto{
+    width: calc(25%);
+}
+
+.artikelToevoegen{
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px var(--grey);
+    background-color: var(--white);
+}
+
+.artikelToevoegen h2 {
+    text-align: center;
+    color: var(--black);
+    margin-bottom: 1rem;
+}
+
+.artikelToevoegen form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.artikelToevoegen label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.artikelToevoegen input[type="text"],
+.artikelToevoegen textarea,
+.artikelToevoegen input[type="file"] {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px var(--grey);
+}
+
+.artikelToevoegen textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.artikelToevoegen input[type="submit"], #scansysteem input[type="submit"] {
+    align-self: center;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--red);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px var(--grey);
+}
+
+.artikelToevoegen input[type="submit"]:hover,#scansysteem input[type="submit"]:hover {
+    background-color: var(--dark-red);
+}
+.artikelToevoegen select,
+.artikelToevoegen option {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px var(--grey);
+    background-color: var(--white);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--black);
+}
+
+.artikelToevoegen select:focus {
+    border: 1px solid var(--blue);
+    outline: none;
+}
+#scansysteem {
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+}
+#uitlenenForm, #terugnemenForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px var(--grey);
+    background-color: var(--white);
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+
+}
+
+
+
+
+
+
+/* TODO: 
+- Put icons under logo if mobile device 
+- Add category button for mobile and tablet
+*/
+
+@media screen and (max-width: 480px) {
+
+}
+
+ 

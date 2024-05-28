@@ -18,16 +18,17 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Verkrijg de formuliervelden
-  $naam = $_POST['naam'];
-  $merk = $_POST['merk'];
-  $categorie = $_POST['categorie'];
-  $beschrijving = $_POST['beschrijving'];
-  $subcategorie_id = $_POST['subcategorie_id'];
+  $name = $_POST['name'];
+  $brand = $_POST['brand'];
+  $category = $_POST['category'];
+  $description = $_POST['description'];
+  $subcategory_id = $_POST['subcategory_id'];
+  
 
   // Verwerk de foto-upload
   $afbeelding = '';
   if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
-      $target_dir = "images/products/";
+      $target_dir = "../images/products/";
       $target_file = $target_dir . basename($_FILES["foto"]["name"]);
       $uploadOk = 1;
       $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo "Sorry, je bestand is niet geüpload.";
       } else {
           if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
-              $afbeelding = $target_file;
+              $image = $target_file;
           } else {
               echo "Sorry, er was een probleem met het uploaden van je bestand.";
               exit;
@@ -67,15 +68,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Bereid de SQL query voor
-  $sql = "INSERT INTO PRODUCTEN (naam, merk, categorie, beschrijving, beschikbaarheid, id_personen, subcategorie_id, afbeelding) VALUES (?, ?, ?, ?, 1, NULL, ?, ?)";
+  $sql = "INSERT INTO PRODUCTS (name, brand, category, description, availability, user_id, subcategory_id, image) VALUES (?, ?, ?, ?, 1, NULL, ?, ?)";
 
   // Gebruik prepared statements om SQL injectie te voorkomen
   if ($stmt = $conn->prepare($sql)) {
-      $stmt->bind_param("ssssis", $naam, $merk, $categorie, $beschrijving, $subcategorie_id, $afbeelding);
+      $stmt->bind_param("ssssis", $name, $brand, $category, $description, $subcategory_id, $image);
 
       // Voer de query uit
       if ($stmt->execute()) {
-          header("Location: index.html");
+          header("Location: ../index.html");
           exit;
       } else {
           echo "Fout bij het uitvoeren van de query: " . $stmt->error;

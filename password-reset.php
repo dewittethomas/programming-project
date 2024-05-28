@@ -1,3 +1,6 @@
+<?php
+    require 'includes/password-reset.php'
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -22,13 +25,15 @@
         <div class="container center">
             <div class="login-container">
                 <h2>Login</h2>
-                <div class="input-container">
-                    <label for="">Username</label>
-                    <input type="text">
-                    <label for="">Password</label>
-                    <input type="text">
-                    <button class="login" type="submit">Login</button>
-                </div>
+                <form method="post">
+                    <div class="input-container">
+                        <label for="">Username</label>
+                        <input id="username" name="username" type="text">
+                        <label for="">Password</label>
+                        <input id="new-password" name="new-password" type="password">
+                        <button class="login" type="submit">Login</button>
+                    </div>
+                </form>
 
 
             </div>
