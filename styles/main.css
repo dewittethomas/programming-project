@@ -426,6 +426,7 @@ footer {
 }
 
 .product-container {
+    color: black !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
