@@ -37,7 +37,7 @@
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
             foreach ($_POST['blackliststatus'] as $id) {
-                $sql = "UPDATE USERS SET blackliststatus = 1 WHERE voornaam = $id";
+                $sql = "UPDATE USERS SET blackliststatus = 1 WHERE name = '$id'";
                 $conn->query($sql);
             }
             header("Location: Blacklist.php");
@@ -80,6 +80,7 @@
             <button class="toevoegen-button" type="submit">Bijwerken</button>
         </a>
     </form>
+
 
     
 
