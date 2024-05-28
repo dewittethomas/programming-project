@@ -1,6 +1,5 @@
 <?php
-    require "includes/connect.php";
-    require "includes/products.php";
+    require 'includes/connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -24,19 +23,6 @@
                 <form class="search-container" action="/">
                     <input class="search-glass" type="text" placeholder="Search...">
                 </form>
-                <nav>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/shopping-cart.svg" loading="lazy">
-                    </a>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/profile-picture.svg" loading="lazy">
-                    </a>
-                </nav>
-            </div>
-        </div>
-        <div class="header-middle">
-            <div class="container">
-                
                 <nav>
                     <a class="nav-icon" href="">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
@@ -79,12 +65,50 @@
 
     <main>
         <div class="product-container">
-            <?php
+        <?php
 
-                echo $result
+        // Query om producten op te halen
+        $sql = "SELECT id, name, image
+        FROM PRODUCTS";
+        $result = $conn->query($sql);
 
-            ?>
-        </div>
+        // Array om bij te houden welke namen al zijn weergegeven
+        $weergegevenNamen = array();
+
+        // Producten weergeven met afbeeldingen
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                // Controleren op duplicaties
+                if (!in_array($row["name"], $weergegevenNamen)) {
+                    echo '<div class="product">';
+                    // Link naar artikelpagina
+                    echo '<a href="artikel.php?id=' . $row["id"] . '">';
+                    // Productnaam weergeven
+                    echo "<h2>" . $row["name"] . "</h2>";
+                    // Productafbeelding weergeven indien beschikbaar
+                    $imagePath = 'images/' . $row["image"]; // Pad naar de afbeelding
+                    if (file_exists($imagePath)) {
+                        echo '<img src="' . $imagePath . '" alt="" class= "artikel-foto"/><br>';
+                    } 
+                    else {
+                        echo "No image available<br>";
+                    }
+                    echo '</a>';
+                    echo '</div>';
+
+                    // Naam toevoegen aan array van weergegeven namen
+                    $weergegevenNamen[] = $row["name"];
+                }
+            }
+        } else {
+            echo "Geen producten gevonden.";
+        }
+
+        $conn->close();
+
+        $conn->close();
+        ?>
+    </div>
     </main>
     
 

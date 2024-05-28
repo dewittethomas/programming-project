@@ -217,10 +217,6 @@ input {
     cursor: pointer;
 }
 
-.product-container {
-    color: black !important;
-}
-
 footer {
     color: var(--white);
     background-color: var(--light-black);
@@ -278,6 +274,7 @@ footer {
 }
 
 .product-container {
+    color: black !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
