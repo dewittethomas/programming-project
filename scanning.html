@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <title>Uitleendienst MediaLab</title>
+    <title>Beheerder Medialab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
@@ -15,7 +15,7 @@
 <header>
     <div class="header-top">
         <div class="container">
-            <a class="logo" href="/" title="Home">
+            <a class="logo" href="/admin.php" title="Home">
                 <img src="/images/website/logo.svg" loading="lazy" alt="Home">
             </a>
             <nav>
@@ -33,7 +33,7 @@
   <!-- Formulier om artikelnummer voor uitlenen in te voeren -->
   <form class="uitlenenForm" action="/includes/verwerking.php" method="post">
     <label for="artikelnummerUitlenen">Artikelnummer Uitlenen:</label><br>
-    <input type="text" id="artikelnummerUitlenen" name="artikelnummerUitlenen" required><br><br>
+    <input type="text" class="artikelnummerUitlenen" name="artikelnummerUitlenen" required><br><br>
     <input type="submit" value="Uitlenen">
   </form>
   
@@ -42,7 +42,7 @@
   <!-- Formulier om artikelnummer voor terugnemen in te voeren -->
   <form class="terugnemenForm" action="/includes/verwerking.php" method="post">
     <label for="artikelnummerTerugnemen">Artikelnummer Terugnemen:</label><br>
-    <input type="text" id="artikelnummerTerugnemen" name="artikelnummerTerugnemen" required><br><br>
+    <input type="text" class="artikelnummerTerugnemen" name="artikelnummerTerugnemen" required><br><br>
     <input type="submit" value="Terugnemen">
   </form>
 
