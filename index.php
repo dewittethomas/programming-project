@@ -25,7 +25,7 @@
                     <input class="search-glass" type="text" placeholder="Search...">
                 </form>
                 <nav>
-                    <a class="nav-icon" href="">
+                    <a class="nav-icon" href="winkelmandje.php">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
                     </a>
                     <a class="nav-icon" href="">
