@@ -470,7 +470,7 @@ footer {
 
 /* Media queries voor responsief ontwerp */
 @media screen and (max-width: 480px) {
-    #artikelToevoegen {
+    .artikelToevoegen {
         padding: 1rem 0.5rem;
     }
 }
