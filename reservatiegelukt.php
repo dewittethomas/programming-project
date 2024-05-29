@@ -12,54 +12,20 @@ session_start();
 </head>
 <body>
 <header>
-        <div class="header-top">
-            <div class="container">
-                <a class="logo" href="/" title="Home">
-                    <img src="/images/website/logo.svg" loading="lazy" alt="Home">
-                </a>
-                <form class="search-container" action="/">
-                    <input class="search-glass" type="text" placeholder="Search...">
-                </form>
-                <nav>
-                    <a class="nav-icon" href="winkelmandje.php">
-                        <img src="/images/website/shopping-cart.svg" loading="lazy">
-                    </a>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/profile-picture.svg" loading="lazy">
-                    </a>
-                </nav>
-            </div>
+    <div class="header-top">
+        <div class="container">
+            <a class="logo" href="index.php" title="Home">
+                <img src="/images/logo.svg" alt="Home">
+            </a>
+            <form action="search.php" method="GET">
+                <input type="text" name="query"  placeholder="Search...">
+            </form>
+            <nav>
+                <img class="cart" src="images/shopping-cart.svg">
+            </nav>
         </div>
-        <div class="header-bottom">
-            <div class="container">
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
-                </form>
-                <ul class="category-container">
-                    <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="">Video</a></li>
-
-                        <div class="dropdown-content">
-                            <div class="container">
-                                <div class="dropdown-row">
-                                    <a class="category" href="#">Camera's</a>
-                                    <a href="#">Dieptecamera</a>
-                                    <a href="#">Overige</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <li><a href="gezochte_producten.php?category=Audio">Audio</a></li>
-        <li><a href="gezochte_producten.php?category=Belichting">Belichting</a></li>
-        <li><a href="gezochte_producten.php?category=Tools">Tools</a></li>
-        <li><a href="gezochte_producten.php?category=Varia">Varia</a></li>
-        <li><a href="gezochte_producten.php?category=XR">XR</a></li>
-  
-                </ul>
-            </div>
-        </div>
-    </header>
+    </div>
+</header>
 <main>
     <h1>Reservatie Gelukt!</h1>
     <p>Hier zijn de details van uw reservering:</p>

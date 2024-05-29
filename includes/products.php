@@ -1,7 +1,7 @@
 <?php 
     require "connect.php";
 
-    $sql = "SELECT id, name, image FROM PRODUCTS";
+    $sql = "SELECT * FROM PRODUCTS";
     $result = mysqli_query($conn, $sql);
 
     $empty = true;

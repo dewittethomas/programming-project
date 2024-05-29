@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,48 +52,27 @@
                 }
             }
 
-            // SQL query om alle aankomende reservaties op te halen, gesorteerd op begindatum, met product status 1
-            $sql_reservaties = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
-                                p.name as product_name, p.image as product_image, p.brand as product_brand, p.status as product_status,
-                                u.firstname as user_first_name,u.lastname as user_last_name, u.email as user_email
-                            FROM RESERVERINGEN r
-                            JOIN PRODUCTS p ON r.product_id = p.id
-                            JOIN USERS u ON r.user_id = u.user_id
-                            WHERE p.status = 1
-                            ORDER BY r.begindatum";
-            $result_reservaties = $conn->query($sql_reservaties);
+            // SQL query om alle aankomende reservaties op te halen, gesorteerd op datum
+            $sql = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
+                        p.name as product_name, p.image as product_image, p.brand as product_brand, 
+                        u.name as user_name, u.email as user_email
+                    FROM RESERVERINGEN r
+                    JOIN PRODUCTS p ON r.product_id = p.id
+                    JOIN USERS u ON r.user_id = u.user_id
+                    WHERE r.begindatum >= CURDATE()
+                    ORDER BY r.begindatum";
+            $result = $conn->query($sql);
 
             $reservations = [];
-            if ($result_reservaties->num_rows > 0) {
-                while($row = $result_reservaties->fetch_assoc()) {
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
                     $reservations[$row['begindatum']][] = $row;
                 }
             } else {
                 echo "Geen aankomende reservaties gevonden.";
             }
 
-            // SQL query om alle inleveringen op te halen, gesorteerd op einddatum
-            $sql_inleveringen = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
-                                p.name as product_name, p.image as product_image, p.brand as product_brand, p.status as product_status,
-                                u.firstname as user_first_name,u.lastname as user_last_name, u.email as user_email
-                            FROM RESERVERINGEN r
-                            JOIN PRODUCTS p ON r.product_id = p.id
-                            JOIN USERS u ON r.user_id = u.user_id
-                            WHERE r.einddatum >= CURDATE()
-                            ORDER BY r.einddatum";
-            $result_inleveringen = $conn->query($sql_inleveringen);
-
-            $inleveringen = [];
-            if ($result_inleveringen->num_rows > 0) {
-                while($row = $result_inleveringen->fetch_assoc()) {
-                    $inleveringen[$row['einddatum']][] = $row;
-                }
-            } else {
-                echo "Geen aankomende inleveringen gevonden.";
-            }
-
             // Doorloop de gesorteerde reservaties en toon ze
-            echo '<h1>Reservaties</h1>';
             foreach ($reservations as $date => $reservationList) {
                 echo '<div class="reservation-group">';
                 echo '<div class="reservation-header">Reservaties ' . date('j F Y', strtotime($date)) . '</div>';
@@ -110,46 +88,14 @@
                     echo '<div class="reservation-details">';
                     echo '<h2>' . $reservation["product_name"] . '</h2>';
                     echo '<p><strong>Merk:</strong> ' . $reservation["product_brand"] . '</p>';
-                    echo '<p><strong>Naam:</strong> ' . $reservation["user_first_name"] . ' ' . $reservation["user_last_name"] . '</p>';
+                    echo '<p><strong>Naam:</strong> ' . $reservation["user_name"] . '</p>';
                     echo '<p><strong>Email:</strong> ' . $reservation["user_email"] . '</p>';
                     echo '<p><strong>Periode:</strong> ' . date('d/m/Y', strtotime($reservation["begindatum"])) . ' tot ' . date('d/m/Y', strtotime($reservation["einddatum"])) . '</p>';
-                    echo '<p><strong>ArtNr:</strong> ' . $reservation["product_id"] . '</p>';
+                    echo '<p><strong>ArtNr:</strong> ' . $reservation["reservatie_id"] . '</p>';
                     echo '</div>';
                     // Delete button with form
                     echo '<form method="POST" action="" onsubmit="return confirm(\'Weet je zeker dat je deze reservatie wilt verwijderen?\');">';
                     echo '<input type="hidden" name="delete_id" value="' . $reservation["reservatie_id"] . '">';
-                    echo '<button type="submit" class="delete-button">🗑️</button>';
-                    echo '</form>';
-                    echo '</div>';
-                }
-                echo '</div>';
-            }
-
-            // Doorloop de gesorteerde inleveringen en toon ze
-            echo '<h1>Inleveringen</h1>';
-            foreach ($inleveringen as $date => $inleveringList) {
-                echo '<div class="reservation-group">';
-                echo '<div class="reservation-header">Inleveringen ' . date('j F Y', strtotime($date)) . '</div>';
-                foreach ($inleveringList as $inlevering) {
-                    echo '<div class="reservation-item">';
-                    // Productafbeelding weergeven indien beschikbaar
-                    $imagePath = 'images/' . $inlevering["product_image"]; // Pad naar de afbeelding
-                    if (file_exists($imagePath)) {
-                        echo '<img src="' . $imagePath . '" alt="" />';
-                    } else {
-                        echo '<img src="images/no-image-available.png" alt="" />';
-                    }
-                    echo '<div class="reservation-details">';
-                    echo '<h2>' . $inlevering["product_name"] . '</h2>';
-                    echo '<p><strong>Merk:</strong> ' . $inlevering["product_brand"] . '</p>';
-                    echo '<p><strong>Naam:</strong> ' . $inlevering["user_first_name"] . ' '. $inlevering["user_last_name"] .'</p>';
-                    echo '<p><strong>Email:</strong> ' . $inlevering["user_email"] . '</p>';
-                    echo '<p><strong>Periode:</strong> ' . date('d/m/Y', strtotime($inlevering["begindatum"])) . ' tot ' . date('d/m/Y', strtotime($inlevering["einddatum"])) . '</p>';
-                    echo '<p><strong>ArtNr:</strong> ' . $inlevering["product_id"] . '</p>';
-                    echo '</div>';
-                    // Delete button with form
-                    echo '<form method="POST" action="" onsubmit="return confirm(\'Weet je zeker dat je deze inlevering wilt verwijderen?\');">';
-                    echo '<input type="hidden" name="delete_id" value="' . $inlevering["reservatie_id"] . '">';
                     echo '<button type="submit" class="delete-button">🗑️</button>';
                     echo '</form>';
                     echo '</div>';

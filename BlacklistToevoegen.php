@@ -43,7 +43,7 @@
             header("Location: Blacklist.php");
         }
         
-        $sql = "SELECT name, surname, email, blackliststatus, reason FROM USERS";
+        $sql = "SELECT firstname, lastname, email, blackliststatus, reason FROM USERS";
         $result = $conn->query($sql);
 
     ?>

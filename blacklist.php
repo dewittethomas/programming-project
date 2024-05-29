@@ -1,3 +1,7 @@
+<?php
+    require 'includes/session.php';
+    require 'includes/connect.php';
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -33,16 +37,14 @@
     </header>
 
     <?php
-        include 'includes/connect.php';
-
-        $sql = "SELECT user_id, name, surname, email, blackliststatus, reason FROM USERS";
+        $sql = "SELECT user_id, firstname, lastname, email, blackliststatus, reason FROM USERS";
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
             foreach ($_POST['blackliststatus'] as $user_id) {
                 $sql = "UPDATE USERS SET blackliststatus = 1 WHERE name = '$user_id'";
                 $conn->query($sql);
             }
-            header("Location: Blacklist.php");
+            header("Location: blacklist.php");
         }
         
         $result = $conn->query($sql);
@@ -77,7 +79,7 @@
         }
     ?>
 
-    <a href="studentenlijst.php">
+    <a href="update.php">
         <button class="toevoegen-button" type="button">Studentenlijst</button>
     </a>
 

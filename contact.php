@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Uitleendienst MediaLab</title>
+    <title>Contactpagina Erasmushogeschool</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -18,21 +18,8 @@
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
                 <form class="search-container" action="/">
-                    <input class="search-glass" type="text" placeholder="Search...">
+                    <input type="text" placeholder="Search...">
                 </form>
-                <nav>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/shopping-cart.svg" loading="lazy">
-                    </a>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/profile-picture.svg" loading="lazy">
-                    </a>
-                </nav>
-            </div>
-        </div>
-        <div class="header-middle">
-            <div class="container">
-                
                 <nav>
                     <a class="nav-icon" href="">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
@@ -45,9 +32,6 @@
         </div>
         <div class="header-bottom">
             <div class="container">
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
-                </form>
                 <ul class="category-container">
                     <div class="dropdown-container">
                         <li class="dropdown-item"><a href="">Video</a></li>
@@ -73,19 +57,31 @@
         </div>
     </header>
 
-    <main>
+    <div class="contact">
+        <p class="titel-contact">Contact</p><br>
+        <p><u>Beheerder:</u></p>
+        <p><u>Email:</u> voornaam.achternaam@ehb.be</p>
+        <p><u>Nummer:</u> +32 123 45 67 89</p>
+        <p><u>Aanwezigheid:</u> ?</p>
+        <br>
+        <p class="titel-contact">ICT Dienst:</p><br>
+        <p><u>Email:</u> voornaam.achternaam@ehb.be</p>
+        <p><u>Nummer:</u> +32 123 45 67 89</p>
+        <p><u>Aanwezigheid:</u> ?</p>
+    </div>
 
-
-    </main>
+    <div>
+        <img src="images/website/ehb-foto.jpg" class="foto-contact">
+    </div>
 
     <footer>
         <div class="container">
             <div class="footer-container">
-                <p>&copy; Erasmushogeschool Brussel 2024</p>
+                <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
                 
                 <ul class="pages">
-                    <li><a href="">Voorwaarden</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="Voorwaarde.html">Voorwaarden</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
                 <div class="socials">

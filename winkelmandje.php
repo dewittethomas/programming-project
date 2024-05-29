@@ -4,6 +4,7 @@ session_start();
 // Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 // Include the database connection file
 include 'includes/connect.php';
 
@@ -30,72 +31,33 @@ if (!isset($_SESSION['selected_products'])) {
 </head>
 <body>
 <header>
-        <div class="header-top">
-            <div class="container">
-                <a class="logo" href="/" title="Home">
-                    <img src="/images/website/logo.svg" loading="lazy" alt="Home">
-                </a>
-                <form class="search-container" action="/">
-                    <input class="search-glass" type="text" placeholder="Search...">
-                </form>
-                <nav>
-                    <a class="nav-icon" href="winkelmandje.php">
-                        <img src="/images/website/shopping-cart.svg" loading="lazy">
-                    </a>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/profile-picture.svg" loading="lazy">
-                    </a>
-                </nav>
-            </div>
+    <div class="header-top">
+        <div class="container">
+            <a class="logo" href="index.php" title="Home">
+                <img src="/images/logo.svg" alt="Home">
+            </a>
+            <form action="search.php" method="GET">
+                <input type="text" name="query"  placeholder="Search...">
+            </form>
+            <nav>
+                <img class="cart" src="images/shopping-cart.svg">
+            </nav>
         </div>
-        <div class="header-bottom">
-            <div class="container">
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
-                </form>
-                <ul class="category-container">
-                    <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="">Video</a></li>
+    </div>
+</header>
 
-                        <div class="dropdown-content">
-                            <div class="container">
-                                <div class="dropdown-row">
-                                    <a class="category" href="#">Camera's</a>
-                                    <a href="#">Dieptecamera</a>
-                                    <a href="#">Overige</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <li><a href="gezochte_producten.php?category=Audio">Audio</a></li>
-        <li><a href="gezochte_producten.php?category=Belichting">Belichting</a></li>
-        <li><a href="gezochte_producten.php?category=Tools">Tools</a></li>
-        <li><a href="gezochte_producten.php?category=Varia">Varia</a></li>
-        <li><a href="gezochte_producten.php?category=XR">XR</a></li>
-  
-                </ul>
-            </div>
-        </div>
-    </header>
-<main>
-    <h1>Reservatie</h1>
-    <div class="row">
+<main class="container">
+    <h1>Winkelmandje</h1>
+    <div class="selected-products">
         <?php 
         // Check if any products are selected
         if (!empty($_SESSION['selected_products'])) {
             // Loop through each selected product
-            foreach ($_SESSION['selected_products'] as $key => $product) {
-                echo '<div class="product-item">';
-                echo '<img src="38088.avif">';
-                echo '<div class="details">';
-                echo '<h2 class="capitalize">' . $product['product_naam'] . '</h2>';
-                echo '<p>Termijn: ' . $product['start_date'] . ' - ' . $product['end_date'] . '</p>';
-                echo '<form action="" method="post">';
-                echo '<input type="hidden" name="remove_product_key" value="' . $key . '">';
-                echo '<button type="submit" name="remove_product" class="verwijderen-button">Verwijderen</button>';
-                echo '</form>';
-                echo '</div>';
+            foreach ($_SESSION['selected_products'] as $product) {
+                echo '<div class="product">';
+                echo '<h2>' . $product['product_naam'] . '</h2>';
+                echo '<p>Start Date: ' . $product['start_date'] . '</p>';
+                echo '<p>End Date: ' . $product['end_date'] . '</p>';
                 echo '</div>';
             }
         } else {
@@ -105,8 +67,8 @@ if (!isset($_SESSION['selected_products'])) {
     </div>
     
     <!-- Form to confirm and insert all selected products into the database -->
-    <form action="" method="post" class="reserveren-form">
-        <button type="submit" name="confirm_reservation" class="reserveren-button">Reserveren</button>
+    <form action="" method="post">
+        <button type="submit" name="confirm_reservation">Bevestig Reservering</button>
     </form>
 </main>
 
@@ -116,7 +78,6 @@ if (!isset($_SESSION['selected_products'])) {
 
 </body>
 </html>
-
 
 <?php
 // Check if the confirm_reservation button is clicked
@@ -128,23 +89,25 @@ if (isset($_POST['confirm_reservation'])) {
         // Iterate through each selected product and insert it into the database
         foreach ($_SESSION['selected_products'] as $product) {
             $product_id = $product['product_id'];
+            $product_naam = $product['product_naam'];
             $start_date = $product['start_date'];
             $end_date = $product['end_date'];
 
-            $user_id = 500; // Assign the user_id variable the value of 500
-
             // Prepare and execute the SQL statement to insert reservation
-            $sql = "INSERT INTO RESERVERINGEN (product_id, user_id, begindatum, einddatum) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO RESERVERINGEN (product_id, product_naam, start_date, end_date) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("iiss", $product_id, $user_id, $start_date, $end_date);
+            $stmt->bind_param("isss", $product_id, $product_naam, $start_date, $end_date);
             $stmt->execute();
         }
 
         // Commit the transaction
         $conn->commit();
 
+        // Clear the selected products session array
+        $_SESSION['selected_products'] = array();
+
         // Redirect to a success page or wherever you need to go next
-        header("Location: reservatiegelukt.php");
+        header("Location: success.php");
         exit();
     } catch (Exception $e) {
         // Rollback the transaction if an error occurs
@@ -152,16 +115,4 @@ if (isset($_POST['confirm_reservation'])) {
         echo "Error: " . $e->getMessage();
     }
 }
-
-// Check if the remove_product button is clicked
-if (isset($_POST['remove_product'])) {
-    // Get the key of the product to remove from the session
-    $key = $_POST['remove_product_key'];
-    // Remove the product from the session using the key
-    unset($_SESSION['selected_products'][$key]);
-    // Redirect to refresh the page
-    header("Location: ".$_SERVER['PHP_SELF']);
-    exit();
-}
-
 ?>

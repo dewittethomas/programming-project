@@ -22,7 +22,7 @@
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
                 <form class="search-container" action="/">
-                    <input class="search-glass" type="text" placeholder="Search...">
+                    <input class="search-glass focus" type="text" placeholder="Search...">
                 </form>
                 <nav>
                     <a class="nav-icon" href="winkelmandje.php">
@@ -37,7 +37,7 @@
         <div class="header-bottom">
             <div class="container">
                 <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
+                    <input class="search-glass focus" type="text" placeholder="Search...">
                 </form>
                 <ul class="category-container">
                     <div class="dropdown-container">
@@ -54,12 +54,11 @@
                         </div>
                     </div> 
                     
-                    <li><a href="gezochte_producten.php?category=Audio">Audio</a></li>
-        <li><a href="gezochte_producten.php?category=Belichting">Belichting</a></li>
-        <li><a href="gezochte_producten.php?category=Tools">Tools</a></li>
-        <li><a href="gezochte_producten.php?category=Varia">Varia</a></li>
-        <li><a href="gezochte_producten.php?category=XR">XR</a></li>
-  
+                    <li>Audio</li>
+                    <li>Belichting</li>
+                    <li>Tools</li>
+                    <li>Varia</li>
+                    <li>XR</li>
                 </ul>
             </div>
         </div>
@@ -77,17 +76,18 @@
                         $image_path = 'images/products/' . $row["image"]; 
 
                         echo '<div class="product">';
-                        echo '<a href="artikel.php?id=' . $row["id"] . '">';
-                        echo "<h2>" . $row["name"] . "</h2>";
 
                         if (file_exists($image_path)) {
-                            echo '<img src="' . $image_path . '" alt="" class= "artikel-foto"/><br>';
-                        } 
-                        else {
+                            echo '<img src="' . $image_path . '" alt="">';
+                        } else {
                             echo "No image available";
                         }
-                        
-                        echo '</a>';
+
+                        echo '<div class="product-information">';
+                        echo '<a class="product-title" href="artikel.php?id=' . $row["id"] . '">' . $row["name"] . '</a>';
+                        echo '<a class="product-subtitle">' . $row["brand"] . ' | ' . $row["description"] . '</a>';
+                        echo '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>';
+                        echo '</div>';
                         echo '</div>';
 
                         $products[] = $row["name"];

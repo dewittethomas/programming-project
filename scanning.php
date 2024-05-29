@@ -15,7 +15,7 @@
 <header>
     <div class="header-top">
         <div class="container">
-            <a class="logo" href="/admin.php" title="Home">
+            <a class="logo" href="/" title="Home">
                 <img src="/images/website/logo.svg" loading="lazy" alt="Home">
             </a>
             <nav>
@@ -23,16 +23,6 @@
                     <img src="/images/website/profile-picture.svg" loading="lazy">
                 </a>
             </nav>
-        </div>
-    </div>
-    <div class="header-bottom">
-        <div class="container">
-            <ul class="category-container">
-                <li><a href="scanning.html">Scanning</a></li>
-                <li><a href="artikel-toevoegen.html">Artikel toevoegen</a></li>
-                <li><a href ="blacklist.php">Blacklist</a></li>
-                <li><a href ="admin-producten.php">Producten</a></li>
-            </ul>
         </div>
     </div>
     
@@ -63,6 +53,11 @@
   <div class="container">
       <div class="footer-container">
           <p>&copy; Erasmushogeschool Brussel 2024</p>
+          
+          <ul class="pages">
+              <li><a href="">Voorwaarden</a></li>
+              <li><a href="">Contact</a></li>
+          </ul>
 
           <div class="socials">
               <a class="footer-icon" href="https://www.facebook.com/erasmushogeschool" target="_blank">
