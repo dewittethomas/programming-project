@@ -64,26 +64,23 @@
                 echo "<p>" . $row["surname"] . "</p>";
                 echo "<p>" . $row["email"] . "</p>";
                 echo "<div class='BlacklistButtons'>";
-                    echo "<button class='toevoegen-button' type='button' onclick='myFunction()'>Toevoegen</button>";
+                    echo "<form method='POST' action='update.php'>";
+                    echo "<input type='hidden' name='user_id' value='" . $row["user_id"] . "'>";
+                    echo "<button class='toevoegen-button' type='submit' name='blackliststatus' value='" . $row["user_id"] . "'>Toevoegen</button>";
+                    echo "</form>";
                     echo "<button class='toevoegen-button' type='button'>Verwijderen</button>";
                 echo "</div>";
                 echo "</div>";
-
             }
         } else {
             echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";
         }
 
-        function myFunction() {
-            include 'db_connection.php';
-
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
-                foreach ($_POST['blackliststatus'] as $user_id) {
-                    $sql = "UPDATE USERS SET blackliststatus = 1 WHERE user_id = '$user_id'";
-                    $conn->query($sql);
-                }
-                header("Location: Blacklist.php");
-            }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
+            $user_id = $_POST['user_id'];
+            $sql = "UPDATE USERS SET blackliststatus = 1 WHERE user_id = '$user_id'";
+            $conn->query($sql);
+            header("Location: Blacklist.php");
         }
     ?>
 
