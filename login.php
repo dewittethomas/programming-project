@@ -24,14 +24,14 @@
     <main>
         <div class="container center">
             <div class="login-container">
-                <h2>Login</h2>
+                <h2>Inloggen</h2>
                 <form method="post">
                     <div class="input-container">
-                        <label for="">Username</label>
+                        <label for="username">Gebruikersnaam</label>
                         <input id="username" name="username" type="text">
-                        <label for="">Password</label>
+                        <label for="password">Paswoord</label>
                         <input id="password" name="password" type="password">
-                        <button class="login" type="submit">Login</button>
+                        <button class="login" type="submit">Inloggen</button>
                     </div>
                 </form>
 

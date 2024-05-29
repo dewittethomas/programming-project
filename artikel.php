@@ -262,9 +262,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const endDate = new Date(startDate);
             endDate.setDate(startDate.getDate() + 4);
             document.getElementById('end_date').value = endDate.toISOString().split('T')[0];
+        },
+        onDayClick: function(selectedDates, dateStr, instance) {
+            // Get the selected date
+            const selectedDate = new Date(dateStr);
+            
+            // Calculate the start of the week
+            const weekStart = new Date(selectedDate);
+            weekStart.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
+            
+            // Update the selected date to the start of the week
+            instance.setDate(weekStart);
         }
     });
 });
+
 </script>
 </body>
 </html>

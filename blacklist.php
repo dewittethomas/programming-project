@@ -77,7 +77,7 @@
         }
     ?>
 
-    <a href="update.php">
+    <a href="studentenlijst.php">
         <button class="toevoegen-button" type="button">Studentenlijst</button>
     </a>
 

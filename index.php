@@ -66,37 +66,42 @@
     </header>
 
     <main>
-        <div class="product-container">
-        <?php
-        $shown_names = array();
+        <div class="container">
+            <div class="product-container">
+            <?php
+            $products = array();
 
-        if (!$empty) {
-            while($row = mysqli_fetch_assoc($result)) {
-                if (!in_array($row["name"], $shown_names)) {
-                    $image_path = 'images/' . $row["image"]; 
+            if (!$empty) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    if (!in_array($row["name"], $products)) {
+                        $image_path = 'images/products/' . $row["image"]; 
 
-                    echo '<div class="product">';
-                    echo '<a href="artikel.php?id=' . $row["id"] . '">';
-                    echo "<h2>" . $row["name"] . "</h2>";
-                    if (file_exists($image_path)) {
-                        echo '<img src="' . $image_path . '" alt="" class= "artikel-foto"/><br>';
-                    } 
-                    else {
-                        echo "No image available<br>";
+                        echo '<div class="product">';
+                        echo '<a href="artikel.php?id=' . $row["id"] . '">';
+                        echo "<h2>" . $row["name"] . "</h2>";
+
+                        if (file_exists($image_path)) {
+                            echo '<img src="' . $image_path . '" alt="" class= "artikel-foto"/><br>';
+                        } 
+                        else {
+                            echo "No image available";
+                        }
+                        
+                        echo '</a>';
+                        echo '</div>';
+
+                        $products[] = $row["name"];
                     }
-                    echo '</a>';
-                    echo '</div>';
-
-                    $shown_names[] = $row["name"];
                 }
+            } else {
+                echo "Geen producten gevonden.";
             }
-        } else {
-            echo "Geen producten gevonden.";
-        }
 
-        mysqli_close($conn);
-        ?>
-    </div>
+            mysqli_close($conn);
+            ?>
+            </div>
+        </div>
+        
     </main>
 
     <footer>
