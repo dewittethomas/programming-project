@@ -41,7 +41,7 @@
 
    <div class="admin-product-container">
         <?php
-        include 'includes/db_connection.php';
+        include 'includes/connect.php';
 
         // Check if delete request is made
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
