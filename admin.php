@@ -52,27 +52,48 @@
                 }
             }
 
-            // SQL query om alle aankomende reservaties op te halen, gesorteerd op datum
-            $sql = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
-                        p.name as product_name, p.image as product_image, p.brand as product_brand, 
-                        u.name as user_name, u.email as user_email
-                    FROM RESERVERINGEN r
-                    JOIN PRODUCTS p ON r.product_id = p.id
-                    JOIN USERS u ON r.user_id = u.user_id
-                    WHERE r.begindatum >= CURDATE()
-                    ORDER BY r.begindatum";
-            $result = $conn->query($sql);
+            // SQL query om alle aankomende reservaties op te halen, gesorteerd op begindatum, met product status 1
+            $sql_reservaties = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
+                                p.name as product_name, p.image as product_image, p.brand as product_brand, p.status as product_status,
+                                u.name as user_name, u.email as user_email
+                            FROM RESERVERINGEN r
+                            JOIN PRODUCTS p ON r.product_id = p.id
+                            JOIN USERS u ON r.user_id = u.user_id
+                            WHERE p.status = 1
+                            ORDER BY r.begindatum";
+            $result_reservaties = $conn->query($sql_reservaties);
 
             $reservations = [];
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
+            if ($result_reservaties->num_rows > 0) {
+                while($row = $result_reservaties->fetch_assoc()) {
                     $reservations[$row['begindatum']][] = $row;
                 }
             } else {
                 echo "Geen aankomende reservaties gevonden.";
             }
 
+            // SQL query om alle afhalingen op te halen, gesorteerd op einddatum
+            $sql_afhalingen = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
+                                p.name as product_name, p.image as product_image, p.brand as product_brand, p.status as product_status,
+                                u.name as user_name, u.email as user_email
+                            FROM RESERVERINGEN r
+                            JOIN PRODUCTS p ON r.product_id = p.id
+                            JOIN USERS u ON r.user_id = u.user_id
+                            WHERE r.einddatum >= CURDATE()
+                            ORDER BY r.einddatum";
+            $result_afhalingen = $conn->query($sql_afhalingen);
+
+            $afhalingen = [];
+            if ($result_afhalingen->num_rows > 0) {
+                while($row = $result_afhalingen->fetch_assoc()) {
+                    $afhalingen[$row['einddatum']][] = $row;
+                }
+            } else {
+                echo "Geen aankomende afhalingen gevonden.";
+            }
+
             // Doorloop de gesorteerde reservaties en toon ze
+            echo '<h1>Reservaties</h1>';
             foreach ($reservations as $date => $reservationList) {
                 echo '<div class="reservation-group">';
                 echo '<div class="reservation-header">Reservaties ' . date('j F Y', strtotime($date)) . '</div>';
@@ -91,11 +112,43 @@
                     echo '<p><strong>Naam:</strong> ' . $reservation["user_name"] . '</p>';
                     echo '<p><strong>Email:</strong> ' . $reservation["user_email"] . '</p>';
                     echo '<p><strong>Periode:</strong> ' . date('d/m/Y', strtotime($reservation["begindatum"])) . ' tot ' . date('d/m/Y', strtotime($reservation["einddatum"])) . '</p>';
-                    echo '<p><strong>ArtNr:</strong> ' . $reservation["reservatie_id"] . '</p>';
+                    echo '<p><strong>ArtNr:</strong> ' . $reservation["product_id"] . '</p>';
                     echo '</div>';
                     // Delete button with form
                     echo '<form method="POST" action="" onsubmit="return confirm(\'Weet je zeker dat je deze reservatie wilt verwijderen?\');">';
                     echo '<input type="hidden" name="delete_id" value="' . $reservation["reservatie_id"] . '">';
+                    echo '<button type="submit" class="delete-button">🗑️</button>';
+                    echo '</form>';
+                    echo '</div>';
+                }
+                echo '</div>';
+            }
+
+            // Doorloop de gesorteerde afhalingen en toon ze
+            echo '<h1>Afhalingen</h1>';
+            foreach ($afhalingen as $date => $afhalingList) {
+                echo '<div class="reservation-group">';
+                echo '<div class="reservation-header">Afhalingen ' . date('j F Y', strtotime($date)) . '</div>';
+                foreach ($afhalingList as $afhaling) {
+                    echo '<div class="reservation-item">';
+                    // Productafbeelding weergeven indien beschikbaar
+                    $imagePath = 'images/' . $afhaling["product_image"]; // Pad naar de afbeelding
+                    if (file_exists($imagePath)) {
+                        echo '<img src="' . $imagePath . '" alt="" />';
+                    } else {
+                        echo '<img src="images/no-image-available.png" alt="" />';
+                    }
+                    echo '<div class="reservation-details">';
+                    echo '<h2>' . $afhaling["product_name"] . '</h2>';
+                    echo '<p><strong>Merk:</strong> ' . $afhaling["product_brand"] . '</p>';
+                    echo '<p><strong>Naam:</strong> ' . $afhaling["user_name"] . '</p>';
+                    echo '<p><strong>Email:</strong> ' . $afhaling["user_email"] . '</p>';
+                    echo '<p><strong>Periode:</strong> ' . date('d/m/Y', strtotime($afhaling["begindatum"])) . ' tot ' . date('d/m/Y', strtotime($afhaling["einddatum"])) . '</p>';
+                    echo '<p><strong>ArtNr:</strong> ' . $afhaling["product_id"] . '</p>';
+                    echo '</div>';
+                    // Delete button with form
+                    echo '<form method="POST" action="" onsubmit="return confirm(\'Weet je zeker dat je deze afhaling wilt verwijderen?\');">';
+                    echo '<input type="hidden" name="delete_id" value="' . $afhaling["reservatie_id"] . '">';
                     echo '<button type="submit" class="delete-button">🗑️</button>';
                     echo '</form>';
                     echo '</div>';
