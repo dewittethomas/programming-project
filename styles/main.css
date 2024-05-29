@@ -1062,3 +1062,1101 @@ footer {
     margin-left: 20px; /* Add spacing between image and details */
     position: relative; /* Ensure positioning context for pseudo-elements */
 }
+
+/*zeno*/
+/* Main styling */
+
+/* Colors */
+@import url("colors.css");
+
+/* Reset defaults */
+@import url("reset.css");
+
+/* General */
+
+body {
+    color: var(--black);
+    background-color: var(--white);
+    height: 100vh;
+    font-family: Poppins, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.background {
+    background-image: url("/images/website/banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+}
+
+.header-top {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--grey);
+    width: 100%;
+}
+
+.header-bottom {
+    background-color: var(--light-grey);
+    border-bottom: 1px solid var(--grey);
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    margin: 0.8rem 0;
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon {
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon:hover {
+    background-color: var(--light-grey);
+    border-radius: 50%;
+}
+
+.nav-icon img {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    visibility: visible;
+}
+
+.header-bottom .search-container {
+    display: none;
+}
+
+input {
+    box-shadow: 1px 1px 10px var(--grey);
+    border: 1px solid var(--grey);
+    height: 45px;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 9px;
+}
+
+.search-glass {
+    width: 70%;
+    padding: 1rem 1rem 1rem 3rem;
+    background-image: url("/images/website/search.svg");
+    background-repeat: no-repeat;
+    background-position: 1rem;
+    background-size: 1rem 1rem;
+}
+
+.search-glass:focus {
+    border: 1px solid var(--blue);
+}
+
+.category-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-container li {
+    padding: 1rem 0;
+    position: relative;
+    font-weight: 600;
+}
+
+.category-container li:before  {
+    width: 100%;
+    height: 4px;
+    background-color: var(--red);
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scaleX(0); 
+}
+
+.category-container li:hover::before {
+    transform: scaleX(1); 
+}
+
+.dropdown-content {
+    background-color: var(--light-grey);
+    border: 1px solid var(--grey);
+    width: 100%;
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+}
+
+.dropdown-container:hover .dropdown-content {
+    visibility: visible;
+}
+
+.dropdown-row {
+    width: 80%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-row .category {
+    color: var(--red);
+    font-weight: 700;
+}
+
+.dropdown-row a:hover, .dropdown-row p:hover {
+    text-decoration: underline;
+}
+
+.dropdown-container:hover .dropdown-item::before {
+    transform: scaleX(1); 
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.login-container h2 {
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+.center {
+    height: 70vh;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container input:focus {
+    border: 1px solid var(--blue);
+}
+
+.login {
+    color: var(--white);
+    background-color: var(--green);
+    border: none;
+    padding: 0.8rem 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+footer {
+    color: var(--white);
+    background-color: var(--light-black);
+    margin-top: auto;
+}
+
+.footer-container {
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.information {
+    display: flex;
+    align-items: center;
+}
+
+.pages {
+    display: flex;
+}
+
+.pages a {
+    color: var(--green);
+}
+
+.pages a:hover {
+    color: var(--dark-green);
+    text-decoration: underline;
+}
+
+.pages li {
+    padding: 0 0.8rem;
+}
+
+.socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.socials .footer-icon {
+    background-color: var(--dark-grey);
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-icon img {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.product-container {
+    color: black !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+.product {
+    width: calc(33.33% - 10px);
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+
+.contact{
+    padding: 50px;
+    font-size: 24px;
+}
+
+.titel-contact{
+    font-size: 36px;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.foto-contact{
+    width: 800px; /* Breedte van de afbeelding */
+    height: auto; /* Behoudt de oorspronkelijke verhoudingen van de afbeelding */
+    position: absolute; /* Absoluut positioneren */
+    top: 50%; /* Plaats de bovenkant van de afbeelding op 50% van de hoogte van de pagina */
+    right: 0; /* Plaats de afbeelding aan de rechterkant van het scherm */
+    transform: translateY(-50%);
+    padding-right: 50px; ;
+}
+
+.container-voorwaarde{
+    padding: 20px;
+}
+
+.container-voorwaarde a{
+    color: red;
+}
+
+.titel-voorwaarde{
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.container-blacklist{
+    font-weight: 700;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.container-blacklist p{
+    border: 2px solid #ccc;
+    width: 80%;
+    padding-right: 165px;
+    padding-left: 165px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    background-color: var(--grey);
+}
+
+.toevoegen-button{
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 15px 50px;
+    border-color: var(--white);
+}
+
+.artikel-foto{
+    width: calc(25%);
+}
+
+@media screen and (max-width: 1024px) {
+    .header-top .search-container {
+        display: none;
+    }
+
+    .category-container {
+        display: none;
+    }
+
+    .header-bottom .search-container {
+        display: inline-flex;
+    }
+
+    .search-container input {
+        width: 100%;
+    }
+
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .socials {
+        margin: 1rem 0 0 0;
+    }
+}
+
+#artikelToevoegen{
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px var(--grey);
+    background-color: var(--white);
+}
+
+#artikelToevoegen h2 {
+    text-align: center;
+    color: var(--black);
+    margin-bottom: 1rem;
+}
+
+#artikelToevoegen form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#artikelToevoegen label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+#artikelToevoegen input[type="text"],
+#artikelToevoegen textarea,
+#artikelToevoegen input[type="file"] {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px var(--grey);
+}
+
+#artikelToevoegen textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+#artikelToevoegen input[type="submit"] {
+    align-self: center;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--red);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px var(--grey);
+}
+
+#artikelToevoegen input[type="submit"]:hover {
+    background-color: var(--dark-red);
+}
+
+
+.foto-contact{
+    width: 800px; /* Breedte van de afbeelding */
+    height: auto; /* Behoudt de oorspronkelijke verhoudingen van de afbeelding */
+    position: absolute; /* Absoluut positioneren */
+    top: 50%; /* Plaats de bovenkant van de afbeelding op 50% van de hoogte van de pagina */
+    right: 0; /* Plaats de afbeelding aan de rechterkant van het scherm */
+    transform: translateY(-50%);
+    padding-right: 50px; ;
+}
+
+.container-voorwaarde{
+    padding: 20px;
+}
+
+.container-voorwaarde a{
+    color: red;
+}
+
+.titel-voorwaarde{
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.container-blacklist{
+    font-weight: 700;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.container-studenten{
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    align-items: center;
+    text-align: center;
+    text-wrap: nowrap;
+
+}
+
+.container-blacklist p{
+    border: 2px solid #ccc;
+    width: 80%;
+    padding: 15px;
+    background-color: var(--grey);
+}
+
+.container-studenten p{
+    border: 2px solid #ccc;
+    width: 80%;
+    padding: 15px;
+    background-color: var(--grey);
+}
+.container-studenten form{
+    border: 2px solid #ccc;
+    display: flex;
+    background-color: var(--grey);
+    padding: 11.5px;
+    padding-right: 120px;
+    padding-left: 120px;
+}
+
+.toevoegen-button{
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 15px 50px;
+    border-color: var(--white);
+}
+
+.artikel-foto{
+    width: calc(25%);
+}
+
+.studentenBlacklist th{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Media queries voor responsief ontwerp */
+@media screen and (max-width: 480px) {
+    #artikelToevoegen {
+        padding: 1rem 0.5rem;
+    }
+}
+
+
+/* TODO: 
+- Put icons under logo if mobile device 
+- Add category button for mobile and tablet
+*/
+
+@media screen and (max-width: 480px) {
+
+}
+
+.contact{
+    padding: 50px;
+    font-size: 24px;
+}
+
+.titel-contact{
+    font-size: 36px;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.foto-contact{
+    width: 800px; /* Breedte van de afbeelding */
+    height: auto; /* Behoudt de oorspronkelijke verhoudingen van de afbeelding */
+    position: absolute; /* Absoluut positioneren */
+    top: 50%; /* Plaats de bovenkant van de afbeelding op 50% van de hoogte van de pagina */
+    right: 0; /* Plaats de afbeelding aan de rechterkant van het scherm */
+    transform: translateY(-50%);
+    padding-right: 50px; ;
+}
+
+.container-voorwaarde{
+    padding: 20px;
+}
+
+.container-voorwaarde a{
+    color: red;
+}
+
+.titel-voorwaarde{
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.container-blacklist{
+    font-weight: 700;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.container-blacklist p{
+    border: 2px solid #ccc;
+    width: 80%;
+    padding-right: 165px;
+    padding-left: 165px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    background-color: var(--grey);
+}
+
+.toevoegen-button{
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 15px 50px;
+    border-color: var(--white);
+}
+
+.artikel-foto{
+    width: calc(25%);
+}
+
+.artikelToevoegen{
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px var(--grey);
+    background-color: var(--white);
+}
+
+.artikelToevoegen h2 {
+    text-align: center;
+    color: var(--black);
+    margin-bottom: 1rem;
+}
+
+.artikelToevoegen form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.artikelToevoegen label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.artikelToevoegen input[type="text"],
+.artikelToevoegen textarea,
+.artikelToevoegen input[type="file"] {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px var(--grey);
+}
+
+.artikelToevoegen textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.artikelToevoegen input[type="submit"], #scansysteem input[type="submit"] {
+    align-self: center;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--red);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px var(--grey);
+}
+
+.artikelToevoegen input[type="submit"]:hover,#scansysteem input[type="submit"]:hover {
+    background-color: var(--dark-red);
+}
+.artikelToevoegen select,
+.artikelToevoegen option {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px var(--grey);
+    background-color: var(--white);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--black);
+}
+
+.artikelToevoegen select:focus {
+    border: 1px solid var(--blue);
+    outline: none;
+}
+.scansysteem {
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+}
+.uitlenenForm, .terugnemenForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px var(--grey);
+    background-color: var(--white);
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+
+}
+
+.verwijderen-button {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.verwijderen-button:hover {
+    background-color: darkred;
+}
+
+.reserveren-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.reserveren-button {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.reserveren-button:hover {
+    background-color: darkred;
+}
+
+.NaamProductFoto {
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.Beschrijving {
+    width: 60%; /* Adjust width as needed */
+}
+
+/* CSS for rounded corners and styling of dates */
+.calendar {
+    width: 30%; /* Adjust width as needed */
+    border-collapse: collapse;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+.calendar th, .calendar td {
+    border: 0.1rem solid black;
+    padding: 0.5rem; /* Increase padding for better clickable area */
+    text-align: center;
+    width: calc(100% / 7);
+    cursor: pointer; /* Change cursor to pointer for clickable dates */
+}
+
+.calendar .selected {
+    background-color: var(--blue); /* Change to the desired color for selected dates */
+    color: blue; /* Change to the desired text color for selected dates */
+}
+
+.calendar .fade {
+    color: #aaa; /* Change to the desired color for faded dates */
+    pointer-events: none; /* Disable pointer events for faded dates */
+}
+
+
+.header {
+    background-color: #ccc;
+}
+
+.empty {
+    background-color: #f2f2f2;
+}
+
+.item, .details {
+    margin: 10px;
+}
+.item {
+    width: 25%; 
+     position: relative;
+}
+
+.item img {
+    max-width: 100%; /* Ensure image does not exceed container width */
+}
+
+.spatie {
+    padding: 20px; 
+    display: flex;
+}
+.NaamProductFoto {
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.Beschrijving {
+    width: 60%; /* Adjust width as needed */
+}
+
+
+.header {
+    background-color: #ccc;
+}
+
+.empty {
+    background-color: #f2f2f2;
+}
+.details {
+    margin-left: 20px; /* Add spacing between image and details */
+    position: relative; /* Ensure positioning context for pseudo-elements */
+}
+
+.admin-product-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.admin-product {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.admin-product img {
+    width: 80px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-header h2 {
+    margin: 0;
+    color: var(--black);
+}
+
+.product-header .delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.product-header .delete-button:hover {
+    background-color: #c82333;
+}
+
+.product-quantity {
+    margin: 10px 0;
+    color: #6c757d;
+}
+
+.product-description {
+    color: #555;
+}
+.reservation-container {
+    padding: 20px;
+}
+.reservation-group {
+    margin-bottom: 30px;
+}
+.reservation-header {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+.reservation-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+}
+.reservation-item img {
+    width: 80px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+.reservation-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.reservation-details h2 {
+    margin: 0;
+    font-size: 1.2em;
+    
+}
+.reservation-details p {
+    margin: 5px 0;
+    color: #6c757d;
+}
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+
+
+
+
+/* TODO: 
+- Put icons under logo if mobile device 
+- Add category button for mobile and tablet
+*/
+
+@media screen and (max-width: 480px) {
+
+}
+
+.NaamProductFoto {
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.Beschrijving {
+    width: 60%; /* Adjust width as needed */
+}
+
+/* CSS for rounded corners and styling of dates */
+.calendar {
+    width: 30%; /* Adjust width as needed */
+    border-collapse: collapse;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+.calendar th, .calendar td {
+    border: 0.1rem solid black;
+    padding: 0.5rem; /* Increase padding for better clickable area */
+    text-align: center;
+    width: calc(100% / 7);
+    cursor: pointer; /* Change cursor to pointer for clickable dates */
+}
+
+.calendar .selected {
+    background-color: var(--blue); /* Change to the desired color for selected dates */
+    color: blue; /* Change to the desired text color for selected dates */
+}
+
+.calendar .fade {
+    color: #aaa; /* Change to the desired color for faded dates */
+    pointer-events: none; /* Disable pointer events for faded dates */
+}
+
+
+.header {
+    background-color: #ccc;
+}
+
+.empty {
+    background-color: #f2f2f2;
+}
+
+
+
+
+.item, .details {
+    margin: 10px;
+}
+.item {
+    width: 25%; 
+     position: relative;
+}
+
+.item img {
+    max-width: 100%; /* Ensure image does not exceed container width */
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+   
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+
+.product-item {
+    display: flex;
+    width: 60%;
+    border: 1px solid var(--grey);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    max-width: 200;
+    height: auto;
+    margin-right: 20px;
+}
+
+.detailswinkel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+.capitalize {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.spatie {
+    padding: 20px; 
+    display: flex;
+}
+.NaamProductFoto {
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.Beschrijving {
+    width: 60%; /* Adjust width as needed */
+}
+
+
+.header {
+    background-color: #ccc;
+}
+
+.empty {
+    background-color: #f2f2f2;
+}
+
+.capitalize{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Add spacing between elements and ensure they are displayed one below the other */
+.details {
+    margin-left: 20px; /* Add spacing between image and details */
+    position: relative; /* Ensure positioning context for pseudo-elements */
+}
