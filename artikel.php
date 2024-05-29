@@ -14,6 +14,7 @@ if (!isset($_SESSION['selected_products'])) {
 }
 
 // Retrieve product information based on the product ID passed through the URL
+$product_naam = $product_description = "";
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
 
@@ -27,6 +28,7 @@ if (isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $product_naam = $row['name'];
+        $product_description = $row['description'];
     } else {
         $product_naam = "Product not found";
     }
@@ -106,7 +108,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
         echo '<p>Startdatum is vereist.</p>';
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -127,53 +128,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
     <div class="header-top">
         <div class="container">
             <a class="logo" href="index.php" title="Home">
-                <img src="/images/logo.svg" alt="Home">
+                <img src="/images/website/logo.svg" alt="Home">
             </a>
             <form action="search.php" method="GET">
                 <input type="text" name="query" placeholder="Search...">
             </form>
-            <nav>
-                <img class="cart" src="images/shopping-cart.svg">
+            <nav><a href="winkelmandje.php">
+                <img class="cart" src="images/website/shopping-cart.svg">
+                </a>
             </nav>
         </div>
     </div>
 </header>
 
-
 <main class="container">
     <div class="item">
+    <p class="NaamProductFoto"><?php echo htmlspecialchars($product_naam); ?></p>
         <img src="38088.avif" alt="">
-        <p class="NaamProductFoto"><?php echo $product_naam; ?></p>
+        
     </div>
+    
     <div>
         <!-- Calendar form -->
         <form action="artikel.php" method="post">
-            <label for="start_date">Startdatum:</label>
+            <p>beschikbaarheid:</p>
             <input type="date" id="start_date" name="start_date" required>
             
             <!-- Hidden end date field -->
             <input type="hidden" id="end_date" name="end_date">
-            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-            <input type="hidden" name="product_naam" value="<?php echo $product_naam; ?>">
+            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product_id); ?>">
+            <input type="hidden" name="product_naam" value="<?php echo htmlspecialchars($product_naam); ?>">
             <!-- Reserveren button -->
+            <br>
             <button type="submit" name="reserveren">Reserveren</button>
         </form>
     </div>
     <div>
-        <p class="Beschrijving"> <span class="capitalize"> Beschrijving van product </span> <br> <br> De Nikon D50 is een semiprofessionele spiegelreflexcamera. De D50 levert foto's af in JPEG- en RAW-formaat. De D50 kan uitgebreid worden met een heel gamma aan Nikkor-lenzen.</p>
+        <p class="Beschrijving"> <span class="capitalize"> Beschrijving van product </span> <br> <br> <?php echo nl2br(htmlspecialchars($product_description)); ?></p>
     </div>
     <?php 
     // Display success message if redirected with success parameter
     if(isset($_GET['success']) && $_GET['success'] == 'true') {
         echo '<p>Product succesvol toegevoegd aan winkelmandje!</p>';
     }
-    
     ?>
 </main>
 
-<div>
-    <p>Gerelateerde producten</p>
-</div>
 <footer>
     <p>&copy; Erasmushogeschool Brussel 2024</p>
 </footer>
