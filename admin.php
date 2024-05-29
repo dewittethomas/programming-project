@@ -72,13 +72,19 @@
                 echo "Geen aankomende reservaties gevonden.";
             }
 
+<<<<<<< Updated upstream
             // SQL query om alle afhalingen op te halen, gesorteerd op einddatum
             $sql_afhalingen = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
+=======
+            // SQL query om alle Inleveringen op te halen, gesorteerd op einddatum
+            $sql_Inleveringen = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
+>>>>>>> Stashed changes
                                 p.name as product_name, p.image as product_image, p.brand as product_brand, p.status as product_status,
                                 u.name as user_name, u.email as user_email
                             FROM RESERVERINGEN r
                             JOIN PRODUCTS p ON r.product_id = p.id
                             JOIN USERS u ON r.user_id = u.user_id
+<<<<<<< Updated upstream
                             WHERE r.einddatum >= CURDATE()
                             ORDER BY r.einddatum";
             $result_afhalingen = $conn->query($sql_afhalingen);
@@ -90,6 +96,18 @@
                 }
             } else {
                 echo "Geen aankomende afhalingen gevonden.";
+=======
+                            ORDER BY r.einddatum";
+            $result_Inleveringen = $conn->query($sql_Inleveringen);
+
+            $Inleveringen = [];
+            if ($result_Inleveringen->num_rows > 0) {
+                while($row = $result_Inleveringen->fetch_assoc()) {
+                    $Inleveringen[$row['einddatum']][] = $row;
+                }
+            } else {
+                echo "Geen aankomende Inleveringen gevonden.";
+>>>>>>> Stashed changes
             }
 
             // Doorloop de gesorteerde reservaties en toon ze
@@ -124,11 +142,19 @@
                 echo '</div>';
             }
 
+<<<<<<< Updated upstream
             // Doorloop de gesorteerde afhalingen en toon ze
             echo '<h1>Afhalingen</h1>';
             foreach ($afhalingen as $date => $afhalingList) {
                 echo '<div class="reservation-group">';
                 echo '<div class="reservation-header">Afhalingen ' . date('j F Y', strtotime($date)) . '</div>';
+=======
+            // Doorloop de gesorteerde Inleveringen en toon ze
+            echo '<h1>Inleveringen</h1>';
+            foreach ($Inleveringen as $date => $afhalingList) {
+                echo '<div class="reservation-group">';
+                echo '<div class="reservation-header">Inleveringen ' . date('j F Y', strtotime($date)) . '</div>';
+>>>>>>> Stashed changes
                 foreach ($afhalingList as $afhaling) {
                     echo '<div class="reservation-item">';
                     // Productafbeelding weergeven indien beschikbaar
