@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       // Voer de query uit
       if ($stmt->execute()) {
-          header("Location: ../index.html");
+          header("Location: ../artikel-toevoegen.html");
           exit;
       } else {
           echo "Fout bij het uitvoeren van de query: " . $stmt->error;
