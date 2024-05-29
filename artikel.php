@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+require 'includes/products.php';
 // Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -14,7 +15,7 @@ if (!isset($_SESSION['selected_products'])) {
 }
 
 // Retrieve product information based on the product ID passed through the URL
-$product_naam = $product_description = "";
+$product_naam = $product_description = $product_image = "";
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
 
@@ -29,6 +30,7 @@ if (isset($_GET['id'])) {
         $row = $result->fetch_assoc();
         $product_naam = $row['name'];
         $product_description = $row['description'];
+        $product_image = 'images/'. $row['image'];
     } else {
         $product_naam = "Product not found";
     }
@@ -125,27 +127,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
 </head>
 <body>
 <header>
-    <div class="header-top">
-        <div class="container">
-            <a class="logo" href="index.php" title="Home">
-                <img src="/images/website/logo.svg" alt="Home">
-            </a>
-            <form action="search.php" method="GET">
-                <input type="text" name="query" placeholder="Search...">
-            </form>
-            <nav><a href="winkelmandje.php">
-                <img class="cart" src="images/website/shopping-cart.svg">
+        <div class="header-top">
+            <div class="container">
+                <a class="logo" href="/" title="Home">
+                    <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-            </nav>
+                <form class="search-container" action="/">
+                    <input class="search-glass" type="text" placeholder="Search...">
+                </form>
+                <nav>
+                    <a class="nav-icon" href="winkelmandje.php">
+                        <img src="/images/website/shopping-cart.svg" loading="lazy">
+                    </a>
+                    <a class="nav-icon" href="">
+                        <img src="/images/website/profile-picture.svg" loading="lazy">
+                    </a>
+                </nav>
+            </div>
         </div>
-    </div>
-</header>
+        <div class="header-bottom">
+            <div class="container">
+                <form class="search-container" action="/">
+                    <input type="text" placeholder="Search...">
+                </form>
+                <ul class="category-container">
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="">Video</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <a class="category" href="#">Camera's</a>
+                                    <a href="#">Dieptecamera</a>
+                                    <a href="#">Overige</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    <li><a href="gezochte_producten.php?category=Audio">Audio</a></li>
+        <li><a href="gezochte_producten.php?category=Belichting">Belichting</a></li>
+        <li><a href="gezochte_producten.php?category=Tools">Tools</a></li>
+        <li><a href="gezochte_producten.php?category=Varia">Varia</a></li>
+        <li><a href="gezochte_producten.php?category=XR">XR</a></li>
+  
+                </ul>
+            </div>
+        </div>
+    </header>
 
 <main class="container">
     <div class="item">
-    <p class="NaamProductFoto"><?php echo htmlspecialchars($product_naam); ?></p>
-        <img src="38088.avif" alt="">
+    <p class="NaamProductFoto"><?php echo htmlspecialchars($product_naam); ?> </p>
         
+    <img src="<?php echo htmlspecialchars($product_image); ?>" alt="<?php echo htmlspecialchars($product_naam); ?>">
+     
+   
     </div>
     
     <div>
@@ -186,17 +223,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function disableReservedWeeks(date) {
         const selectedDate = new Date(date);
+
+        // Calculate the start and end of the current week
+        const currentWeekStart = new Date();
+        currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay() + 1); // Monday
+
+        const currentWeekEnd = new Date(currentWeekStart);
+        currentWeekEnd.setDate(currentWeekStart.getDate() + 4); // Friday
+
+        // Normalize the selected date to week start and end
         const selectedWeekStart = new Date(selectedDate);
         selectedWeekStart.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
 
         const selectedWeekEnd = new Date(selectedWeekStart);
         selectedWeekEnd.setDate(selectedWeekStart.getDate() + 4); // Friday
 
-        return reservedWeeks.some(week => {
+        // Disable weekends and reserved weeks
+        return selectedDate.getDay() === 0 || selectedDate.getDay() === 6 || reservedWeeks.some(week => {
             const weekStart = new Date(week.week_start);
             const weekEnd = new Date(week.week_end);
             return (selectedWeekStart <= weekEnd && selectedWeekEnd >= weekStart);
-        });
+        }) || (selectedWeekStart <= currentWeekEnd && selectedWeekEnd >= currentWeekStart);
     }
 
     flatpickr("#start_date", {
@@ -207,14 +254,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 return disableReservedWeeks(date);
             }
         ],
+        locale: {
+            firstDayOfWeek: 1 // Start the week on Monday
+        },
         onChange: function(selectedDates, dateStr, instance) {
             const startDate = new Date(dateStr);
             const endDate = new Date(startDate);
             endDate.setDate(startDate.getDate() + 4);
             document.getElementById('end_date').value = endDate.toISOString().split('T')[0];
+        },
+        onDayClick: function(selectedDates, dateStr, instance) {
+            // Get the selected date
+            const selectedDate = new Date(dateStr);
+            
+            // Calculate the start of the week
+            const weekStart = new Date(selectedDate);
+            weekStart.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
+            
+            // Update the selected date to the start of the week
+            instance.setDate(weekStart);
         }
     });
 });
+
 </script>
 </body>
 </html>
