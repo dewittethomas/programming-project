@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+require 'includes/products.php';
 // Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -14,6 +15,7 @@ if (!isset($_SESSION['selected_products'])) {
 }
 
 // Retrieve product information based on the product ID passed through the URL
+$product_naam = $product_description = $product_image = "";
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
 
@@ -27,6 +29,8 @@ if (isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $product_naam = $row['name'];
+        $product_description = $row['description'];
+        $product_image = 'images/'. $row['image'];
     } else {
         $product_naam = "Product not found";
     }
@@ -106,7 +110,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
         echo '<p>Startdatum is vereist.</p>';
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -124,56 +127,90 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
 </head>
 <body>
 <header>
-    <div class="header-top">
-        <div class="container">
-            <a class="logo" href="index.php" title="Home">
-                <img src="/images/logo.svg" alt="Home">
-            </a>
-            <form action="search.php" method="GET">
-                <input type="text" name="query" placeholder="Search...">
-            </form>
-            <nav>
-                <img class="cart" src="images/shopping-cart.svg">
-            </nav>
+        <div class="header-top">
+            <div class="container">
+                <a class="logo" href="/" title="Home">
+                    <img src="/images/website/logo.svg" loading="lazy" alt="Home">
+                </a>
+                <form class="search-container" action="/">
+                    <input class="search-glass" type="text" placeholder="Search...">
+                </form>
+                <nav>
+                    <a class="nav-icon" href="winkelmandje.php">
+                        <img src="/images/website/shopping-cart.svg" loading="lazy">
+                    </a>
+                    <a class="nav-icon" href="">
+                        <img src="/images/website/profile-picture.svg" loading="lazy">
+                    </a>
+                </nav>
+            </div>
         </div>
-    </div>
-</header>
+        <div class="header-bottom">
+            <div class="container">
+                <form class="search-container" action="/">
+                    <input type="text" placeholder="Search...">
+                </form>
+                <ul class="category-container">
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="">Video</a></li>
 
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <a class="category" href="#">Camera's</a>
+                                    <a href="#">Dieptecamera</a>
+                                    <a href="#">Overige</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    <li><a href="gezochte_producten.php?category=Audio">Audio</a></li>
+        <li><a href="gezochte_producten.php?category=Belichting">Belichting</a></li>
+        <li><a href="gezochte_producten.php?category=Tools">Tools</a></li>
+        <li><a href="gezochte_producten.php?category=Varia">Varia</a></li>
+        <li><a href="gezochte_producten.php?category=XR">XR</a></li>
+  
+                </ul>
+            </div>
+        </div>
+    </header>
 
 <main class="container">
     <div class="item">
-        <img src="38088.avif" alt="">
-        <p class="NaamProductFoto"><?php echo $product_naam; ?></p>
+    <p class="NaamProductFoto"><?php echo htmlspecialchars($product_naam); ?> </p>
+        
+    <img src="<?php echo htmlspecialchars($product_image); ?>" alt="<?php echo htmlspecialchars($product_naam); ?>">
+     
+   
     </div>
+    
     <div>
         <!-- Calendar form -->
         <form action="artikel.php" method="post">
-            <label for="start_date">Startdatum:</label>
+            <p>beschikbaarheid:</p>
             <input type="date" id="start_date" name="start_date" required>
             
             <!-- Hidden end date field -->
             <input type="hidden" id="end_date" name="end_date">
-            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-            <input type="hidden" name="product_naam" value="<?php echo $product_naam; ?>">
+            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product_id); ?>">
+            <input type="hidden" name="product_naam" value="<?php echo htmlspecialchars($product_naam); ?>">
             <!-- Reserveren button -->
+            <br>
             <button type="submit" name="reserveren">Reserveren</button>
         </form>
     </div>
     <div>
-        <p class="Beschrijving"> <span class="capitalize"> Beschrijving van product </span> <br> <br> De Nikon D50 is een semiprofessionele spiegelreflexcamera. De D50 levert foto's af in JPEG- en RAW-formaat. De D50 kan uitgebreid worden met een heel gamma aan Nikkor-lenzen.</p>
+        <p class="Beschrijving"> <span class="capitalize"> Beschrijving van product </span> <br> <br> <?php echo nl2br(htmlspecialchars($product_description)); ?></p>
     </div>
     <?php 
     // Display success message if redirected with success parameter
     if(isset($_GET['success']) && $_GET['success'] == 'true') {
         echo '<p>Product succesvol toegevoegd aan winkelmandje!</p>';
     }
-    
     ?>
 </main>
 
-<div>
-    <p>Gerelateerde producten</p>
-</div>
 <footer>
     <p>&copy; Erasmushogeschool Brussel 2024</p>
 </footer>
@@ -186,17 +223,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function disableReservedWeeks(date) {
         const selectedDate = new Date(date);
+
+        // Calculate the start and end of the current week
+        const currentWeekStart = new Date();
+        currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay() + 1); // Monday
+
+        const currentWeekEnd = new Date(currentWeekStart);
+        currentWeekEnd.setDate(currentWeekStart.getDate() + 4); // Friday
+
+        // Normalize the selected date to week start and end
         const selectedWeekStart = new Date(selectedDate);
         selectedWeekStart.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
 
         const selectedWeekEnd = new Date(selectedWeekStart);
         selectedWeekEnd.setDate(selectedWeekStart.getDate() + 4); // Friday
 
-        return reservedWeeks.some(week => {
+        // Disable weekends and reserved weeks
+        return selectedDate.getDay() === 0 || selectedDate.getDay() === 6 || reservedWeeks.some(week => {
             const weekStart = new Date(week.week_start);
             const weekEnd = new Date(week.week_end);
             return (selectedWeekStart <= weekEnd && selectedWeekEnd >= weekStart);
-        });
+        }) || (selectedWeekStart <= currentWeekEnd && selectedWeekEnd >= currentWeekStart);
     }
 
     flatpickr("#start_date", {
@@ -207,6 +254,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return disableReservedWeeks(date);
             }
         ],
+        locale: {
+            firstDayOfWeek: 1 // Start the week on Monday
+        },
         onChange: function(selectedDates, dateStr, instance) {
             const startDate = new Date(dateStr);
             const endDate = new Date(startDate);

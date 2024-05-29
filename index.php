@@ -54,11 +54,12 @@
                         </div>
                     </div> 
                     
-                    <li>Audio</li>
-                    <li>Belichting</li>
-                    <li>Tools</li>
-                    <li>Varia</li>
-                    <li>XR</li>
+                    <li><a href="gezochte_producten.php?category=Audio">Audio</a></li>
+        <li><a href="gezochte_producten.php?category=Belichting">Belichting</a></li>
+        <li><a href="gezochte_producten.php?category=Tools">Tools</a></li>
+        <li><a href="gezochte_producten.php?category=Varia">Varia</a></li>
+        <li><a href="gezochte_producten.php?category=XR">XR</a></li>
+  
                 </ul>
             </div>
         </div>

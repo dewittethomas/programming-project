@@ -45,12 +45,12 @@ header {
 
 .container {
     width: 100%;
-    max-width: 1250px;
+    max-width: 150px;
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    
 }
 
 .logo {
@@ -795,7 +795,7 @@ footer {
     margin: 10px;
 }
 .item {
-    width: 25%; 
+     width: 25%; 
      position: relative;
 }
 
@@ -1116,7 +1116,7 @@ header {
     padding: 0 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    
 }
 
 .logo {
