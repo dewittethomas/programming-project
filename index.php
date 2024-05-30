@@ -73,22 +73,26 @@
             if (!$empty) {
                 while($row = mysqli_fetch_assoc($result)) {
                     if (!in_array($row["name"], $products)) {
-                        $image_path = 'images/products/' . $row["image"]; 
-
                         echo '<div class="product">';
 
-                        if (file_exists($image_path)) {
-                            echo '<img src="' . $image_path . '" alt="">';
+                        if ($row["image"]) {
+                            $image_path = "images/products/{$row["image"]}";
+
+                            if (file_exists($image_path)) {
+                                echo "<img src='{$image_path}' alt=''>";
+                            } else {
+                                echo "<img src='images/products/not-found.jpg' alt=''>";
+                            }
                         } else {
-                            echo "No image available";
+                            echo "<img src='images/products/not-found.jpg' alt=''>";
                         }
 
-                        echo '<div class="product-information">';
-                        echo '<a class="product-title" href="artikel.php?id=' . $row["id"] . '">' . $row["name"] . '</a>';
-                        echo '<a class="product-subtitle">' . $row["brand"] . ' | ' . $row["description"] . '</a>';
-                        echo '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>';
-                        echo '</div>';
-                        echo '</div>';
+                        echo "<div class='product-information'>";
+                        echo "<a class='product-title' href='artikel.php?id={$row["id"]}'>{$row["name"]}</a>";
+                        echo "<a class='product-subtitle'>{$row["brand"]} | {$row["object"]}</a>";
+                        echo "<p>{$row["description"]}</p>";
+                        echo "</div>";
+                        echo "</div>";
 
                         $products[] = $row["name"];
                     }
@@ -107,11 +111,11 @@
     <footer>
         <div class="container">
             <div class="footer-container">
-                <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
+                <p>&copy; Erasmushogeschool Brussel 2024</p>
                 
                 <ul class="pages">
-                    <li><a href="voorwaarden.php">Voorwaarden</a></li>
-                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="">Voorwaarden</a></li>
+                    <li><a href="">Contact</a></li>
                 </ul>
 
                 <div class="socials">
