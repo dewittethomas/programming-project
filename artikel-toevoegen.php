@@ -14,7 +14,7 @@
     <header>
         <div class="header-top">
             <div class="container">
-                <a class="logo" href="/admin.php" title="Home">
+                <a class="logo" href="admin.php" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
                 <nav>
@@ -27,8 +27,8 @@
         <div class="header-bottom">
             <div class="container">
                 <ul class="category-container">
-                    <li><a href="scanning.html">Scanning</a></li>
-                    <li><a href="artikel-toevoegen.html">Artikel toevoegen</a></li>
+                    <li><a href="scanning.php">Scanning</a></li>
+                    <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
                     <li><a href ="blacklist.php">Blacklist</a></li>
                     <li><a href ="admin-producten.php">Producten</a></li>
                 </ul>

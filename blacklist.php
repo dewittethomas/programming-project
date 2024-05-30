@@ -18,20 +18,24 @@
     <header>
         <div class="header-top">
             <div class="container">
-                <a class="logo" href="/" title="Home">
+                <a class="logo" href="admin.php" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
-                </form>
                 <nav>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/shopping-cart.svg" loading="lazy">
-                    </a>
                     <a class="nav-icon" href="">
                         <img src="/images/website/profile-picture.svg" loading="lazy">
                     </a>
                 </nav>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <ul class="category-container">
+                    <li><a href="scanning.php">Scanning</a></li>
+                    <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
+                    <li><a href ="blacklist.php">Blacklist</a></li>
+                    <li><a href ="admin-producten.php">Producten</a></li>
+                </ul>
             </div>
         </div>
     </header>
@@ -63,14 +67,10 @@
             while($row = $result->fetch_assoc()) {
                 if ($row["blackliststatus"] == 1) {
                     echo "<div class='container-studenten'>";
-                    echo "<p>" . $row["name"] . "</p>";
-                    echo "<p>" . $row["surname"] . "</p>";
+                    echo "<p>" . $row["firstname"] . "</p>";
+                    echo "<p>" . $row["lastname"] . "</p>";
                     echo "<p>" . $row["email"] . "</p>";
-                    echo "<form method='post' action='blacklist.php'>
-                                        <input type='hidden' name='id' value='" . $row["name"] . "'>
-                                        <textarea name='reason'>" . $row["reason"] . "</textarea>
-                                        <input type='submit' value='Opslaan'>
-                                    </form>";
+                    echo "<p>" . $row["reason"] . "</p>";
                     echo "</div>";
                 }
             }
@@ -79,7 +79,7 @@
         }
     ?>
 
-    <a href="update.php">
+    <a href="studentenlijst.php">
         <button class="toevoegen-button" type="button">Studentenlijst</button>
     </a>
 

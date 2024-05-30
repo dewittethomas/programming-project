@@ -12,30 +12,34 @@
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <div class="container">
-                <a class="logo" href="/" title="Home">
-                    <img src="/images/website/logo.svg" loading="lazy" alt="Home">
-                </a>
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
-                </form>
-                <nav>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/shopping-cart.svg" loading="lazy">
+            <div class="header-top">
+                <div class="container">
+                    <a class="logo" href="admin.php" title="Home">
+                        <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                     </a>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/profile-picture.svg" loading="lazy">
-                    </a>
-                </nav>
+                    <nav>
+                        <a class="nav-icon" href="">
+                            <img src="/images/website/profile-picture.svg" loading="lazy">
+                        </a>
+                    </nav>
+                </div>
             </div>
-        </div>
-    </header>
+            <div class="header-bottom">
+                <div class="container">
+                    <ul class="category-container">
+                        <li><a href="scanning.php">Scanning</a></li>
+                        <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
+                        <li><a href ="blacklist.php">Blacklist</a></li>
+                        <li><a href ="admin-producten.php">Producten</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
 
     <?php
         include 'includes/connect.php';
 
-        $sql = "SELECT user_id, name, surname, email, blackliststatus, reason FROM USERS";
+        $sql = "SELECT user_id, firstname, lastname, email, blackliststatus, reason FROM USERS";
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
             foreach ($_POST['blackliststatus'] as $user_id) {
@@ -53,15 +57,17 @@
         <p>Voornaam student</p>
         <p>Achternaam student</p>
         <p>Mail student</p>
-        <p>Reden</p>
+        <p>Blacklisten</p>
     </div>
 
     <?php
+        ob_start(); // Start output buffering
+
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<div class='container-studenten'>";
-                echo "<p>" . $row["name"] . "</p>";
-                echo "<p>" . $row["surname"] . "</p>";
+                echo "<p>" . $row["firstname"] . "</p>";
+                echo "<p>" . $row["lastname"] . "</p>";
                 echo "<p>" . $row["email"] . "</p>";
                 echo "<div class='BlacklistButtons'>";
                     echo "<form method='POST' action='studentenlijst.php'>";
@@ -84,6 +90,7 @@
             $sql = "UPDATE USERS SET blackliststatus = 1 WHERE user_id = '$user_id'";
             $conn->query($sql);
             header("Location: Blacklist.php");
+            exit();
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blacklistVerwijder'])) {
@@ -91,7 +98,10 @@
             $sql = "UPDATE USERS SET blackliststatus = 0 WHERE user_id = '$user_id'";
             $conn->query($sql);
             header("Location: Blacklist.php");
+            exit();
         }
+
+        ob_end_flush(); // Flush the output buffer
     ?>
 
     <footer>

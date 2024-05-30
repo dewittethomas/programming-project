@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include 'db_connection.php';
+include 'includes/connect.php';
 
 // Check if the form is submitted
 if(isset($_GET['query'])) {

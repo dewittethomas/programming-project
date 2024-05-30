@@ -107,7 +107,7 @@
     <footer>
         <div class="container">
             <div class="footer-container">
-                <p>&copy; Erasmushogeschool Brussel 2024</p>
+                <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
                 
                 <ul class="pages">
                     <li><a href="">Voorwaarden</a></li>
