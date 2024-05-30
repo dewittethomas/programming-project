@@ -34,6 +34,7 @@
                     <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
                     <li><a href ="blacklist.php">Blacklist</a></li>
                     <li><a href ="admin-producten.php">Producten</a></li>
+                    <li><a href ="AddUser.php">Nieuwe gebruiker</a></li>
                 </ul>
             </div>
         </div>
@@ -58,9 +59,9 @@
         }
 
         // Query om producten op te halen
-        $sql = "SELECT id,name, brand, image,object, description, COUNT(*) as quantity
+        $sql = "SELECT id,name, brand, image, description, COUNT(*) as quantity
         FROM PRODUCTS
-        GROUP BY name,id, brand,image, description";
+        GROUP BY id,name, brand,image, description";
         $result = $conn->query($sql);
 
         // Array om bij te houden welke namen al zijn weergegeven
@@ -94,9 +95,6 @@
                     echo '<div class="product-brand">Merk: ' . $row["brand"] . '</div>';
                     // Producthoeveelheid weergeven
                     echo '<div class="product-quantity">Hoeveelheid: ' . $row["quantity"] . '</div>';
-                    //objectsoort weergeven
-                    echo '<div class="product-object">Objectsoort: ' . $row["object"] . '</div>';
-
                     // Productbeschrijving weergeven
                     echo '<div class="product-description">Beschrijving: ' . $row["description"] . '</div>';
                     echo '</div>';
