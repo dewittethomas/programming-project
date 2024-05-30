@@ -37,7 +37,7 @@
         </div>
     </header>
     <main>
-        <div class="artikelToevoegen">
+        <div>
             <h1>Nieuwe gebruiker toevoegen</h1>
             <form action="AddUser.php" method="post">
             <label for="firstname">Voornaam:</label>
@@ -60,7 +60,7 @@
                 <option value="0">Not Blacklisted</option>
                 <option value="1">Blacklisted</option>
             </select>
-            <button type="submit" class="gebruikerbutton">Toevoegen</button>
+            <button type="submit">Toevoegen</button>
             </form>
         </div>
         
@@ -83,6 +83,12 @@
 
             if ($blackliststatus === "") {
                 $sql = "INSERT INTO USERS (firstname, lastname, email, username, password, role) VALUES ('$firstname', '$lastname', '$email', '$username', '$password', '$role')";
+            }
+
+            if ($conn->query($sql) === TRUE) {
+                echo "New user added successfully";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
             }
 
             // Close database connection
