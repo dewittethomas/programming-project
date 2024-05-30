@@ -8,7 +8,7 @@ function confirmReservation() {
     ini_set('display_errors', 1);
 
     // Include the database connection file
-    include 'db_connection.php';
+    include 'includes/connect.php';
 
     // Assign the user_id variable the value of 12
     $user_id = 500;

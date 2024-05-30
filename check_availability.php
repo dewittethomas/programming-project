@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connection.php';
+include 'includes/connect.php';
 
 if (isset($_POST['product_key'])) {
     $key = $_POST['product_key'];

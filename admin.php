@@ -27,8 +27,8 @@
         <div class="header-bottom">
             <div class="container">
                 <ul class="category-container">
-                    <li><a href="scanning.html">Scanning</a></li>
-                    <li><a href="artikel-toevoegen.html">Artikel toevoegen</a></li>
+                    <li><a href="scanning.php">Scanning</a></li>
+                    <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
                     <li><a href ="blacklist.php">Blacklist</a></li>
                     <li><a href ="admin-producten.php">Producten</a></li>
                 </ul>
@@ -55,7 +55,7 @@
             // SQL query om alle aankomende reservaties op te halen, gesorteerd op datum
             $sql = "SELECT r.reservatie_id, r.product_id, r.user_id, r.begindatum, r.einddatum, 
                         p.name as product_name, p.image as product_image, p.brand as product_brand, 
-                        u.name as user_name, u.email as user_email
+                        u.firstname as user_name, u.email as user_email
                     FROM RESERVERINGEN r
                     JOIN PRODUCTS p ON r.product_id = p.id
                     JOIN USERS u ON r.user_id = u.user_id
@@ -79,7 +79,7 @@
                 foreach ($reservationList as $reservation) {
                     echo '<div class="reservation-item">';
                     // Productafbeelding weergeven indien beschikbaar
-                    $imagePath = 'images/' . $reservation["product_image"]; // Pad naar de afbeelding
+                    $imagePath = 'images/products/' . $reservation["product_image"]; // Pad naar de afbeelding
                     if (file_exists($imagePath)) {
                         echo '<img src="' . $imagePath . '" alt="" />';
                     } else {

@@ -15,13 +15,13 @@ session_start();
     <div class="header-top">
         <div class="container">
             <a class="logo" href="index.php" title="Home">
-                <img src="/images/logo.svg" alt="Home">
+                <img src="/images/website/logo.svg" alt="Home">
             </a>
             <form action="search.php" method="GET">
                 <input type="text" name="query"  placeholder="Search...">
             </form>
             <nav>
-                <img class="cart" src="images/shopping-cart.svg">
+                <img class="cart" src="images/website/shopping-cart.svg">
             </nav>
         </div>
     </div>
