@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-require 'includes/products.php';
 // Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -15,7 +14,7 @@ if (!isset($_SESSION['selected_products'])) {
 }
 
 // Retrieve product information based on the product ID passed through the URL
-$product_naam = $product_description = $product_image = "";
+$product_naam = $product_description = "";
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
 
@@ -30,7 +29,6 @@ if (isset($_GET['id'])) {
         $row = $result->fetch_assoc();
         $product_naam = $row['name'];
         $product_description = $row['description'];
-        $product_image = 'images/products/'. $row['image'];
     } else {
         $product_naam = "Product not found";
     }
@@ -82,6 +80,7 @@ function getReservedWeeks($reservations) {
 }
 
 $reserved_weeks = getReservedWeeks($reservations);
+
 // Handle form submission and store selected dates
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
     // Check if start date is submitted
@@ -89,22 +88,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
         $start_date = $_POST['start_date'];
         $end_date = date('Y-m-d', strtotime($start_date . ' + 4 days'));
         
-        // Retrieve product ID, name, and image from the form submission
+        // Retrieve product ID and name from the form submission
         $product_id = $_POST['product_id'];
         $product_naam = $_POST['product_naam'];
-        $product_image = $_POST['product_image']; // Add this line to retrieve the image path
 
         // Store the selected product and dates in the session array
         $_SESSION['selected_products'][] = array(
             'product_id' => $product_id,
             'product_naam' => $product_naam,
-            'product_image' => $product_image, // Store the image path in the session
             'start_date' => $start_date,
             'end_date' => $end_date,
         );
 
-        // Redirect to winkelmandje.php with a success message
-        header("Location: winkelmandje.php?success=true");
+        // Redirect to artikel.php with a success message
+        header("Location: artikel.php?id=$product_id&success=true");
         exit();
     } else {
         // Handle the case where start date is not provided
@@ -119,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
     <title>Uitleendienst MediaLab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
@@ -128,96 +125,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
 </head>
 <body>
 <header>
-        <div class="header-top">
-            <div class="container">
-                <a class="logo" href="/" title="Home">
-                    <img src="/images/website/logo.svg" loading="lazy" alt="Home">
+    <div class="header-top">
+        <div class="container">
+            <a class="logo" href="index.php" title="Home">
+                <img src="/images/website/logo.svg" alt="Home">
+            </a>
+            <form action="search.php" method="GET">
+                <input type="text" name="query" placeholder="Search...">
+            </form>
+            <nav><a href="winkelmandje.php">
+                <img class="cart" src="images/website/shopping-cart.svg">
                 </a>
-                <form class="search-container" action="/">
-                    <input class="search-glass" type="text" placeholder="Search...">
-                </form>
-                <nav>
-                    <a class="nav-icon" href="winkelmandje.php">
-                        <img src="/images/website/shopping-cart.svg" loading="lazy">
-                    </a>
-                    <a class="nav-icon" href="">
-                        <img src="/images/website/profile-picture.svg" loading="lazy">
-                    </a>
-                </nav>
-            </div>
+            </nav>
         </div>
-        <div class="header-bottom">
-            <div class="container">
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
-                </form>
-                <ul class="category-container">
-                    <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="">Video</a></li>
+    </div>
+</header>
 
-                        <div class="dropdown-content">
-                            <div class="container">
-                                <div class="dropdown-row">
-                                    <a class="category" href="#">Camera's</a>
-                                    <a href="#">Dieptecamera</a>
-                                    <a href="#">Overige</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <li><a href="gezochte_producten.php?category=Audio">Audio</a></li>
-        <li><a href="gezochte_producten.php?category=Belichting">Belichting</a></li>
-        <li><a href="gezochte_producten.php?category=Tools">Tools</a></li>
-        <li><a href="gezochte_producten.php?category=Varia">Varia</a></li>
-        <li><a href="gezochte_producten.php?category=XR">XR</a></li>
-  
-                </ul>
-            </div>
-        </div>
-    </header>
-
-<main class="containerartikel">
+<main class="container">
     <div class="item">
-    <p class="NaamProductFoto"><?php echo htmlspecialchars($product_naam); ?> </p>
+    <p class="NaamProductFoto"><?php echo htmlspecialchars($product_naam); ?></p>
+        <img src="38088.avif" alt="">
         
-    <img src="<?php echo htmlspecialchars($product_image); ?>" alt="<?php echo htmlspecialchars($product_naam); ?>">
-     
-   
     </div>
     
     <div>
-        <?php
-    // Handle form submission and store selected dates
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserveren'])) {
-    // Check if start date is submitted
-    if (isset($_POST['start_date'])) {
-        $start_date = $_POST['start_date'];
-        $end_date = date('Y-m-d', strtotime($start_date . ' + 4 days'));
-        
-        // Retrieve product ID, name, and image from the form submission
-        $product_id = $_POST['product_id'];
-        $product_naam = $_POST['product_naam'];
-        $product_image = $_POST['product_image']; // Add this line to retrieve the image path
-
-        // Store the selected product and dates in the session array
-        $_SESSION['selected_products'][] = array(
-            'product_id' => $product_id,
-            'product_naam' => $product_naam,
-            'product_image' => $product_image, // Store the image path in the session
-            'start_date' => $start_date,
-            'end_date' => $end_date,
-        );
-
-        // Redirect to winkelmandje.php with a success message
-        header("Location: winkelmandje.php?success=true");
-        exit();
-    } else {
-        // Handle the case where start date is not provided
-        echo '<p>Startdatum is vereist.</p>';
-    }
-}
-?>
         <!-- Calendar form -->
         <form action="artikel.php" method="post">
             <p>beschikbaarheid:</p>
@@ -255,27 +186,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function disableReservedWeeks(date) {
         const selectedDate = new Date(date);
-
-        // Calculate the start and end of the current week
-        const currentWeekStart = new Date();
-        currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay() + 1); // Monday
-
-        const currentWeekEnd = new Date(currentWeekStart);
-        currentWeekEnd.setDate(currentWeekStart.getDate() + 4); // Friday
-
-        // Normalize the selected date to week start and end
         const selectedWeekStart = new Date(selectedDate);
         selectedWeekStart.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
 
         const selectedWeekEnd = new Date(selectedWeekStart);
         selectedWeekEnd.setDate(selectedWeekStart.getDate() + 4); // Friday
 
-        // Disable weekends and reserved weeks
-        return selectedDate.getDay() === 0 || selectedDate.getDay() === 6 || reservedWeeks.some(week => {
+        return reservedWeeks.some(week => {
             const weekStart = new Date(week.week_start);
             const weekEnd = new Date(week.week_end);
             return (selectedWeekStart <= weekEnd && selectedWeekEnd >= weekStart);
-        }) || (selectedWeekStart <= currentWeekEnd && selectedWeekEnd >= currentWeekStart);
+        });
     }
 
     flatpickr("#start_date", {
@@ -286,37 +207,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 return disableReservedWeeks(date);
             }
         ],
-        locale: {
-            firstDayOfWeek: 1 // Start the week on Monday
-        },
         onChange: function(selectedDates, dateStr, instance) {
-            const selectedDate = new Date(dateStr);
-            
-            // Calculate the start of the week
-            const weekStart = new Date(selectedDate);
-            weekStart.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
-
-            // Update the selected date to the start of the week
-            instance.setDate(weekStart);
-            
-            const endDate = new Date(weekStart);
-            endDate.setDate(weekStart.getDate() + 4);
+            const startDate = new Date(dateStr);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 4);
             document.getElementById('end_date').value = endDate.toISOString().split('T')[0];
-        },
-        onDayClick: function(selectedDates, dateStr, instance) {
-            // Get the selected date
-            const selectedDate = new Date(dateStr);
-            
-            // Calculate the start of the week
-            const weekStart = new Date(selectedDate);
-            weekStart.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
-            
-            // Update the selected date to the start of the week
-            instance.setDate(weekStart);
         }
     });
 });
-
 </script>
 </body>
 </html>
