@@ -493,7 +493,7 @@ footer {
     resize: vertical;
 }
 
-.artikelToevoegen input[type="submit"], #scansysteem input[type="submit"] {
+.artikelToevoegen input[type="submit"], .scansysteem input[type="submit"] {
     align-self: center;
     padding: 0.8rem 2rem;
     border: none;
@@ -506,7 +506,7 @@ footer {
     box-shadow: 1px 1px 5px var(--grey);
 }
 
-.artikelToevoegen input[type="submit"]:hover,#scansysteem input[type="submit"]:hover {
+.artikelToevoegen input[type="submit"]:hover,.scansysteem input[type="submit"]:hover {
     background-color: var(--dark-red);
 }
 .artikelToevoegen select,
