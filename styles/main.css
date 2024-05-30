@@ -230,12 +230,12 @@ input {
 }
 
 .product {
-    border: 1px solid var(--grey);
     width: 600px;
     margin: 0 4.5px;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .product img {
@@ -257,7 +257,7 @@ input {
 }
 
 .product-subtitle {
-    color: var(--grey);
+    color: var(--lightest-black);
 }
 
 /* Footer */

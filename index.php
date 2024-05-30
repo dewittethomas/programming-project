@@ -1,6 +1,7 @@
 <?php
     require 'includes/session.php';
     require 'includes/products.php';
+    require 'includes/categories.php';
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -39,6 +40,7 @@
                 <form class="search-container" action="/">
                     <input class="search-glass focus" type="text" placeholder="Search...">
                 </form>
+
                 <ul class="category-container">
                     <div class="dropdown-container">
                         <li class="dropdown-item"><a href="">Video</a></li>
@@ -46,19 +48,120 @@
                         <div class="dropdown-content">
                             <div class="container">
                                 <div class="dropdown-row">
-                                    <a class="category" href="#">Camera's</a>
-                                    <a href="#">Dieptecamera</a>
-                                    <a href="#">Overige</a>
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == "Video") {
+                                            echo "<a href='#'>{$row["subcategory"]}</a>";
+                                        }
+                                    }
+
+                                    ?>
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                    
-                    <li>Audio</li>
-                    <li>Belichting</li>
-                    <li>Tools</li>
-                    <li>Varia</li>
-                    <li>XR</li>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="">Audio</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == "Audio") {
+                                            echo "<a href='#'>{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="">Belichting</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == "Belichting") {
+                                            echo "<a href='#'>{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="">Tools</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == "Tools") {
+                                            echo "<a href='#'>{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="">Varia</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == "Varia") {
+                                            echo "<a href='#'>{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="">XR</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == "XR") {
+                                            echo "<a href='#'>{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -67,42 +170,42 @@
     <main>
         <div class="container">
             <div class="product-container">
-            <?php
-            $products = array();
+                <?php
+                $products = array();
 
-            if (!$empty) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    if (!in_array($row["name"], $products)) {
-                        echo '<div class="product">';
+                if (!$empty) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                        if (!in_array($row["name"], $products)) {
+                            echo '<div class="product">';
 
-                        if ($row["image"]) {
-                            $image_path = "images/products/{$row["image"]}";
+                            if ($row["image"]) {
+                                $image_path = "images/products/{$row["image"]}";
 
-                            if (file_exists($image_path)) {
-                                echo "<img src='{$image_path}' alt=''>";
+                                if (file_exists($image_path)) {
+                                    echo "<img src='/{$image_path}' alt=''>";
+                                } else {
+                                    echo "<img src='/images/products/not-found.jpg' alt=''>";
+                                }
                             } else {
-                                echo "<img src='images/products/not-found.jpg' alt=''>";
+                                echo "<img src='/images/products/not-found.jpg' alt=''>";
                             }
-                        } else {
-                            echo "<img src='images/products/not-found.jpg' alt=''>";
+
+                            echo "<div class='product-information'>";
+                            echo "<a class='product-title' href='artikel.php?id={$row["id"]}'>{$row["name"]}</a>";
+                            echo "<a class='product-subtitle'>{$row["brand"]} | {$row["object"]}</a>";
+                            echo "<p>{$row["description"]}</p>";
+                            echo "</div>";
+                            echo "</div>";
+
+                            $products[] = $row["name"];
                         }
-
-                        echo "<div class='product-information'>";
-                        echo "<a class='product-title' href='artikel.php?id={$row["id"]}'>{$row["name"]}</a>";
-                        echo "<a class='product-subtitle'>{$row["brand"]} | {$row["object"]}</a>";
-                        echo "<p>{$row["description"]}</p>";
-                        echo "</div>";
-                        echo "</div>";
-
-                        $products[] = $row["name"];
                     }
+                } else {
+                    echo "Geen producten gevonden.";
                 }
-            } else {
-                echo "Geen producten gevonden.";
-            }
 
-            mysqli_close($conn);
-            ?>
+                mysqli_close($conn);
+                ?>
             </div>
         </div>
         
