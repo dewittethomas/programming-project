@@ -110,8 +110,8 @@
                 <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
                 
                 <ul class="pages">
-                    <li><a href="">Voorwaarden</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="voorwaarden.php">Voorwaarden</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                 </ul>
 
                 <div class="socials">
