@@ -829,3 +829,6 @@ h1 {
 .gebruikerbutton:hover{
     background-color: var(--dark-red);
 }
+.expired {
+    background-color: rgb(241, 80, 80);
+}
