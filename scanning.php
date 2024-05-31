@@ -25,7 +25,16 @@
             </nav>
         </div>
     </div>
-    
+    <div class="header-bottom">
+        <div class="container">
+            <ul class="category-container">
+                <li><a href="scanning.php">Scanning</a></li>
+                <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
+                <li><a href ="blacklist.php">Blacklist</a></li>
+                <li><a href ="admin-producten.php">Producten</a></li>
+            </ul>
+        </div>
+    </div>
 </header>
 <main>
   <div class="scansysteem">
