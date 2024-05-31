@@ -31,6 +31,7 @@
                     <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
                     <li><a href ="blacklist.php">Blacklist</a></li>
                     <li><a href ="admin-producten.php">Producten</a></li>
+                    <li><a href ="AddUser.php">Nieuwe gebruiker</a></li>
                 </ul>
             </div>
         </div>
