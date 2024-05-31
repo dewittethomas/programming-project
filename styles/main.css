@@ -27,9 +27,28 @@ body {
     flex-direction: column;
 }
 
+.container {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .focus:focus {
     border: 1px solid var(--blue);
 }
+
+.submit-button {
+    color: var(--white);
+    width: 100%;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Header */
 
 header {
     width: 100%;
@@ -46,18 +65,6 @@ header {
     border-bottom: 1px solid var(--grey);
     width: 100%;
 }
-
-.container {
-    width: 100%;
-    max-width: 1250px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Header */
 
 .logo {
     margin: 0.8rem 0;
@@ -212,12 +219,10 @@ input {
 }
 
 .login {
-    color: var(--white);
     background-color: var(--green);
-    padding: 0.8rem 0;
+    padding: 0.8rem 0.8rem;
     font-size: 1.2rem;
     font-weight: 700;
-    cursor: pointer;
 }
 
 /* Products */
@@ -246,6 +251,8 @@ input {
 .product-information {
     width: 65%;
     padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-information a {
@@ -258,6 +265,21 @@ input {
 
 .product-subtitle {
     color: var(--lightest-black);
+}
+
+.product-footer {
+    margin-top: auto;
+}
+
+.product-availability {
+    color: var(--green);
+    margin: 0.2rem 0;
+}
+
+.product-reservation {
+    background-color: var(--red);
+    padding: 0.5rem;
+    font-size: 1rem;
 }
 
 /* Footer */

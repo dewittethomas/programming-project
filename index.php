@@ -56,7 +56,6 @@
                                             echo "<a href='#'>{$row["subcategory"]}</a>";
                                         }
                                     }
-
                                     ?>
                                 </div>
                             </div>
@@ -182,18 +181,29 @@
                                 $image_path = "images/products/{$row["image"]}";
 
                                 if (file_exists($image_path)) {
-                                    echo "<img src='/{$image_path}' alt=''>";
+                                    echo "<img src='/{$image_path}' loading='lazy'>";
                                 } else {
-                                    echo "<img src='/images/products/not-found.jpg' alt=''>";
+                                    echo "<img src='/images/products/not-found.jpg' loading='lazy'>";
                                 }
                             } else {
-                                echo "<img src='/images/products/not-found.jpg' alt=''>";
+                                echo "<img src='/images/products/not-found.jpg' loading='lazy'>";
                             }
 
                             echo "<div class='product-information'>";
                             echo "<a class='product-title' href='artikel.php?id={$row["id"]}'>{$row["name"]}</a>";
                             echo "<a class='product-subtitle'>{$row["brand"]} | {$row["object"]}</a>";
                             echo "<p>{$row["description"]}</p>";
+                            echo "<div class='product-footer'>";
+
+                            if (isAvailable($row["name"])) {
+                                echo "<a class='product-availability'>Beschikbaar</a>";
+
+                            } else {
+                                echo "<a class='product-availability'>Niet beschikbaar</a>";
+                            }
+                            
+                            echo "<button class='submit-button product-reservation'>Leen uit</button>";
+                            echo "</div>";
                             echo "</div>";
                             echo "</div>";
 
@@ -208,7 +218,6 @@
                 ?>
             </div>
         </div>
-        
     </main>
 
     <footer>
@@ -217,8 +226,8 @@
                 <p>&copy; Erasmushogeschool Brussel 2024</p>
                 
                 <ul class="pages">
-                    <li><a href="">Voorwaarden</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="voorwaarden.php">Voorwaarden</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                 </ul>
 
                 <div class="socials">

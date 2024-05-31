@@ -21,6 +21,7 @@
             </a>
         </div>
     </header>
+
     <main>
         <div class="container center">
             <div class="login-container">
@@ -34,12 +35,8 @@
                         <button class="login" type="submit">Login</button>
                     </div>
                 </form>
-
-
             </div>
-
         </div>
     </main>
-
 </body>
 </html>

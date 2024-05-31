@@ -92,11 +92,11 @@
     <footer>
         <div class="container">
             <div class="footer-container">
-                <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
+                <p>&copy; Erasmushogeschool Brussel 2024</p>
                 
                 <ul class="pages">
-                    <li><a href="Voorwaarde.html">Voorwaarden</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="voorwaarden.php">Voorwaarden</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                 </ul>
 
                 <div class="socials">

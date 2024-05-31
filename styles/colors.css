@@ -1,5 +1,7 @@
 /* Colors */
 :root {
+    --success: #2BB673;
+    --fail: #FF3333;
     --white: #FFF;
     --black: #000;
     --lightest-black: #686876;

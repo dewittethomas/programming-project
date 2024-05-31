@@ -21,6 +21,7 @@
             </a>
         </div>
     </header>
+
     <main>
         <div class="container center">
             <div class="login-container">
@@ -31,7 +32,7 @@
                         <input id="username" name="username" type="text">
                         <label for="password">Paswoord</label>
                         <input id="password" name="password" type="password">
-                        <button class="login" type="submit">Inloggen</button>
+                        <button class="submit-button login" type="submit">Inloggen</button>
                     </div>
                 </form>
 
@@ -40,6 +41,5 @@
 
         </div>
     </main>
-
 </body>
 </html>
