@@ -21,7 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $name = $_POST['name'];
   $brand = $_POST['brand'];
   $category = $_POST['category'];
+  $subcategory = $_POST['subcategory'];
   $object = $_POST['object'];
+  $description = $_POST['description'];
 
   
 
@@ -68,11 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Bereid de SQL query voor
-  $sql = "INSERT INTO PRODUCTS (name, brand, category, object, availability,subcategory,image) VALUES (?, ?, ?, ?, 1, NULL, ?)";
+  $sql = "INSERT INTO PRODUCTS (name, brand, category, object, description, availability,subcategory,image) VALUES (?, ?, ?, ?,?, 1, ?, ?)";
 
   // Gebruik prepared statements om SQL injectie te voorkomen
   if ($stmt = $conn->prepare($sql)) {
-      $stmt->bind_param("ssiss", $name, $brand, $category, $object,$image);
+      $stmt->bind_param("ssissis", $name, $brand, $category, $object,$description,$subcategory,$image);
 
       // Voer de query uit
       if ($stmt->execute()) {

@@ -42,6 +42,7 @@
         <div class="artikelToevoegen">
         
         <h2>Artikel Toevoegen</h2>
+        
         <form action="/includes/add-article.php" method="post" enctype="multipart/form-data">
             <label for="naam">Naam:</label>
             <input type="text" id="name" name="name" required><br><br>
@@ -59,8 +60,15 @@
                 <option value="5">Varia</option>
                 <option value="6">XR</option>
             </select><br><br>
+            <label for="subcategory">Subcategorie:</label>
+            <select id="subcategory" name="subcategory">
+                <!-- Opties via subcategory.js -->
+            </select><br><br>
             <label for="object">Objectsoort:</label>
             <input type="text" id="object" name="object" required><br><br>
+
+            <label for="description">Beschrijving:</label>
+            <textarea id="description" name="description" required></textarea><br><br>
         
             <label for="foto">Foto:</label>
             <input type="file" id="foto" name="foto"><br><br>
@@ -105,5 +113,7 @@
             </div>
         </div>
     </footer>
+    
+<script src="scripts/subcategory.js"></script>
 </body>
 </html>
