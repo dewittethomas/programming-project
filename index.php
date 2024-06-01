@@ -2,6 +2,7 @@
     require 'includes/session.php';
     require 'includes/products.php';
     require 'includes/categories.php';
+    require 'includes/pages.php';
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -170,52 +171,69 @@
         <div class="container">
             <div class="product-container">
                 <?php
-                $products = array();
+                $products = getProducts($start, 10);
+                
+                while($row = mysqli_fetch_assoc($products)) {
+                    $product;
 
-                if (!$empty) {
-                    while($row = mysqli_fetch_assoc($result)) {
-                        if (!in_array($row["name"], $products)) {
-                            echo '<div class="product">';
+                    if ($row["brand"]) {
+                        $product = getProductDetails($row["name"], $row["brand"]);
+                    } else {
+                        $product = getProductDetails($row["name"]);
+                    }
+                        
+                    while($row = mysqli_fetch_assoc($product)) {
+                        echo '<div class="product">';
 
-                            if ($row["image"]) {
-                                $image_path = "images/products/{$row["image"]}";
-
-                                if (file_exists($image_path)) {
-                                    echo "<img src='/{$image_path}' loading='lazy'>";
-                                } else {
-                                    echo "<img src='/images/products/not-found.jpg' loading='lazy'>";
-                                }
+                        if ($row["image"]) {
+                            $image_path = "images/products/{$row["image"]}";
+    
+                            if (file_exists($image_path)) {
+                                echo "<img src='/{$image_path}' loading='lazy'>";
                             } else {
                                 echo "<img src='/images/products/not-found.jpg' loading='lazy'>";
                             }
-
-                            echo "<div class='product-information'>";
-                            echo "<a class='product-title' href='artikel.php?id={$row["id"]}'>{$row["name"]}</a>";
-                            echo "<a class='product-subtitle'>{$row["brand"]} | {$row["object"]}</a>";
-                            echo "<p>{$row["description"]}</p>";
-                            echo "<div class='product-footer'>";
-
-                            if (isAvailable($row["name"])) {
-                                echo "<a class='product-availability'>Beschikbaar</a>";
-
-                            } else {
-                                echo "<a class='product-availability'>Niet beschikbaar</a>";
-                            }
-                            
-                            echo "<button class='submit-button product-reservation'>Leen uit</button>";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-
-                            $products[] = $row["name"];
+                        } else {
+                            echo "<img src='/images/products/not-found.jpg' loading='lazy'>";
                         }
+    
+                        echo "<div class='product-information'>";
+                        echo "<a class='product-title' href='artikel.php'>{$row["name"]}</a>";
+
+                        if ($row["brand"]) {
+                            echo "<a class='product-subtitle'>{$row["brand"]} | {$row["object"]}</a>";
+                        } else {
+                            echo "<a class='product-subtitle'>Geen merk | {$row["object"]}</a>";
+                        }
+                        
+                        echo "<p>{$row["description"]}</p>";
+                        echo "<div class='product-footer'>";
+                        
+                        if (isAvailable($row["name"])) {
+                            echo "<p class='product-availability'>Beschikbaar</p>";
+                        } else {
+                            echo "<p class='product-availability'>Niet beschikbaar</p>";
+                        }
+                        
+                        echo "<button class='submit-button product-reservation'>Reserveren</button>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
                     }
-                } else {
-                    echo "Geen producten gevonden.";
                 }
 
                 mysqli_close($conn);
                 ?>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="pages">
+                <a href="index.php?page=1">1</a>
+                <a href="index.php?page=2">2</a>
+                <a href="index.php?page=3">3</a>
+                <a href="index.php?page=4">4</a>
+                <a href="index.php?page=5">5</a>
             </div>
         </div>
     </main>
@@ -225,7 +243,7 @@
             <div class="footer-container">
                 <p>&copy; Erasmushogeschool Brussel 2024</p>
                 
-                <ul class="pages">
+                <ul class="links">
                     <li><a href="voorwaarden.php">Voorwaarden</a></li>
                     <li><a href="contact.php">Contact</a></li>
                 </ul>

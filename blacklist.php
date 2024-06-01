@@ -89,7 +89,7 @@
             <div class="footer-container">
                 <p>&copy; Erasmushogeschool Brussel 2024</p>
                 
-                <ul class="pages">
+                <ul class="links">
                     <li><a href="voorwaarden.php">Voorwaarden</a></li>
                     <li><a href="contact.php">Contact</a></li>
                 </ul>
