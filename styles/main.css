@@ -239,15 +239,22 @@ input {
 }
 
 .product {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
+    width: 50%;
     max-width: 50%;
     display: flex;
     justify-content: space-between;
     flex: 1 1 calc(50% - 1rem);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
-.product img {
+.product-image {
+    width: 20vh;
+    height: 20vh;
+    display: inline-block;
+}
+
+.product-image img {
     width: 20vh;
     height: 20vh;
 }
@@ -288,10 +295,16 @@ input {
 
 /* Homepage Pages Footer */
 
-.pages {
+.pages-container {
     background-color: var(--grey);
     width: 100%;
     margin: 2rem 0 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+.pages {
+
 }
 
 /* Footer */

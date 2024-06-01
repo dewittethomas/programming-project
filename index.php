@@ -185,6 +185,7 @@
                     while($row = mysqli_fetch_assoc($product)) {
                         echo '<div class="product">';
 
+                        echo "<a class='product-image' href='artikel.php'>";
                         if ($row["image"]) {
                             $image_path = "images/products/{$row["image"]}";
     
@@ -196,6 +197,7 @@
                         } else {
                             echo "<img src='/images/products/not-found.jpg' loading='lazy'>";
                         }
+                        echo "</a>";
     
                         echo "<div class='product-information'>";
                         echo "<a class='product-title' href='artikel.php'>{$row["name"]}</a>";
@@ -225,12 +227,14 @@
         </div>
 
         <div class="container">
-            <div class="pages">
-                <a href="index.php?page=1">1</a>
-                <a href="index.php?page=2">2</a>
-                <a href="index.php?page=3">3</a>
-                <a href="index.php?page=4">4</a>
-                <a href="index.php?page=5">5</a>
+            <div class="pages-container">
+                <div class="pages">
+                    <a href="index.php?page=1">1</a>
+                    <a href="index.php?page=2">2</a>
+                    <a href="index.php?page=3">3</a>
+                    <a href="index.php?page=4">4</a>
+                    <a href="index.php?page=5">5</a>
+                </div>
             </div>
         </div>
     </main>
