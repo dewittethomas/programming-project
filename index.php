@@ -209,11 +209,8 @@
                         echo "<p>{$row["description"]}</p>";
                         echo "<div class='product-footer'>";
                         
-                        if (isAvailable($row["name"])) {
-                            echo "<p class='product-availability'>Beschikbaar</p>";
-                        } else {
-                            echo "<p class='product-availability'>Niet beschikbaar</p>";
-                        }
+                        $count = isAvailable($row["name"]);
+                        echo "<p class='product-availability'>{$count} Beschikbaar</p>";
                         
                         echo "<button class='submit-button product-reservation'>Reserveren</button>";
                         echo "</div>";
