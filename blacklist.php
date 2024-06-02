@@ -29,8 +29,10 @@
                 <ul class="category-container">
                     <li><a href="scanning.php">Scanning</a></li>
                     <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
-                    <li><a href="blacklist.php">Blacklist</a></li>
-                    <li><a href="admin-producten.php">Producten</a></li>
+                    <li><a href ="blacklist.php">Blacklist</a></li>
+                    <li><a href ="admin-producten.php">Producten</a></li>
+                    <li><a href ="waarschuwen.php">Waarschuwen</a></li>
+
                 </ul>
             </div>
         </div>
@@ -49,7 +51,7 @@
                         $stmt = $conn->prepare($sql);
                         $stmt->bind_param("i", $userId);
                         if ($stmt->execute()) {
-                            header("Location: /studentenlijst.php ");
+                            header("Location: /blacklist.php ");
                             exit;
                         } else {
                             echo "Fout bij het opnieuw instellen van de gebruiker.";
