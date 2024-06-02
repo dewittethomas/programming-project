@@ -1,7 +1,3 @@
-<?php
-    require 'includes/session.php';
-    require 'includes/connect.php';
-?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -12,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    
 </head>
 <body>
     <header>
@@ -33,58 +29,68 @@
                 <ul class="category-container">
                     <li><a href="scanning.php">Scanning</a></li>
                     <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
-                    <li><a href ="blacklist.php">Blacklist</a></li>
-                    <li><a href ="admin-producten.php">Producten</a></li>
-                    <li><a href ="AddUser.php">Nieuwe gebruiker</a></li>
+                    <li><a href="blacklist.php">Blacklist</a></li>
+                    <li><a href="admin-producten.php">Producten</a></li>
                 </ul>
             </div>
         </div>
     </header>
+    <main>
+        <div class="container">
+            <div class="user-container">
+                <?php
+                    include 'includes/connect.php';
+                    if ($conn->connect_error) {
+                        die("Verbinding mislukt: " . $conn->connect_error);
+                    }
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["user_id"])) {
+                        $userId = $_POST["user_id"];
+                        $sql = "UPDATE USERS SET blacklist = 0, warning = 0 WHERE user_id = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("i", $userId);
+                        if ($stmt->execute()) {
+                            header("Location: /studentenlijst.php ");
+                            exit;
+                        } else {
+                            echo "Fout bij het opnieuw instellen van de gebruiker.";
+                        }
+                    }
+                    $sql = "SELECT user_id, first_name, last_name, email, username FROM USERS WHERE blacklist = 1";
+                    $result = $conn->query($sql);
+                ?>
 
-    <?php
-        $sql = "SELECT user_id, firstname, lastname, email, blackliststatus, reason FROM USERS";
+                <h2>Blacklisted Gebruikers</h2>
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['blackliststatus'])) {
-            foreach ($_POST['blackliststatus'] as $user_id) {
-                $sql = "UPDATE USERS SET blackliststatus = 1 WHERE name = '$user_id'";
-                $conn->query($sql);
-            }
-            header("Location: blacklist.php");
-        }
-        
-        $result = $conn->query($sql);
-
-    ?>
-
-    <div class="container-blacklist">
-        <p>Voornaam student</p>
-        <p>Achternaam student</p>
-        <p>Mail student</p>
-        <p>Reden</p>
-    </div>
-
-    <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                if ($row["blackliststatus"] == 1) {
-                    echo "<div class='container-studenten'>";
-                    echo "<p>" . $row["firstname"] . "</p>";
-                    echo "<p>" . $row["lastname"] . "</p>";
-                    echo "<p>" . $row["email"] . "</p>";
-                    echo "<p>" . $row["reason"] . "</p>";
-                    echo "</div>";
-                }
-            }
-        } else {
-            echo "<tr><td colspan='4'>Geen studenten gevonden</td></tr>";
-        }
-    ?>
-
-    <a href="studentenlijst.php">
-        <button class="toevoegen-button" type="button">Studentenlijst</button>
-    </a>
-
-    <footer>
+                <table>
+                    <tr>
+                        <th>Voornaam</th>
+                        <th>Achternaam</th>
+                        <th>E-mail</th>
+                        <th>Gebruikersnaam</th>
+                        <th></th>
+                    </tr>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["first_name"] . "</td>";
+                            echo "<td>" . $row["last_name"] . "</td>";
+                            echo "<td>" . $row["email"] . "</td>";
+                            echo "<td>" . $row["username"] . "</td>";
+                            echo '<td class="delete-icon-cell"><form method="post" action="'.$_SERVER['PHP_SELF'].'">';
+                            echo '<input type="hidden" name="user_id" value="' . $row["user_id"] . '">';
+                            echo '<button type="submit" class="delete-icon" onclick="return confirm(\'Weet je zeker dat je deze gebruiker wilt deblokkeren en de waarschuwing wilt resetten?\')">&#10060;</button>';
+                            echo '</form></td>';
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5'>Geen blacklisted gebruikers gevonden.</td></tr>";
+                    }
+                    ?>
+</table>
+        </div>
+    </main>    
+<footer>
         <div class="container">
             <div class="footer-container">
                 <p>&copy; Erasmushogeschool Brussel 2024</p>
