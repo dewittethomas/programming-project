@@ -881,3 +881,56 @@ h1 {
 .expired {
     background-color: rgb(241, 80, 80);
 }
+.user-container {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+    background-color: var(--white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.user-container h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+table th, table td {
+    padding: 1rem;
+    border: 1px solid var(--grey);
+    text-align: left;
+}
+
+table th {
+    background-color: var(--light-grey);
+    font-weight: 700;
+}
+
+table td {
+    background-color: var(--white);
+}
+.delete-icon-cell {
+    text-align: center;
+    vertical-align: middle;
+}
+.delete-icon {
+    background: none;
+    border: none;
+    color: var(--red);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.delete-icon:hover {
+    color: var(--dark-red);
+}
