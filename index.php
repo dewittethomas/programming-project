@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/index.php?category=3">Belichting</a></li>
+                        <li class="dropdown-item category-selected"><a href="/index.php?category=3">Belichting</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -254,6 +254,7 @@
                 echo "</a>";
             }
             ?>
+
             <div class="pages">
             <?php
             echo "<a href='index.php?page=1";
@@ -310,6 +311,7 @@
             }
             ?>
             </div>
+
             <?php
             if ($current_page != $total_pages) {
                 echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page + 1);

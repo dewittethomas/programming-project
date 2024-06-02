@@ -49,6 +49,10 @@ main {
     border: 1px solid var(--blue);
 }
 
+.category-selected:before {
+    transform: scaleX(1) !important; 
+}
+
 .submit-button {
     color: var(--white);
     width: 100%;
@@ -230,6 +234,7 @@ input {
 .login {
     background-color: var(--green);
     padding: 0.8rem 0.8rem;
+    font-size: 1rem;
     font-weight: 700;
 }
 
@@ -881,6 +886,7 @@ h1 {
 .expired {
     background-color: rgb(241, 80, 80);
 }
+
 .user-container {
     width: 100%;
     max-width: 1250px;
