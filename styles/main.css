@@ -940,3 +940,20 @@ table td {
 .delete-icon:hover {
     color: var(--dark-red);
 }
+.warning-icon-cell {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.warning-icon {
+    background: none;
+    border: none;
+    color: var(--yellow);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.warning-icon:hover {
+    color: var(--dark-yellow);
+}
