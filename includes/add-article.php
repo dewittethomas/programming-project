@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
 
   // Verwerk de foto-upload
-  $afbeelding = '';
+  $image = '';
   if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
       $target_dir = "../images/products/";
       $target_file = $target_dir . basename($_FILES["foto"]["name"]);
