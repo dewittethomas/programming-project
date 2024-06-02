@@ -241,75 +241,88 @@
 
         <div class="container">
             <div class="pages-container">
-                <?php
-                if ($current_page != 1) {
-                    echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page - 1);
-                    
-                    if ($category) {
-                        echo "&category=" . $category ."'>";
-                    } else {
-                        echo "'>";
-                    }
-                    
-                    echo "<img src='/images/website/arrow-left.svg' loading='lazy'>";
-                    echo "</a>";
+            <?php
+            if ($current_page != 1) {
+                echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page - 1);
+                
+                if ($category) {
+                    echo "&category=" . urlencode($category);
                 }
-                ?>
-                <div class="pages">
-                <?php
-                echo "<a href='index.php?page=1'";
-                if ($category) echo "&category=" . $category ."'";
-                if (1 == $current_page) echo " class='current'";
-                echo ">1</a>";
+                
+                echo "'>";
+                echo "<img src='/images/website/arrow-left.svg' loading='lazy'>";
+                echo "</a>";
+            }
+            ?>
+            <div class="pages">
+            <?php
+            echo "<a href='index.php?page=1";
+            if ($category) {
+                echo "&category=" . urlencode($category);
+            }
+            echo "'";
+            if (1 == $current_page) {
+                echo " class='current'";
+            }
+            echo ">1</a>";
 
-                if ($current_page <= 4) {
-                    $start_page = 2;
-                    $end_page = min(5, $total_pages - 1);
-                } elseif ($current_page >= $total_pages - 3) {
-                    $start_page = max($total_pages - 4, 2);
-                    $end_page = $total_pages - 1;
-                } else {
-                    $start_page = $current_page - 2;
-                    $end_page = $current_page + 2;
+            if ($current_page <= 4) {
+                $start_page = 2;
+                $end_page = min(5, $total_pages - 1);
+            } elseif ($current_page >= $total_pages - 3) {
+                $start_page = max($total_pages - 4, 2);
+                $end_page = $total_pages - 1;
+            } else {
+                $start_page = $current_page - 2;
+                $end_page = $current_page + 2;
+            }
+
+            if ($start_page > 2) {
+                echo "<span>...</span>";
+            }
+
+            for ($i = $start_page; $i <= $end_page; $i++) {
+                echo "<a href='index.php?page={$i}";
+                if ($category) {
+                    echo "&category=" . urlencode($category);
                 }
-
-                if ($start_page > 2) {
-                    echo "<span>...</span>";
+                echo "'";
+                if ($i == $current_page) {
+                    echo " class='current'";
                 }
+                echo ">{$i}</a>";
+            }
 
-                for ($i = $start_page; $i <= $end_page; $i++) {
-                    echo "<a href='index.php?page={$i}";
-                    if ($category) echo "&category=" . $category ."'";
-                    if ($i == $current_page) echo " class='current'";
-                    echo ">{$i}</a>";
+            if ($end_page < $total_pages - 1) {
+                echo "<span>...</span>";
+            }
+
+            if ($total_pages > 1) {
+                echo "<a href='index.php?page={$total_pages}";
+                if ($category) {
+                    echo "&category=" . urlencode($category);
                 }
-
-                if ($end_page < $total_pages - 1) {
-                    echo "<span>...</span>";
+                echo "'";
+                if ($total_pages == $current_page) {
+                    echo " class='current'";
                 }
-
-                if ($total_pages > 1) {
-                    echo "<a href='index.php?page={$total_pages}";
-                    if ($category) echo "&category=" . $category ."'";
-                    if ($total_pages == $current_page) echo " class='current'";
-                    echo ">{$total_pages}</a>";
+                echo ">{$total_pages}</a>";
+            }
+            ?>
+            </div>
+            <?php
+            if ($current_page != $total_pages) {
+                echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page + 1);
+                
+                if ($category) {
+                    echo "&category=" . urlencode($category);
                 }
-                ?>
-                </div>
-                <?php
-                if ($current_page != $total_pages) {
-                    echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page + 1);
-
-                    if ($category) {
-                        echo "&category=" . $category ."'>";
-                    } else {
-                        echo "'>";
-                    }
-
-                    echo "<img src='/images/website/arrow-right.svg' loading='lazy'>";
-                    echo "</a>";
-                }
-                ?>
+                
+                echo "'>";
+                echo "<img src='/images/website/arrow-right.svg' loading='lazy'>";
+                echo "</a>";
+            }
+            ?>
             </div>
         </div>
     </main>
