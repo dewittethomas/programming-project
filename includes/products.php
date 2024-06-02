@@ -9,6 +9,18 @@
         return $result;
     }
 
+    function getPages() {
+        require "connect.php";
+
+        $sql = "SELECT name, brand FROM PRODUCTS GROUP BY name, brand";
+        $result = mysqli_query($conn, $sql);
+
+        $rows = mysqli_num_rows($result);
+
+        mysqli_close($conn);
+        return ceil($rows / 10);
+    }
+
     function getProductDetails($product, $brand=null) {
         require "connect.php";
 
@@ -16,7 +28,6 @@
             $sql = "SELECT DISTINCT name, brand, object, category, subcategory, description, image FROM PRODUCTS WHERE name = '$product' AND brand = '$brand'";
         } else {
             $sql = "SELECT DISTINCT name, brand, object, category, subcategory, description, image FROM PRODUCTS WHERE name = '$product'";
-
         }
 
         $result = mysqli_query($conn, $sql);

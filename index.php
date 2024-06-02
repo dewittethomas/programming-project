@@ -3,6 +3,16 @@
     require 'includes/products.php';
     require 'includes/categories.php';
     require 'includes/pages.php';
+
+    $total_pages = getPages();
+
+    if ($total_pages < $current_page) {
+        header("Location: index.php?page={$total_pages}");
+        exit;
+    } elseif ($current_page <= 0) {
+        header("Location: index.php");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -174,8 +184,6 @@
                 $products = getProducts($start, 10);
                 
                 while($row = mysqli_fetch_assoc($products)) {
-                    $product;
-
                     if ($row["brand"]) {
                         $product = getProductDetails($row["name"], $row["brand"]);
                     } else {
@@ -228,13 +236,25 @@
 
         <div class="container">
             <div class="pages-container">
+                <?php
+                if ($current_page != 1) {
+                    echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page - 1) . "'>";
+                        echo "<img src='/images/website/arrow-left.svg' loading='lazy'>";
+                    echo "</a>";
+                }
+                ?>
                 <div class="pages">
-                    <a href="index.php?page=1">1</a>
-                    <a href="index.php?page=2">2</a>
-                    <a href="index.php?page=3">3</a>
-                    <a href="index.php?page=4">4</a>
-                    <a href="index.php?page=5">5</a>
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <a <?php if ($i == $current_page) echo "class='current'"; ?> href="index.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    <?php endfor; ?>
                 </div>
+                <?php
+                if ($current_page != $total_pages) {
+                    echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page + 1) . "'>";
+                        echo "<img src='/images/website/arrow-right.svg' loading='lazy'>";
+                    echo "</a>";
+                }
+                ?>
             </div>
         </div>
     </main>

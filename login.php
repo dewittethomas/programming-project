@@ -26,6 +26,7 @@
         <div class="container center">
             <div class="login-container">
                 <h2>Inloggen</h2>
+                
                 <form method="post">
                     <div class="input-container">
                         <label for="username">Gebruikersnaam</label>
@@ -35,10 +36,7 @@
                         <button class="submit-button login" type="submit">Inloggen</button>
                     </div>
                 </form>
-
-
             </div>
-
         </div>
     </main>
 </body>
