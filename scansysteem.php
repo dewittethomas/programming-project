@@ -28,7 +28,7 @@
     <div class="header-bottom">
         <div class="container">
             <ul class="category-container">
-                <li><a href="scanning.php">Scanning</a></li>
+                <li><a href="scansysteem.php">Scanning</a></li>
                 <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
                 <li><a href ="blacklist.php">Blacklist</a></li>
                 <li><a href ="admin-producten.php">Producten</a></li>
@@ -42,7 +42,7 @@
   <div class="scansysteem">
 
   <!-- Formulier om artikelnummer voor uitlenen in te voeren -->
-  <form class="uitlenenForm" action="/includes/verwerking.php" method="post">
+  <form class="uitlenenForm" action="/includes/scanysteem.php" method="post">
     <label for="artikelnummerUitlenen">Artikelnummer Uitlenen:</label><br>
     <input type="text" id="artikelnummerUitlenen" name="artikelnummerUitlenen" required><br><br>
     <input type="submit" value="Uitlenen">
@@ -51,7 +51,7 @@
   
 
   <!-- Formulier om artikelnummer voor terugnemen in te voeren -->
-  <form class="terugnemenForm" action="/includes/verwerking.php" method="post">
+  <form class="terugnemenForm" action="/includes/scanysteem.php" method="post">
     <label for="artikelnummerTerugnemen">Artikelnummer Terugnemen:</label><br>
     <input type="text" id="artikelnummerTerugnemen" name="artikelnummerTerugnemen" required><br><br>
     <input type="submit" value="Terugnemen">
