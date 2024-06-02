@@ -316,8 +316,16 @@ input {
     font-size: 1.1rem;
 }
 
+.pages a:hover {
+    text-decoration: underline;
+}
+
 .current {
     color: var(--black) !important;
+}
+
+.current:hover {
+    text-decoration: none !important;
 }
 
 /* Footer */

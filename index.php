@@ -244,9 +244,44 @@
                 }
                 ?>
                 <div class="pages">
-                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                        <a <?php if ($i == $current_page) echo "class='current'"; ?> href="index.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                    <?php endfor; ?>
+                <?php
+                echo "<a href='index.php?page=1'";
+                if (1 == $current_page) echo " class='current'";
+                echo ">1</a>";
+
+                if ($current_page <= 4) {
+                    $start_page = 2;
+                    $end_page = min(5, $total_pages - 1);
+                } elseif ($current_page >= $total_pages - 3) {
+                    $start_page = max($total_pages - 4, 2);
+                    $end_page = $total_pages - 1;
+                } else {
+                    $start_page = $current_page - 2;
+                    $end_page = $current_page + 2;
+                }
+
+                if ($start_page > 2) {
+                    echo "<span>...</span>";
+                }
+
+                for ($i = $start_page; $i <= $end_page; $i++) {
+                    echo "<a";
+                    if ($i == $current_page) {
+                        echo " class='current'";
+                    }
+                    echo " href='index.php?page=$i'>$i</a>";
+                }
+
+                if ($end_page < $total_pages - 1) {
+                    echo "<span>...</span>";
+                }
+
+                if ($total_pages > 1) {
+                    echo "<a href='index.php?page=$total_pages'";
+                    if ($total_pages == $current_page) echo " class='current'";
+                    echo ">$total_pages</a>";
+                }
+                ?>
                 </div>
                 <?php
                 if ($current_page != $total_pages) {
