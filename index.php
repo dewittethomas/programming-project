@@ -3,14 +3,15 @@
     require 'includes/products.php';
     require 'includes/categories.php';
     require 'includes/pages.php';
+    require 'includes/search.php';
 
     $total_pages = getPages($category, $subcategory);
 
     if ($total_pages < $current_page) {
-        header("Location: index.php?page={$total_pages}");
+        header("Location: /?page={$total_pages}");
         exit;
     } elseif ($current_page <= 0) {
-        header("Location: index.php");
+        header("Location: /");
         exit;
     }
 ?>
@@ -33,8 +34,8 @@
                 <a class="logo" href="/" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-                <form class="search-container" action="/">
-                    <input class="search-glass focus" type="text" placeholder="Search...">
+                <form method="post" class="search-container">
+                    <input class="search-glass focus" name="search" type="text" placeholder="Search...">
                 </form>
                 <nav>
                     <a class="nav-icon" href="winkelmandje.php">
@@ -48,13 +49,13 @@
         </div>
         <div class="header-bottom">
             <div class="container">
-                <form class="search-container" action="/">
+                <form method="post" class="search-container">
                     <input class="search-glass focus" type="text" placeholder="Search...">
                 </form>
 
                 <ul class="category-container">
                     <div class="dropdown-container">
-                        <li class="dropdown-item <?php echo ($category == 1) ? 'current-category' : ''; ?>"><a href="/index.php?category=1">Video</a></li>
+                        <li class="dropdown-item <?php echo ($category == 1) ? 'current-category' : ''; ?>"><a href="/?category=1">Video</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -64,7 +65,7 @@
                                     
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 1) {
-                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
                                             if ($row["subcategory_id"] == $subcategory)  {
                                                 echo " class='current-subcategory'";
                                             }
@@ -78,7 +79,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item <?php echo ($category == 2) ? 'current-category' : ''; ?>"><a href="/index.php?category=2">Audio</a></li>
+                        <li class="dropdown-item <?php echo ($category == 2) ? 'current-category' : ''; ?>"><a href="/?category=2">Audio</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -88,7 +89,7 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 2) {
-                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
                                             if ($row["subcategory_id"] == $subcategory)  {
                                                 echo " class='current-subcategory'";
                                             }
@@ -102,7 +103,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item <?php echo ($category == 3) ? 'current-category' : ''; ?>"><a href="/index.php?category=3">Belichting</a></li>
+                        <li class="dropdown-item <?php echo ($category == 3) ? 'current-category' : ''; ?>"><a href="/?category=3">Belichting</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -112,7 +113,7 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 3) {
-                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
                                             if ($row["subcategory_id"] == $subcategory)  {
                                                 echo " class='current-subcategory'";
                                             }
@@ -126,7 +127,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item <?php echo ($category == 4) ? 'current-category' : ''; ?>"><a href="/index.php?category=4">Tools</a></li>
+                        <li class="dropdown-item <?php echo ($category == 4) ? 'current-category' : ''; ?>"><a href="/?category=4">Tools</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -136,7 +137,7 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 4) {
-                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
                                             if ($row["subcategory_id"] == $subcategory)  {
                                                 echo " class='current-subcategory'";
                                             }
@@ -150,7 +151,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item <?php echo ($category == 5) ? 'current-category' : ''; ?>"><a href="/index.php?category=5">Varia</a></li>
+                        <li class="dropdown-item <?php echo ($category == 5) ? 'current-category' : ''; ?>"><a href="/?category=5">Varia</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -160,7 +161,7 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 5) {
-                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
                                             if ($row["subcategory_id"] == $subcategory)  {
                                                 echo " class='current-subcategory'";
                                             }
@@ -174,7 +175,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item <?php echo ($category == 6) ? 'current-category' : ''; ?>"><a href="/index.php?category=6">XR</a></li>
+                        <li class="dropdown-item <?php echo ($category == 6) ? 'current-category' : ''; ?>"><a href="/?category=6">XR</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -184,7 +185,7 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 6) {
-                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
                                             if ($row["subcategory_id"] == $subcategory)  {
                                                 echo " class='current-subcategory'";
                                             }
@@ -267,7 +268,7 @@
             <div class="pages-container">
             <?php
             if ($current_page != 1) {
-                echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page - 1);
+                echo "<a class='arrow-icon' href='/?page=" . ($current_page - 1);
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
@@ -282,7 +283,7 @@
 
             <div class="pages">
             <?php
-            echo "<a href='index.php?page=1";
+            echo "<a href='/?page=1";
             if ($category) {
                 echo "&category=" . urlencode($category);
             }
@@ -311,7 +312,7 @@
             }
 
             for ($i = $start_page; $i <= $end_page; $i++) {
-                echo "<a href='index.php?page={$i}";
+                echo "<a href='/?page={$i}";
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
@@ -330,7 +331,7 @@
             }
 
             if ($total_pages > 1) {
-                echo "<a href='index.php?page={$total_pages}";
+                echo "<a href='/?page={$total_pages}";
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
@@ -348,7 +349,7 @@
 
             <?php
             if ($current_page != $total_pages) {
-                echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page + 1);
+                echo "<a class='arrow-icon' href='/?page=" . ($current_page + 1);
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }

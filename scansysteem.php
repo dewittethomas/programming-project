@@ -50,7 +50,7 @@
   <div class="scansysteem">
 
   <!-- Formulier om artikelnummer voor uitlenen in te voeren -->
-  <form class="uitlenenForm" action="/includes/scanysteem.php" method="post">
+  <form class="uitlenenForm" action="/includes/scanning-system.php" method="post">
     <label for="artikelnummerUitlenen">Artikelnummer Uitlenen:</label><br>
     <input type="text" id="artikelnummerUitlenen" name="artikelnummerUitlenen" required><br><br>
     <input type="submit" value="Uitlenen">
@@ -59,7 +59,7 @@
   
 
   <!-- Formulier om artikelnummer voor terugnemen in te voeren -->
-  <form class="terugnemenForm" action="/includes/scanysteem.php" method="post">
+  <form class="terugnemenForm" action="/includes/scanning-system.php" method="post">
     <label for="artikelnummerTerugnemen">Artikelnummer Terugnemen:</label><br>
     <input type="text" id="artikelnummerTerugnemen" name="artikelnummerTerugnemen" required><br><br>
     <input type="submit" value="Terugnemen">

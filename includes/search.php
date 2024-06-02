@@ -1,33 +1,16 @@
 <?php
-// Include the database connection file
-include 'includes/connect.php';
+    require 'connect.php';
 
-// Check if the form is submitted
-if(isset($_GET['query'])) {
-    // Get the search term from the form
-    $searchTerm = $_GET['query'];
-    
-    // SQL query to search for data
-    $sql = "SELECT * FROM PRODUCTEN WHERE naam LIKE '%$searchTerm%'";
-    
-    // Execute the query
-    $result = $conn->query($sql);
-    
-    // Check if any results were found
-    if ($result->num_rows > 0) {
-        // Start session
-        session_start();
-
-        // Store search results in session variable
-        $_SESSION['search_results'] = $result->fetch_all(MYSQLI_ASSOC);
-
-        // Redirect to index.php
-        header("Location: gezochte_producten.php?query=$searchTerm");
-        exit();
-    } else {
-        // No results found, redirect with a flag
-        header("Location: gezochte_producten.php?query=$searchTerm&no_results=true");
-        exit();
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $search = '%' . $_POST["search"] . '%';
+        
+        $stmt = $conn -> prepare("SELECT * FROM PRODUCTS WHERE name LIKE ? OR object LIKE ? OR description LIKE ? OR brand LIKE ?");
+        $stmt->bind_param("ssss", $search, $search, $search, $search);
+        $stmt -> execute();
+        $result = $stmt -> get_result();
+        
+        while ($row = $result -> fetch_assoc()) {
+            echo $row["name"] . "<br>";
+        }
     }
-}
 ?>
