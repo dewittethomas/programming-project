@@ -70,8 +70,8 @@
             <label for="description">Beschrijving:</label>
             <textarea id="description" name="description" required></textarea><br><br>
         
-            <label for="foto">Foto:</label>
-            <input type="file" id="foto" name="foto"><br><br>
+            <label for="image">Foto:</label>
+            <input type="file" id="image" name="image"><br><br>
         
             <input type="submit"  value="Artikel Toevoegen">
         </form>

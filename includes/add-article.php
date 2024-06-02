@@ -17,26 +17,23 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Verkrijg de formuliervelden
   $name = $_POST['name'];
   $brand = $_POST['brand'];
   $category = $_POST['category'];
   $subcategory = $_POST['subcategory'];
   $object = $_POST['object'];
-  $description = $_POST['description'];
-
-  
+  $description = $_POST['description']; 
 
   // Verwerk de foto-upload
   $image = '';
-  if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
+  if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
       $target_dir = "../images/products/";
-      $target_file = $target_dir . basename($_FILES["foto"]["name"]);
+      $target_file = $target_dir . basename($_FILES["image"]["name"]);
       $uploadOk = 1;
       $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
       // Controleer of het bestand een echte afbeelding is of een neppe afbeelding
-      $check = getimagesize($_FILES["foto"]["tmp_name"]);
+      $check = getimagesize($_FILES["image"]["tmp_name"]);
       if ($check !== false) {
           $uploadOk = 1;
       } else {
@@ -45,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
 
       // Controleer de bestandsgrootte
-      if ($_FILES["foto"]["size"] > 500000) { // 500KB limiet
+      if ($_FILES["image"]["size"] > 5000000) { //limiet
           echo "Sorry, je bestand is te groot.";
           $uploadOk = 0;
       }
@@ -60,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if ($uploadOk == 0) {
           echo "Sorry, je bestand is niet geüpload.";
       } else {
-          if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
+          if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
               $image = $target_file;
           } else {
               echo "Sorry, er was een probleem met het uploaden van je bestand.";
