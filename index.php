@@ -4,7 +4,7 @@
     require 'includes/categories.php';
     require 'includes/pages.php';
 
-    $total_pages = getPages($category);
+    $total_pages = getPages($category, $subcategory);
 
     if ($total_pages < $current_page) {
         header("Location: index.php?page={$total_pages}");
@@ -54,7 +54,7 @@
 
                 <ul class="category-container">
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/index.php?category=1">Video</a></li>
+                        <li class="dropdown-item <?php echo ($category == 1) ? 'current-category' : ''; ?>"><a href="/index.php?category=1">Video</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -64,7 +64,11 @@
                                     
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 1) {
-                                            echo "<a href='/index.php?category={$row["category"]}'>{$row["subcategory"]}</a>";
+                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
                                         }
                                     }
                                     ?>
@@ -74,7 +78,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/index.php?category=2">Audio</a></li>
+                        <li class="dropdown-item <?php echo ($category == 2) ? 'current-category' : ''; ?>"><a href="/index.php?category=2">Audio</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -84,7 +88,11 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 2) {
-                                            echo "<a href='/index.php?category={$row["category"]}'>{$row["subcategory"]}</a>";
+                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
                                         }
                                     }
                                     ?>
@@ -94,7 +102,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item category-selected"><a href="/index.php?category=3">Belichting</a></li>
+                        <li class="dropdown-item <?php echo ($category == 3) ? 'current-category' : ''; ?>"><a href="/index.php?category=3">Belichting</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -104,7 +112,11 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 3) {
-                                            echo "<a href='/index.php?category={$row["category"]}'>{$row["subcategory"]}</a>";
+                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
                                         }
                                     }
                                     ?>
@@ -114,7 +126,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/index.php?category=4">Tools</a></li>
+                        <li class="dropdown-item <?php echo ($category == 4) ? 'current-category' : ''; ?>"><a href="/index.php?category=4">Tools</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -124,7 +136,11 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 4) {
-                                            echo "<a href='/index.php?category={$row["category"]}'>{$row["subcategory"]}</a>";
+                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
                                         }
                                     }
                                     ?>
@@ -134,7 +150,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/index.php?category=5">Varia</a></li>
+                        <li class="dropdown-item <?php echo ($category == 5) ? 'current-category' : ''; ?>"><a href="/index.php?category=5">Varia</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -144,7 +160,11 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 5) {
-                                            echo "<a href='/index.php?category={$row["category"]}'>{$row["subcategory"]}</a>";
+                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
                                         }
                                     }
                                     ?>
@@ -154,7 +174,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/index.php?category=6">XR</a></li>
+                        <li class="dropdown-item <?php echo ($category == 6) ? 'current-category' : ''; ?>"><a href="/index.php?category=6">XR</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -164,7 +184,11 @@
 
                                     while($row = mysqli_fetch_assoc($categories)) {
                                         if ($row["category"] == 6) {
-                                            echo "<a href='/index.php?category={$row["category"]}'>{$row["subcategory"]}</a>";
+                                            echo "<a href='/index.php?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
                                         }
                                     }
                                     ?>
@@ -181,7 +205,7 @@
         <div class="container">
             <div class="product-container">
                 <?php
-                $products = getProducts($start, 10, $category);
+                $products = getProducts($start, 10, $category, $subcategory);
                 
                 while($row = mysqli_fetch_assoc($products)) {
                     if ($row["brand"]) {
@@ -244,11 +268,12 @@
             <?php
             if ($current_page != 1) {
                 echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page - 1);
-                
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
-                
+                if ($subcategory) {
+                    echo "&subcategory=" . urlencode($subcategory);
+                }
                 echo "'>";
                 echo "<img src='/images/website/arrow-left.svg' loading='lazy'>";
                 echo "</a>";
@@ -261,9 +286,12 @@
             if ($category) {
                 echo "&category=" . urlencode($category);
             }
+            if ($subcategory) {
+                echo "&subcategory=" . urlencode($subcategory);
+            }
             echo "'";
             if (1 == $current_page) {
-                echo " class='current'";
+                echo " class='current-page'";
             }
             echo ">1</a>";
 
@@ -287,9 +315,12 @@
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
+                if ($subcategory) {
+                    echo "&subcategory=" . urlencode($subcategory);
+                }
                 echo "'";
                 if ($i == $current_page) {
-                    echo " class='current'";
+                    echo " class='current-page'";
                 }
                 echo ">{$i}</a>";
             }
@@ -303,9 +334,12 @@
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
+                if ($subcategory) {
+                    echo "&subcategory=" . urlencode($subcategory);
+                }
                 echo "'";
                 if ($total_pages == $current_page) {
-                    echo " class='current'";
+                    echo " class='current-page'";
                 }
                 echo ">{$total_pages}</a>";
             }
@@ -315,11 +349,12 @@
             <?php
             if ($current_page != $total_pages) {
                 echo "<a class='arrow-icon' href='/index.php?page=" . ($current_page + 1);
-                
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
-                
+                if ($subcategory) {
+                    echo "&subcategory=" . urlencode($subcategory);
+                }
                 echo "'>";
                 echo "<img src='/images/website/arrow-right.svg' loading='lazy'>";
                 echo "</a>";

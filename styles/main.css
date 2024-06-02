@@ -49,9 +49,7 @@ main {
     border: 1px solid var(--blue);
 }
 
-.category-selected:before {
-    transform: scaleX(1) !important; 
-}
+
 
 .submit-button {
     color: var(--white);
@@ -165,6 +163,10 @@ input {
     transform: scaleX(1); 
 }
 
+.current-category:before {
+    transform: scaleX(1) !important; 
+}
+
 .dropdown-content {
     background-color: var(--light-grey);
     border: 1px solid var(--grey);
@@ -199,6 +201,11 @@ input {
 
 .dropdown-container:hover .dropdown-item::before {
     transform: scaleX(1); 
+}
+
+.current-subcategory {
+    color: var(--red);
+    font-weight: 700;
 }
 
 /* Login */
@@ -335,11 +342,11 @@ input {
     text-decoration: underline;
 }
 
-.current {
+.current-page {
     color: var(--black) !important;
 }
 
-.current:hover {
+.current-page:hover {
     text-decoration: none !important;
 }
 
@@ -940,6 +947,7 @@ table td {
 .delete-icon:hover {
     color: var(--dark-red);
 }
+
 .warning-icon-cell {
     text-align: center;
     vertical-align: middle;
