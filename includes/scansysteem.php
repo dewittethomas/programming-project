@@ -25,7 +25,8 @@ if(isset($_POST['artikelnummerUitlenen'])) {
     $sql = "UPDATE PRODUCTS SET status = 0 WHERE id = '$artikelnummer'";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Artikel met nummer " . $artikelnummer . " is uitgeleend.";
+        header("Location: ../scansysteem.php");
+        exit;
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -39,7 +40,8 @@ if(isset($_POST['artikelnummerTerugnemen'])) {
     $sql = "UPDATE PRODUCTS SET status = 1 WHERE id = '$artikelnummer'";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Artikel met nummer " . $artikelnummer . " is teruggebracht.";
+        header("Location: ../scansysteem.php");
+        exit;
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

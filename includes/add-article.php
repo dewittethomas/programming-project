@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $image = '';
   if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
       $target_dir = "../images/products/";
-      $target_file = $target_dir . basename($_FILES["image"]["name"]);
+      $target_file = $target_dir.basename($_FILES["image"]["name"]);
       $uploadOk = 1;
       $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo "Sorry, je bestand is niet geüpload.";
       } else {
           if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-              $image = $target_file;
+              $image = basename($_FILES["image"]["name"]);
           } else {
               echo "Sorry, er was een probleem met het uploaden van je bestand.";
               exit;

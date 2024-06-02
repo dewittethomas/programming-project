@@ -763,7 +763,9 @@ footer {
     margin: 10px 0;
     color: #6c757d;
 }
-
+.reservation-container h1 {
+    padding:1rem;
+}
 .product-description {
     color: #555;
 }
