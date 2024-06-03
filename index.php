@@ -4,7 +4,7 @@
     require 'includes/categories.php';
     require 'includes/pages.php';
     require 'includes/search.php';
-
+    
     $total_pages = getTotalPages($query);
 
     if ($total_pages < $current_page) {

@@ -1,6 +1,7 @@
 <?php 
     require "connect.php";
 
+    $query = null;
     $category = null;
     $subcategory = null;
 
