@@ -40,7 +40,7 @@
                 <ul class="category-container">
                     <li><a href="admin.php">Agenda</a></li>
                     <li><a href="scansysteem.php">Scansysteem</a></li>
-                    <li><a href="admin-producten.php">Producten</a></li>
+                    <li class="current-category"><a href="admin-producten.php">Producten</a></li>
                     <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
                     <li><a href="blacklist.php">Blacklist</a></li>
                     <li><a href="waarschuwen.php">Waarschuwen</a></li>

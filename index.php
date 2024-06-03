@@ -49,7 +49,7 @@
         </div>
         <div class="header-bottom">
             <div class="container">
-                <form method="post" class="search-container">
+                <form method="get" action="/" class="search-container">
                     <input class="search-glass focus" type="text" placeholder="Search...">
                 </form>
 

@@ -1,135 +1,233 @@
 <?php
-session_start();
+    require 'includes/session.php';
+    require 'includes/categories.php';
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-include 'includes/connect.php';
-
-if (!isset($_SESSION['selected_products'])) {
-    $_SESSION['selected_products'] = array();
-}
-
-$product_naam = $product_description = "";
-if (isset($_GET['id'])) {
-    $product_id = $_GET['id'];
-
-    $sql = "SELECT * FROM PRODUCTS WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $product_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $product_naam = $row['name'];
-        $product_description = $row['description'];
-    } else {
-        $product_naam = "Product not found";
-    }
-    $stmt->close();
-}
 ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <title>Uitleendienst MediaLab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-    <div class="header-top">
-        <div class="container">
-            <a class="logo" href="index.php" title="Home">
-                <img src="/images/website/logo.svg" alt="Home">
-            </a>
-            <form action="search.php" method="GET">
-                <input type="text" name="query" placeholder="Search...">
-            </form>
-            <nav><a href="winkelmand.php">
-                <img class="cart" src="images/website/shopping-cart.svg">
+    <header>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <a class="logo" href="/" title="Home">
+                    <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-            </nav>
+                <form method="get" action="/" class="search-container">
+                    <input class="search-glass focus" name="search" type="text" placeholder="Search...">
+                </form>
+                <nav>
+                    <a class="nav-icon" href="winkelmand.php">
+                        <img src="/images/website/shopping-cart.svg" loading="lazy">
+                    </a>
+                    <a class="nav-icon" href="">
+                        <img src="/images/website/profile-picture.svg" loading="lazy">
+                    </a>
+                </nav>
+            </div>
         </div>
-    </div>
-</header>
+        <div class="header-bottom">
+            <div class="container">
+                <form method="get" action="/" class="search-container">
+                    <input class="search-glass focus" type="text" placeholder="Search...">
+                </form>
 
-<main class="container">
-    <div class="item">
-    <p class="NaamProductFoto"><?php echo htmlspecialchars($product_naam); ?></p>
-        <img src="38088.avif" alt="">
-        
-    </div>
-    
-    <div>
-        <form action="artikel.php" method="post">
-            <p>beschikbaarheid:</p>
-            <input type="date" id="start_date" name="start_date" required>
-            
-            <input type="hidden" id="end_date" name="end_date">
-            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product_id); ?>">
-            <input type="hidden" name="product_naam" value="<?php echo htmlspecialchars($product_naam); ?>">
-            <br>
-            <button type="submit" name="reserveren">Reserveren</button>
-        </form>
-    </div>
-    <div>
-        <p class="Beschrijving"> <span class="capitalize"> Beschrijving van product </span> <br> <br> <?php echo nl2br(htmlspecialchars($product_description)); ?></p>
-    </div>
-    <?php 
-    if(isset($_GET['success']) && $_GET['success'] == 'true') {
-        echo '<p>Product succesvol toegevoegd aan winkelmandje!</p>';
-    }
-    ?>
-</main>
+                <ul class="category-container">
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="/?category=1">Video</a></li>
 
-<footer>
-    <p>&copy; Erasmushogeschool Brussel 2024</p>
-</footer>
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+                                    
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 1) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const reservedWeeks = <?php echo json_encode($reserved_weeks); ?>;
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="/?category=2">Audio</a></li>
 
-    function disableReservedWeeks(date) {
-        const selectedDate = new Date(date);
-        const selectedWeekStart = new Date(selectedDate);
-        selectedWeekStart.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
 
-        const selectedWeekEnd = new Date(selectedWeekStart);
-        selectedWeekEnd.setDate(selectedWeekStart.getDate() + 4); // Friday
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 2) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        return reservedWeeks.some(week => {
-            const weekStart = new Date(week.week_start);
-            const weekEnd = new Date(week.week_end);
-            return (selectedWeekStart <= weekEnd && selectedWeekEnd >= weekStart);
-        });
-    }
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="/?category=3">Belichting</a></li>
 
-    flatpickr("#start_date", {
-        minDate: "today",
-        dateFormat: "Y-m-d",
-        disable: [
-            function(date) {
-                return disableReservedWeeks(date);
-            }
-        ],
-        onChange: function(selectedDates, dateStr, instance) {
-            const startDate = new Date(dateStr);
-            const endDate = new Date(startDate);
-            endDate.setDate(startDate.getDate() + 4);
-            document.getElementById('end_date').value = endDate.toISOString().split('T')[0];
-        }
-    });
-});
-</script>
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 3) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="/?category=4">Tools</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 4) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="/?category=5">Varia</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 5) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item"><a href="/?category=6">XR</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 6) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <p>&copy; Erasmushogeschool Brussel 2024</p>
+                
+                <ul class="links">
+                    <li><a href="voorwaarden.php">Voorwaarden</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                </ul>
+
+                <div class="socials">
+                    <a class="footer-icon" href="https://www.facebook.com/erasmushogeschool" target="_blank">
+                        <img src="/images/website/facebook.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://www.linkedin.com/school/erasmushogeschool-brussel/" target="_blank">
+                        <img src="/images/website/linkedin.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://twitter.com/ehbrussel" target="_blank">
+                        <img src="/images/website/twitter.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://www.instagram.com/erasmushogeschool/" target="_blank">
+                        <img src="/images/website/instagram.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://www.youtube.com/user/ehbrussel" target="_blank">
+                        <img src="/images/website/youtube.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://www.flickr.com/photos/erasmushogeschool" target="_blank">
+                        <img src="/images/website/flickr.png" loading="lazy" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
