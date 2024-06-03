@@ -74,7 +74,7 @@
                                 $stmt_update->bind_param("i", $userId);
                                 $stmt_update->execute();
                             }
-                            header("Location: /gebruikers.php");
+                            header("Location: /waarschuwen.php");
                             exit;
                         } else {
                             echo "Fout bij het verhogen van de waarschuwing.";
