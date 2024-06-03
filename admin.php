@@ -119,7 +119,7 @@
 
                     echo '<div class="reservation-item ' . $expiredClass . '">';
                     // Productafbeelding weergeven indien beschikbaar
-                    $imagePath = 'images/' . $reservation["product_image"];
+                    $imagePath = 'images/products/' . $reservation["product_image"];
                     if (file_exists($imagePath)) {
                         echo '<img src="' . $imagePath . '" alt="" />';
                     } else {
