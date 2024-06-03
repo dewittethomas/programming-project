@@ -1,24 +1,19 @@
 <?php
 session_start();
 
-// Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Include the database connection file
 include 'includes/connect.php';
 
-// Initialize an empty array to store selected products if not already initialized
 if (!isset($_SESSION['selected_products'])) {
     $_SESSION['selected_products'] = array();
 }
 
-// Retrieve product information based on the product ID passed through the URL
 $product_naam = $product_description = "";
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
 
-    // Query to fetch product information based on ID
     $sql = "SELECT * FROM PRODUCTS WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $product_id);
@@ -46,7 +41,6 @@ if (isset($_GET['id'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
-    <!-- Include flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
@@ -59,7 +53,7 @@ if (isset($_GET['id'])) {
             <form action="search.php" method="GET">
                 <input type="text" name="query" placeholder="Search...">
             </form>
-            <nav><a href="winkelmandje.php">
+            <nav><a href="winkelmand.php">
                 <img class="cart" src="images/website/shopping-cart.svg">
                 </a>
             </nav>
@@ -75,16 +69,13 @@ if (isset($_GET['id'])) {
     </div>
     
     <div>
-        <!-- Calendar form -->
         <form action="artikel.php" method="post">
             <p>beschikbaarheid:</p>
             <input type="date" id="start_date" name="start_date" required>
             
-            <!-- Hidden end date field -->
             <input type="hidden" id="end_date" name="end_date">
             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product_id); ?>">
             <input type="hidden" name="product_naam" value="<?php echo htmlspecialchars($product_naam); ?>">
-            <!-- Reserveren button -->
             <br>
             <button type="submit" name="reserveren">Reserveren</button>
         </form>
@@ -93,7 +84,6 @@ if (isset($_GET['id'])) {
         <p class="Beschrijving"> <span class="capitalize"> Beschrijving van product </span> <br> <br> <?php echo nl2br(htmlspecialchars($product_description)); ?></p>
     </div>
     <?php 
-    // Display success message if redirected with success parameter
     if(isset($_GET['success']) && $_GET['success'] == 'true') {
         echo '<p>Product succesvol toegevoegd aan winkelmandje!</p>';
     }
@@ -104,7 +94,6 @@ if (isset($_GET['id'])) {
     <p>&copy; Erasmushogeschool Brussel 2024</p>
 </footer>
 
-<!-- Include flatpickr JS -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -38,7 +38,7 @@
                     <input class="search-glass focus" name="search" type="text" placeholder="Search...">
                 </form>
                 <nav>
-                    <a class="nav-icon" href="winkelmandje.php">
+                    <a class="nav-icon" href="winkelmand.php">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
                     </a>
                     <a class="nav-icon" href="">
@@ -248,7 +248,9 @@
                         echo "<p class='product-availability'>{$count} Beschikbaar</p>";
 
                         if ($count) {
-                            echo "<button class='submit-button product-reservation available'>Reserveren</button>";
+                            echo "<a href='artikel.php?product={$row["name"]}'";
+                                echo "<button class='submit-button product-reservation available'>Reserveren</button>";
+                            echo "</a>";
                         } else {
                             echo "<button class='submit-button product-reservation unavailable'>Reserveren</button>";
                         }
