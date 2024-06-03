@@ -1,5 +1,6 @@
 <?php
     require "connect.php";
+    require "roles.php";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $is_invalid = true;
@@ -20,9 +21,15 @@
 
                 session_start();
                 $_SESSION["user_id"] = $row["user_id"];
+                $_SESSION["user_role"] = getRole($row["user_id"]);
 
-                header("Location: index.php");
-                exit;
+                if ($_SESSION["user_role"] == "user") {
+                    header("Location: index.php");
+                    exit;
+                } elseif ($_SESSION["user_role"] == "admin") {
+                    header("Location: admin.php");
+                    exit;
+                }
             }
         }
 

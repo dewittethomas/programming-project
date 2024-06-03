@@ -5,7 +5,7 @@
     require 'includes/pages.php';
     require 'includes/search.php';
 
-    $total_pages = getPages($category, $subcategory);
+    $total_pages = getTotalPages($query);
 
     if ($total_pages < $current_page) {
         header("Location: /?page={$total_pages}");
@@ -34,7 +34,7 @@
                 <a class="logo" href="/" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-                <form method="post" class="search-container">
+                <form method="get" action="/" class="search-container">
                     <input class="search-glass focus" name="search" type="text" placeholder="Search...">
                 </form>
                 <nav>
@@ -206,7 +206,7 @@
         <div class="container">
             <div class="product-container">
                 <?php
-                $products = getProducts($start, 10, $category, $subcategory);
+                $products = getProducts($start, 10, $query);
                 
                 while($row = mysqli_fetch_assoc($products)) {
                     if ($row["brand"]) {
@@ -248,9 +248,7 @@
                         echo "<p class='product-availability'>{$count} Beschikbaar</p>";
 
                         if ($count) {
-                            echo "<a href='artikel.php?product={$row["name"]}'";
-                                echo "<button class='submit-button product-reservation available'>Reserveren</button>";
-                            echo "</a>";
+                            echo "<button class='submit-button product-reservation available'>Reserveren</button>";
                         } else {
                             echo "<button class='submit-button product-reservation unavailable'>Reserveren</button>";
                         }
@@ -271,6 +269,9 @@
             <?php
             if ($current_page != 1) {
                 echo "<a class='arrow-icon' href='/?page=" . ($current_page - 1);
+                if ($search) {
+                    echo "&search=" . urlencode($search);
+                }
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
@@ -286,6 +287,9 @@
             <div class="pages">
             <?php
             echo "<a href='/?page=1";
+            if ($search) {
+                echo "&search=" . urlencode($search);
+            }
             if ($category) {
                 echo "&category=" . urlencode($category);
             }
@@ -315,6 +319,9 @@
 
             for ($i = $start_page; $i <= $end_page; $i++) {
                 echo "<a href='/?page={$i}";
+                if ($search) {
+                    echo "&search=" . urlencode($search);
+                }
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
@@ -334,6 +341,9 @@
 
             if ($total_pages > 1) {
                 echo "<a href='/?page={$total_pages}";
+                if ($search) {
+                    echo "&search=" . urlencode($search);
+                }
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }
@@ -352,6 +362,9 @@
             <?php
             if ($current_page != $total_pages) {
                 echo "<a class='arrow-icon' href='/?page=" . ($current_page + 1);
+                if ($search) {
+                    echo "&search=" . urlencode($search);
+                }
                 if ($category) {
                     echo "&category=" . urlencode($category);
                 }

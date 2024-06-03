@@ -1,33 +1,29 @@
 <?php 
-    function getProducts($start, $count, $category=null, $subcategory=null) {
+    function getProducts($start, $count, $sql=null) {
         require "connect.php";
 
-        if (!$category && !$subcategory) {
-            $sql = "SELECT name, brand FROM PRODUCTS GROUP BY name, brand LIMIT $count OFFSET " . ($start - 1);
-        } elseif ($category && !$subcategory) {
-            $sql = "SELECT name, brand FROM PRODUCTS WHERE category = '$category' GROUP BY name, brand LIMIT $count OFFSET " . ($start - 1);
-        } elseif ($category && $subcategory) {
-            $sql = "SELECT name, brand FROM PRODUCTS WHERE category = '$category' AND subcategory = '$subcategory' GROUP BY name, brand LIMIT $count OFFSET " . ($start - 1);
+        if (!$sql) {
+            $query = "SELECT DISTINCT name, brand FROM PRODUCTS GROUP BY name, brand LIMIT $count OFFSET " . ($start - 1);
+        } else {
+            $query = "SELECT DISTINCT name, brand FROM ($sql) AS subquery GROUP by name, brand LIMIT $count OFFSET " . ($start - 1);
         }
 
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $query);
 
         mysqli_close($conn);
         return $result;
     }
 
-    function getPages($category=null, $subcategory=null) {
+    function getTotalPages($sql=null) {
         require "connect.php";
 
-        if (!$category && !$subcategory) {
-            $sql = "SELECT DISTINCT name, brand FROM PRODUCTS";
-        } elseif ($category && !$subcategory) {
-            $sql = "SELECT DISTINCT name, brand FROM PRODUCTS WHERE category = '$category'";
-        } elseif ($category && $subcategory) {
-            $sql = "SELECT DISTINCT name, brand FROM PRODUCTS WHERE category = '$category' AND subcategory = '$subcategory'";
+        if (!$sql) {
+            $query = "SELECT DISTINCT name, brand FROM PRODUCTS";
+        } else {
+            $query = "SELECT DISTINCT name, brand FROM ($sql) AS subquery";
         }
 
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $query);
         $rows = mysqli_num_rows($result);
 
         mysqli_close($conn);
