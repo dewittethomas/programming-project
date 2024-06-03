@@ -771,6 +771,7 @@ footer {
 }
 .reservation-container {
     padding: 20px;
+    width: 100%;
 }
 .reservation-group {
     margin-bottom: 30px;
@@ -966,4 +967,13 @@ table td {
 
 .warning-icon:hover {
     color: var(--dark-yellow);
+}
+.no-reservations {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    border-radius: 5px;
 }

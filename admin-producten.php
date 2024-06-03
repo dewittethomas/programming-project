@@ -54,23 +54,23 @@
         include 'includes/connect.php';
 
         // Check if delete request is made
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
-            $delete_id = intval($_POST['delete_id']);
-            $delete_sql = "DELETE FROM PRODUCTS WHERE id = ?";
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_name'])) {
+            $delete_name = $_POST['delete_name'];
+            $delete_sql = "DELETE FROM PRODUCTS WHERE name = ?";
             $stmt = $conn->prepare($delete_sql);
-            $stmt->bind_param("i", $delete_id);
+            $stmt->bind_param("s", $delete_name);
             if ($stmt->execute()) {
-                echo "Product succesvol verwijderd.";
+                echo "Producten succesvol verwijderd.";
                 header("refresh:5;url=admin-producten.php");
             } else {
-                echo "Fout bij het verwijderen van het product.";
+                echo "Fout bij het verwijderen van de producten.";
             }
         }
 
         // Query om producten op te halen
-        $sql = "SELECT id,name, brand, image, description, COUNT(*) as quantity
-        FROM PRODUCTS
-        GROUP BY id,name, brand,image, description";
+        $sql = "SELECT name, brand, image, description, COUNT(name) as quantity
+                FROM PRODUCTS
+                GROUP BY name, brand, image, description";
         $result = $conn->query($sql);
 
         // Array om bij te houden welke namen al zijn weergegeven
@@ -86,8 +86,7 @@
                     $imagePath = 'images/products/' . $row["image"]; // Pad naar de afbeelding
                     if (file_exists($imagePath)) {
                         echo '<img src="' . $imagePath . '" alt="" class="artikel-foto"/>';
-                    } 
-                    else {
+                    } else {
                         echo '<img src="images/no-image-available.png" alt="" class="artikel-foto"/>';
                     }
                     echo '<div class="product-details">';
@@ -96,7 +95,7 @@
                     echo "<h2>" . $row["name"] . "</h2>";
                     // Delete button with form
                     echo '<form method="POST" action="" onsubmit="return confirm(\'Weet je zeker dat je dit product wilt verwijderen?\');">';
-                    echo '<input type="hidden" name="delete_id" value="' . $row["id"] . '">';
+                    echo '<input type="hidden" name="delete_name" value="' . $row["name"] . '">';
                     echo '<button type="submit" class="delete-button">🗑️</button>';
                     echo '</form>';
                     echo '</div>';
@@ -119,10 +118,7 @@
 
         $conn->close();
         ?>
-
-
     </div>
-    
 
     <footer>
         <div class="container">
