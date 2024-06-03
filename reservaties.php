@@ -24,7 +24,7 @@
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
                 <nav>
-                    <a class="nav-icon" href="winkelmandje.php">
+                    <a class="nav-icon" href="winkelmand.php">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
                     </a>
                     <a class="nav-icon" href="">
