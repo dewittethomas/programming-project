@@ -57,12 +57,12 @@
                     // Verhoog waarschuwing met 1 en update blacklist indien nodig
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["increase_warning_user_id"])) {
                         $userId = $_POST["increase_warning_user_id"];
-                        $sql = "UPDATE USERS SET warning = warning + 1 WHERE user_id = ?";
+                        $sql = "UPDATE USERS SET warning = warning + 1 WHERE user_id = ? AND WHERE role = 'student'";
                         $stmt = $conn->prepare($sql);
                         $stmt->bind_param("i", $userId);
                         if ($stmt->execute()) {
                             // Controleer of waarschuwingen 2 of hoger zijn en update blacklist
-                            $sql_check_warning = "SELECT warning FROM USERS WHERE user_id = ?";
+                            $sql_check_warning = "SELECT warning FROM USERS WHERE user_id = ? AND WHERE role = 'student'";
                             $stmt_check = $conn->prepare($sql_check_warning);
                             $stmt_check->bind_param("i", $userId);
                             $stmt_check->execute();
@@ -82,7 +82,8 @@
                     }
 
                     // Selecteer alle gebruikers, alfabetisch gesorteerd
-                    $sql = "SELECT user_id, first_name, last_name, email, username, warning FROM USERS ORDER BY last_name ASC, first_name ASC";
+                    $sql = "SELECT user_id, first_name, last_name, email, username, warning FROM USERS WHERE role = 'student' ORDER BY last_name ASC, first_name ASC";
+
                     $result = $conn->query($sql);
                 ?>
 

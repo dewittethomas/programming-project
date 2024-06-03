@@ -168,13 +168,14 @@
 
                         try {
                             // Verhoog de waarschuwing
-                            $update_warning_sql = "UPDATE USERS SET warning = warning + 1 WHERE user_id = ?";
+
+                            $update_warning_sql = "UPDATE USERS SET warning = warning + 1 WHERE user_id = ? AND WHERE role = 'student'";
                             $stmt_warning = $conn->prepare($update_warning_sql);
                             $stmt_warning->bind_param("i", $user_id);
                             $stmt_warning->execute();
 
                             // Haal het bijgewerkte aantal waarschuwingen op
-                            $select_warning_sql = "SELECT warning FROM USERS WHERE user_id = ?";
+                            $select_warning_sql = "SELECT warning FROM USERS WHERE user_id = ? AND WHERE role = 'student'";
                             $stmt_select_warning = $conn->prepare($select_warning_sql);
                             $stmt_select_warning->bind_param("i", $user_id);
                             $stmt_select_warning->execute();
@@ -190,7 +191,7 @@
 
                             // Zet de gebruiker op de zwarte lijst als ze 2 waarschuwingen hebben bereikt
                             if ($warning_count >= 2) {
-                                $update_blacklist_sql = "UPDATE USERS SET blacklist = 1 WHERE user_id = ?";
+                                $update_blacklist_sql = "UPDATE USERS SET blacklist = 1 WHERE user_id = ? AND WHERE role = 'student'";
                                 $stmt_blacklist = $conn->prepare($update_blacklist_sql);
                                 $stmt_blacklist->bind_param("i", $user_id);
                                 $stmt_blacklist->execute();
