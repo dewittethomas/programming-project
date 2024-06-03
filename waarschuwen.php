@@ -10,7 +10,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Uitleendienst MediaLab</title>
+    <title>Beheerder MediaLab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
