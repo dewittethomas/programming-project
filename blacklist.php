@@ -94,7 +94,7 @@
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='5'>Geen blacklisted gebruikers gevonden.</td></tr>";
+                        echo "<tr><td colspan='5' class='geen-blacklist'>Geen blacklisted gebruikers gevonden.</td></tr>";
                     }
                     ?>
 </table>
