@@ -6,7 +6,7 @@
     require 'includes/search.php';
     
     $total_pages = getTotalPages($query);
-
+    
     if ($total_pages < $current_page) {
         header("Location: /?page={$total_pages}");
         exit;

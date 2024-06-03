@@ -1,8 +1,7 @@
 <?php
     require 'includes/session.php';
     require 'includes/categories.php';
-
-
+    require 'includes/article.php'
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -193,7 +192,9 @@
     </header>
 
     <main>
-
+        <div class="container">
+            
+        </div>
     </main>
 
     <footer>

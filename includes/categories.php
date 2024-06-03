@@ -1,7 +1,7 @@
 <?php 
     require "connect.php";
 
-    $query = null;
+    $query = "SELECT name, brand FROM PRODUCTS";
     $category = null;
     $subcategory = null;
 
