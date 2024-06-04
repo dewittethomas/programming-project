@@ -17,8 +17,8 @@
                 <a class="logo" href="/" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-                <form class="search-container" action="/">
-                    <input type="text" placeholder="Search...">
+                <form method="get" action="/" class="search-container">
+                    <input class="search-glass focus" name="search" type="text" placeholder="Search...">
                 </form>
                 <nav>
                     <a class="nav-icon" href="winkelmand.php">

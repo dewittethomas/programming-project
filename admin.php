@@ -207,7 +207,7 @@
                     }
 
                     // Productafbeelding weergeven indien beschikbaar
-                    $imagePath = '/images/products' . $inlevering["product_image"];
+                    $imagePath = 'images/products/' . $inlevering["product_image"];
                     if (file_exists($imagePath)) {
                         echo '<img src="' . $imagePath . '" alt="" />';
                     } else {

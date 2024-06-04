@@ -25,9 +25,6 @@
                 <a class="logo" href="admin.php" title="Home">
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
-                <form class="search-container" action="/">
-                    <input class="search-glass" type="text" placeholder="Search...">
-                </form>
                 <nav>
                     <a class="nav-icon" href="/includes/log-out.php">
                         <img src="/images/website/profile-picture.svg" loading="lazy">

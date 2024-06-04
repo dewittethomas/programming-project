@@ -49,6 +49,9 @@
     
             addToCart($product_id, $start_date, $end_date);
         }
+
+        header("Location: /");
+        exit;
     }
 
     function addToCart($product_id, $start_date, $end_date) {

@@ -23,7 +23,7 @@
                 $_SESSION["user_id"] = $row["user_id"];
                 $_SESSION["user_role"] = getRole($row["user_id"]);
 
-                if (($_SESSION["user_role"] == "user") || ($_SESSION["user_role"] == "professor")) {
+                if (($_SESSION["user_role"] == "student") || ($_SESSION["user_role"] == "professor")) {
                     header("Location: index.php");
                     exit;
                 } elseif ($_SESSION["user_role"] == "admin") {

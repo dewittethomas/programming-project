@@ -247,11 +247,7 @@
                         $count = isAvailable($row["name"]);
                         echo "<p class='product-availability'>{$count} Beschikbaar</p>";
 
-                        if ($count) {
-                            echo "<button class='submit-button product-reservation available'>Reserveren</button>";
-                        } else {
-                            echo "<button class='submit-button product-reservation unavailable'>Reserveren</button>";
-                        }
+
                         
                         echo "</div>";
                         echo "</div>";
