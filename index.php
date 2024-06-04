@@ -41,7 +41,7 @@
                     <a class="nav-icon" href="winkelmand.php">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
                     </a>
-                    <a class="nav-icon" href="">
+                    <a class="nav-icon" href="/includes/log-out.php">
                         <img src="/images/website/profile-picture.svg" loading="lazy">
                     </a>
                 </nav>
@@ -218,7 +218,7 @@
                     while($row = mysqli_fetch_assoc($product)) {
                         echo '<div class="product">';
 
-                        echo "<a class='product-image' href='artikel.php'>";
+                        echo "<a class='product-image' href='artikel.php?name=" . urlencode($row['name']) . "&brand=" . urlencode($row['brand']) . "'>";
                         if ($row["image"]) {
                             $image_path = "images/products/{$row["image"]}";
     
@@ -233,7 +233,7 @@
                         echo "</a>";
     
                         echo "<div class='product-information'>";
-                        echo "<a class='product-title' href='artikel.php'>{$row["name"]}</a>";
+                        echo "<a class='product-title' href='artikel.php?name=" . urlencode($row['name']) . "&brand=" . urlencode($row['brand']) . "'>{$row['name']}</a>";
 
                         if ($row["brand"]) {
                             echo "<a class='product-subtitle'>{$row["brand"]} | {$row["object"]}</a>";

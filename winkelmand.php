@@ -1,24 +1,12 @@
 <?php
-session_start();
-
-// Enable error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Include the database connection file
-include 'includes/connect.php';
-
-// Initialize an empty array to store selected products if not already initialized
-if (!isset($_SESSION['selected_products'])) {
-    $_SESSION['selected_products'] = array();
-}
+    require 'includes/session.php';
+    require 'includes/categories.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Winkelmandje</title>
+    <title>Uitleendienst MediaLab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" type="image/x-icon" href="images/website/favicon.ico">
@@ -28,50 +16,253 @@ if (!isset($_SESSION['selected_products'])) {
 </head>
 <body>
 <header>
-    <div class="header-top">
-        <div class="container">
-            <a class="logo" href="index.php" title="Home">
-                <img src="/images/website/logo.svg" alt="Home">
-            </a>
-            <form action="search.php" method="GET">
-                <input type="text" name="query"  placeholder="Search...">
-            </form>
-            <nav>
-                <img class="cart" src="images/website/shopping-cart.svg">
-            </nav>
+        <div class="header-top">
+            <div class="container">
+                <a class="logo" href="/" title="Home">
+                    <img src="/images/website/logo.svg" loading="lazy" alt="Home">
+                </a>
+                <form method="get" action="/" class="search-container">
+                    <input class="search-glass focus" name="search" type="text" placeholder="Search...">
+                </form>
+                <nav>
+                    <a class="nav-icon" href="winkelmand.php">
+                        <img src="/images/website/shopping-cart.svg" loading="lazy">
+                    </a>
+                    <a class="nav-icon" href="/includes/log-out.php">
+                        <img src="/images/website/profile-picture.svg" loading="lazy">
+                    </a>
+                </nav>
+            </div>
         </div>
-    </div>
-</header>
+        <div class="header-bottom">
+            <div class="container">
+                <form method="get" action="/" class="search-container">
+                    <input class="search-glass focus" type="text" placeholder="Search...">
+                </form>
 
-<main class="container">
-    <h1>Winkelmandje</h1>
-    <div class="selected-products">
-        <?php 
-        // Check if any products are selected
-        if (!empty($_SESSION['selected_products'])) {
-            // Loop through each selected product
-            foreach ($_SESSION['selected_products'] as $product) {
-                echo '<div class="product">';
-                echo '<h2>' . $product['product_naam'] . '</h2>';
-                echo '<p>Start Date: ' . $product['start_date'] . '</p>';
-                echo '<p>End Date: ' . $product['end_date'] . '</p>';
-                echo '</div>';
-            }
-        } else {
-            echo '<p>No products selected.</p>';
-        }
-        ?>
-    </div>
-    
-    <!-- Form to confirm and insert all selected products into the database -->
-    <form action="" method="post">
-        <button type="submit" name="confirm_reservation">Bevestig Reservering</button>
-    </form>
-</main>
+                <ul class="category-container">
+                    <div class="dropdown-container">
+                        <li class="dropdown-item <?php echo ($category == 1) ? 'current-category' : ''; ?>"><a href="/?category=1">Video</a></li>
 
-<footer>
-    <p><a href="https://www.erasmushogeschool.be/nl">&copy; Erasmushogeschool Brussel 2024</a></p>
-</footer>
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+                                    
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 1) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item <?php echo ($category == 2) ? 'current-category' : ''; ?>"><a href="/?category=2">Audio</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 2) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item <?php echo ($category == 3) ? 'current-category' : ''; ?>"><a href="/?category=3">Belichting</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 3) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item <?php echo ($category == 4) ? 'current-category' : ''; ?>"><a href="/?category=4">Tools</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 4) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item <?php echo ($category == 5) ? 'current-category' : ''; ?>"><a href="/?category=5">Varia</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 5) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <li class="dropdown-item <?php echo ($category == 6) ? 'current-category' : ''; ?>"><a href="/?category=6">XR</a></li>
+
+                        <div class="dropdown-content">
+                            <div class="container">
+                                <div class="dropdown-row">
+                                    <?php
+                                    mysqli_data_seek($categories, 0);
+
+                                    while($row = mysqli_fetch_assoc($categories)) {
+                                        if ($row["category"] == 6) {
+                                            echo "<a href='/?category={$row["category"]}&subcategory={$row["subcategory_id"]}'";
+                                            if ($row["subcategory_id"] == $subcategory)  {
+                                                echo " class='current-subcategory'";
+                                            }
+                                            echo ">{$row["subcategory"]}</a>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="selected-products">
+                <?php 
+                // Check if any products are selected
+                if (!empty($_SESSION['cart'])) {
+                    // Loop through each selected product
+                    foreach ($_SESSION['cart'] as $product) {
+                        $product_id = $product['product_id'];
+                        $start_date = $product['start_date'];
+                        $end_date = $product['end_date'];
+
+                        // Fetch product details from the database
+                        $query = "SELECT * FROM PRODUCTS WHERE id = ?";
+                        $stmt = $conn->prepare($query);
+                        $stmt->bind_param("i", $product_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $product_details = $result->fetch_assoc();
+
+                        if ($product_details) {
+                            echo '<div class="reservation">';
+                            echo '<h2>' . htmlspecialchars($product_details['name']) . '</h2>';
+                            echo '<p>Ophaaldatum: ' . htmlspecialchars($start_date) . '</p>';
+                            echo '<p>Inleverdatum: ' . htmlspecialchars($end_date) . '</p>';
+                            echo '</div>';
+                        }
+                    }
+                } else {
+                    echo '<p>No products selected.</p>';
+                }
+                ?>
+            </div>
+            
+            <!-- Form to confirm and insert all selected products into the database -->
+            <form action="" method="post">
+                <button class="submit-button product-reservation" type="submit" name="confirm_reservation">Bevestig reservering</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <p>&copy; Erasmushogeschool Brussel 2024</p>
+                
+                <ul class="links">
+                    <li><a href="voorwaarden.php">Voorwaarden</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                </ul>
+
+                <div class="socials">
+                    <a class="footer-icon" href="https://www.facebook.com/erasmushogeschool" target="_blank">
+                        <img src="/images/website/facebook.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://www.linkedin.com/school/erasmushogeschool-brussel/" target="_blank">
+                        <img src="/images/website/linkedin.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://twitter.com/ehbrussel" target="_blank">
+                        <img src="/images/website/twitter.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://www.instagram.com/erasmushogeschool/" target="_blank">
+                        <img src="/images/website/instagram.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://www.youtube.com/user/ehbrussel" target="_blank">
+                        <img src="/images/website/youtube.png" loading="lazy" alt="">
+                    </a>
+                    <a class="footer-icon" href="https://www.flickr.com/photos/erasmushogeschool" target="_blank">
+                        <img src="/images/website/flickr.png" loading="lazy" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
@@ -84,16 +275,15 @@ if (isset($_POST['confirm_reservation'])) {
 
     try {
         // Iterate through each selected product and insert it into the database
-        foreach ($_SESSION['selected_products'] as $product) {
+        foreach ($_SESSION['cart'] as $product) {
             $product_id = $product['product_id'];
-            $product_naam = $product['product_naam'];
             $start_date = $product['start_date'];
             $end_date = $product['end_date'];
 
             // Prepare and execute the SQL statement to insert reservation
-            $sql = "INSERT INTO RESERVERINGEN (product_id, product_naam, start_date, end_date) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO RESERVATIONS (product_id, user_id, start_date, end_date) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("isss", $product_id, $product_naam, $start_date, $end_date);
+            $stmt->bind_param("iiss", $product_id, $_SESSION['user_id'], $start_date, $end_date);
             $stmt->execute();
         }
 
@@ -101,11 +291,8 @@ if (isset($_POST['confirm_reservation'])) {
         $conn->commit();
 
         // Clear the selected products session array
-        $_SESSION['selected_products'] = array();
+        $_SESSION['cart'] = array();
 
-        // Redirect to a success page or wherever you need to go next
-        header("Location: success.php");
-        exit();
     } catch (Exception $e) {
         // Rollback the transaction if an error occurs
         $conn->rollback();

@@ -27,7 +27,7 @@
                 <img src="/images/website/logo.svg" loading="lazy" alt="Home">
             </a>
             <nav>
-                <a class="nav-icon" href="">
+                <a class="nav-icon" href="/includes/log-out.php">
                     <img src="/images/website/profile-picture.svg" loading="lazy">
                 </a>
             </nav>
@@ -38,7 +38,7 @@
             <ul class="category-container">
                     <li><a href="admin.php">Agenda</a></li>
                     <li class="current-category"><a href="scansysteem.php">Scansysteem</a></li>
-                    <li><a href="admin-producten.php">Producten</a></li>
+                    <li><a href="admin-artikels.php">Artikels</a></li>
                     <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
                     <li><a href="blacklist.php">Blacklist</a></li>
                     <li><a href="waarschuwen.php">Waarschuwen</a></li>
@@ -50,20 +50,20 @@
   <div class="scansysteem">
 
   <!-- Formulier om artikelnummer voor uitlenen in te voeren -->
-  <form class="uitlenenForm" action="/includes/scanning-system.php" method="post">
-    <label for="artikelnummerUitlenen">Artikelnummer Uitlenen:</label><br>
-    <input type="text" id="artikelnummerUitlenen" name="artikelnummerUitlenen" required><br><br>
-    <input type="submit" value="Uitlenen">
-  </form>
-  
-  
+    <form class="uitlenenForm" action="/includes/scanning-system.php" method="post">
+        <label for="artikelnummerUitlenen">Artikelnummer Uitlenen:</label><br>
+        <input type="text" id="artikelnummerUitlenen" name="artikelnummerUitlenen" required><br><br>
+        <input type="submit" value="Uitlenen">
+    </form>
+    
+    
 
-  <!-- Formulier om artikelnummer voor terugnemen in te voeren -->
-  <form class="terugnemenForm" action="/includes/scanning-system.php" method="post">
-    <label for="artikelnummerTerugnemen">Artikelnummer Terugnemen:</label><br>
-    <input type="text" id="artikelnummerTerugnemen" name="artikelnummerTerugnemen" required><br><br>
-    <input type="submit" value="Terugnemen">
-  </form>
+    <!-- Formulier om artikelnummer voor terugnemen in te voeren -->
+    <form class="terugnemenForm" action="/includes/scanning-system.php" method="post">
+        <label for="artikelnummerTerugnemen">Artikelnummer Terugnemen:</label><br>
+        <input type="text" id="artikelnummerTerugnemen" name="artikelnummerTerugnemen" required><br><br>
+        <input type="submit" value="Terugnemen">
+    </form>
 
   </div>
   

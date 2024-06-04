@@ -27,7 +27,7 @@
                     <a class="nav-icon" href="winkelmand.php">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
                     </a>
-                    <a class="nav-icon" href="">
+                    <a class="nav-icon" href="/includes/log-out.php">
                         <img src="/images/website/profile-picture.svg" loading="lazy">
                     </a>
                 </nav>

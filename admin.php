@@ -26,7 +26,7 @@
                     <img src="/images/website/logo.svg" loading="lazy" alt="Home">
                 </a>
                 <nav>
-                    <a class="nav-icon" href="">
+                    <a class="nav-icon" href="/includes/log-out.php">
                         <img src="/images/website/profile-picture.svg" loading="lazy">
                     </a>
                 </nav>
@@ -37,7 +37,7 @@
                 <ul class="category-container">
                     <li class="current-category"><a href="admin.php">Agenda</a></li>
                     <li><a href="scansysteem.php">Scansysteem</a></li>
-                    <li><a href="admin-producten.php">Producten</a></li>
+                    <li><a href="admin-artikels.php">Artikels</a></li>
                     <li><a href="artikel-toevoegen.php">Artikel toevoegen</a></li>
                     <li><a href="blacklist.php">Blacklist</a></li>
                     <li><a href="waarschuwen.php">Waarschuwen</a></li>
@@ -207,11 +207,11 @@
                     }
 
                     // Productafbeelding weergeven indien beschikbaar
-                    $imagePath = 'images/' . $inlevering["product_image"];
+                    $imagePath = '/images/products' . $inlevering["product_image"];
                     if (file_exists($imagePath)) {
                         echo '<img src="' . $imagePath . '" alt="" />';
                     } else {
-                        echo '<img src="images/no-image-available.png" alt="" />';
+                        echo '<img src="/images/products/not-found.jpg" alt="" />';
                     }
                     echo '<div class="reservation-details">';
                     echo '<h2>' . $inlevering["product_name"] . '</h2>';

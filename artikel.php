@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Uitleendienst MediaLab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
@@ -16,7 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
     <header>
         <div class="header-top">
             <div class="container">
@@ -30,7 +29,7 @@
                     <a class="nav-icon" href="winkelmand.php">
                         <img src="/images/website/shopping-cart.svg" loading="lazy">
                     </a>
-                    <a class="nav-icon" href="">
+                    <a class="nav-icon" href="/includes/log-out.php">
                         <img src="/images/website/profile-picture.svg" loading="lazy">
                     </a>
                 </nav>
@@ -44,7 +43,7 @@
 
                 <ul class="category-container">
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/?category=1">Video</a></li>
+                        <li class="dropdown-item <?php echo ($category == 1) ? 'current-category' : ''; ?>"><a href="/?category=1">Video</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -68,7 +67,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/?category=2">Audio</a></li>
+                        <li class="dropdown-item <?php echo ($category == 2) ? 'current-category' : ''; ?>"><a href="/?category=2">Audio</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -92,7 +91,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/?category=3">Belichting</a></li>
+                        <li class="dropdown-item <?php echo ($category == 3) ? 'current-category' : ''; ?>"><a href="/?category=3">Belichting</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -116,7 +115,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/?category=4">Tools</a></li>
+                        <li class="dropdown-item <?php echo ($category == 4) ? 'current-category' : ''; ?>"><a href="/?category=4">Tools</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -140,7 +139,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/?category=5">Varia</a></li>
+                        <li class="dropdown-item <?php echo ($category == 5) ? 'current-category' : ''; ?>"><a href="/?category=5">Varia</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -164,7 +163,7 @@
                     </div>
 
                     <div class="dropdown-container">
-                        <li class="dropdown-item"><a href="/?category=6">XR</a></li>
+                        <li class="dropdown-item <?php echo ($category == 6) ? 'current-category' : ''; ?>"><a href="/?category=6">XR</a></li>
 
                         <div class="dropdown-content">
                             <div class="container">
@@ -193,7 +192,40 @@
 
     <main>
         <div class="container">
-            
+            <div class="article-container">
+                <?php 
+                echo "<div class='article-information'>";
+                echo "<h2>{$name}</h2>";
+                echo "<a class='product-subtitle'>{$article['brand']} | {$article['object']}</a>";
+                
+                echo "</div>";
+                
+                echo "<div class='article-content'>";
+
+                echo "<a class='article-image'>";
+                if ($article["image"]) {
+                    $image_path = "images/products/{$article["image"]}";
+
+                    if (file_exists($image_path)) {
+                        echo "<img src='/{$image_path}' loading='lazy'>";
+                    } else {
+                        echo "<img src='/images/products/not-found.jpg' loading='lazy'>";
+                    }
+                } else {
+                    echo "<img src='/images/products/not-found.jpg' loading='lazy'>";
+                }
+                echo "</a>";
+
+                echo '<p>' . $article['description'] . '</p>';
+
+                echo "<div class='article-reservation'>";
+                echo "<form method='post'>";
+                echo "<button class='submit-button product-reservation' type='submit' name='winkelwagen-toevoegen'>Aan winkelwagen toevoegen</button>";
+                echo "</form>";
+                echo "</div>";
+                echo "</div>";
+                ?>
+            </div>
         </div>
     </main>
 
