@@ -9,6 +9,20 @@
 ## Beschrijving
 Dit project betreft een uitleendienst voor het MediaLab van onze school Erasmushogeschool Brussel, voor het lenen verschillende soorten materiaal, waaronder hoofdtelefoons, camera's en meer. Het biedt zowel gebruikers als beheerders een scala aan functionaliteiten om het lenen en beheren van materiaal eenvoudig en efficiënt te maken.
 
+## Gebruik
+- Download het project van GitHub.
+- Installeer [XAMPP](https://www.apachefriends.org/download.html).
+- Zorg dat je tijdens de installatie zeker `apache` mee installeert.
+- Navigeer naar `"C:\xampp\htdocs"`
+- Verplaats het GitHub project in de lege `htdocs`map.
+- Start `XAMPP` op.
+- Zet `apache`aan.
+- Open een `browser`
+- Typ `localhost` in de zoekbalk.
+- Login
+    - username: `thomas` , wachtwoord: `test` om in te loggen als `gebruiker`.
+    - username: `robbe`, wachtwoord: `test` om in te loggen als `beheerder`.
+
 ## Functionaliteiten
 ### Voor Gebruikers:
 - Productweergave: De gebruiker kan alle beschikbare producten bekijken. → `index.php`
